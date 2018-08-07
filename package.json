@@ -1,0 +1,50 @@
+{
+  "name": "hapi.admin",
+  "version": "1.0.0",
+  "description": "哈皮后台管理系统模版",
+  "main": "index.js",
+  "scripts": {
+    "create": "node components/hapi/hapi.js page",
+    "new": "node components/hapi/hapi.js component",
+    "delete": "node components/hapi/hapi.js delete page",
+    "remove": "node components/hapi/hapi.js remove component",
+    "watch": "node components/hapi/hapi.js watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EchoHub/Hapi.admin.git"
+  },
+  "keywords": [
+    "hapi",
+    "admin"
+  ],
+  "author": "echohub",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EchoHub/Hapi.admin/issues"
+  },
+  "homepage": "https://github.com/EchoHub/Hapi.admin#readme",
+  "dependencies": {
+    "webpack": "^3.12.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.4.8",
+    "@types/react-dom": "^16.0.7",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "webpack-dev-server": "^3.1.5",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^0.28.10",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.7.2",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.1",
+    "url-loader": "^0.6.2"
+  }
+}
