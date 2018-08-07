@@ -1,0 +1,25 @@
+.hp-navmenu {
+    &.active {
+        width: 230px;
+        height: calc(100% - 60px);
+        float: left;
+        position: absolute;
+        z-index: 999;
+        overflow-x: hidden;
+        overflow-y: auto;
+        top: 60px;
+        left: 0;
+    }
+    &.primary {
+        background: #30363e;
+    }
+    &.system {
+        background: #30363e;
+    }
+    &.grey {
+        background: #30363e;
+    }
+    &.dark {
+        background: #30363e;
+    }
+}

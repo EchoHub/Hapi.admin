@@ -1,0 +1,178 @@
+.hp-adminsystem {
+    &_header {
+        height: 60px;
+        line-height: 60px;
+        border-color: transparent;
+        &_left {
+            display: inline-block;
+            height: 100%;
+            width: 230px;
+            margin-right: 10px;
+            > a {
+                height: 60px;
+                line-height: 58px;
+                padding: 0;
+                font-size: 17px;
+                font-weight: 400;
+                letter-spacing: .6px;
+                padding-left: 15px;
+                display: inline-block;
+                overflow: hidden;
+                width: 170px;
+                text-decoration: none;
+                color: inherit;
+                .logo {
+                    top: -10px;
+                    position: relative;
+                    img {
+                        width: 48px;
+                        height: 48px;
+                        display: inline-block;
+                        position: relative;
+                        top: 12px;
+                    }
+                }
+            }
+            .toggle_navmenu {
+                display: inline-block;
+                font-size: 24px;
+                text-align: center;
+                float: right;
+                width: 45px;
+            }
+        }
+        &.bg-primary {
+            color: #fff;
+            background: #4a89dc;
+            .hp-adminsystem_header_left {
+                background:#357bd8;
+            }
+        }
+        &.bg-system {
+            color: #fff;
+            background: #48c9a9;
+            .hp-adminsystem_header_left {
+                background: #38bf9e;
+            }
+        }
+        &.bg-grey {
+            color: #fff;
+            background: #30363e;
+            .hp-adminsystem_header_left {
+                background:#252930;
+            }
+        }
+        &.bg-dark {
+            color: #fff;
+            background: #001529;
+            .hp-adminsystem_header_left {
+                background:#000810;
+            }
+        }
+        &_right {
+            float: right;
+            width: calc(100% - 240px);
+            height: 60px;
+            .hp-adminsystem_header_flag {
+                font-size: 20px;
+                width: 42px;
+                float: left;
+                height: 32px;
+                text-align: center;
+                line-height: 33px;
+                color: #fff;
+                line-height: 60px;
+            }
+            .hp-adminsystem_header_right_navbar{
+                float: right;
+                padding: 0;
+                margin: 0;
+                margin-right: 20px;
+                list-style: none;
+                > li {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}
+.hp-searchbar {
+    height: 32px;
+    width: 32px;
+    border-radius: 0;
+    border: none;
+    display: inline-block;
+    margin-top: 13px;
+    margin-left: 10px;
+    // transition: width ease .3s;
+    > .iconfont.icon-search {
+        font-size: 20px;
+        width: 42px;
+        float: left;
+        height: 32px;
+        text-align: center;
+        line-height: 33px;
+        color: #fff;
+    }
+    > .hp-textbox{
+        list-style: none;
+        position: relative;
+        float: right;
+        width: calc(100% - 46px);
+        font-size: 14px;
+        line-height: 1.5;
+        color: rgba(0, 0, 0, 0.65);
+        background-color: #fff;
+        background-image: none;
+        -webkit-transition: all .3s;
+        transition: all .3s;
+        border: none;
+        border-top-right-radius: 16px;
+        border-bottom-right-radius: 16px;
+        height: 32px;
+        padding: 0;
+        &:focus {
+            outline: 0;
+            border: none;
+            box-shadow: none;
+        }
+    }
+    &.primary {
+        background: #4a89dc;
+        &.active {
+            background: #fff;
+            > .iconfont.icon-search,  > .hp-textbox {
+                color: #4a89dc;
+            }
+        }
+    }
+    &.system {
+        background: #48c9a9;
+        &.active {
+            > .iconfont.icon-search,  > .hp-textbox {
+                color: #48c9a9;
+            }
+        }
+    }
+    &.grey {
+        background: #30363e;
+        &.active {
+            > .iconfont.icon-search,  > .hp-textbox {
+                color: #30363e;
+            }
+        }
+    }
+    &.dark {
+        background: #001529;
+        &.active {
+            > .iconfont.icon-search,  > .hp-textbox {
+                color: #001529;
+            }
+        }
+    }
+    &.active {
+        background: #fff;        
+        width: 400px;
+        border-radius: 16px;
+    }
+}

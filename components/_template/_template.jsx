@@ -4,6 +4,6 @@ import "./_template.scss"
 
 export default class Template extends Component {
     render() {
-        return <div class="hp-template"></div>
+        return <div className="hp-template"></div>
     }
 }
