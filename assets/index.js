@@ -60,26 +60,30 @@ const menus = [
         flag: 1,
         children: [
             {
-                title: "基础组件",
+                title: "登陆页",
                 icon: "",
                 flag: 0,
             },
             {
-                title: "布局",
+                title: "注册页",
                 icon: "",
                 flag: 0,
             },
             {
-                title: "表单",
+                title: "空白页",
                 icon: "",
                 flag: 0,
             },
             {
-                title: "表格",
+                title: "结果页",
                 icon: "",
                 flag: 0,
             },
-            
+            {
+                title: "404",
+                icon: "",
+                flag: 0,
+            }
         ]
     },
     {

@@ -6,6 +6,9 @@ export default class NavMenu extends Component {
     constructor(props) {
         super(props);
         this.renderMenuItem = this.renderMenuItem.bind(this);
+        this.state = {
+            itemactive: false
+        }
     }
 
     /**
@@ -19,6 +22,7 @@ export default class NavMenu extends Component {
                 key={index}
                 menu={menu}
                 theme={theme}
+                parent={this}
             ></MenuItem>)
             index++;
         }
@@ -42,9 +46,18 @@ class MenuItem extends Component {
         super(props);
         this.renderItem = this.renderItem.bind(this)
         this.toogleSubMenu = this.toogleSubMenu.bind(this)
+        this.activeMenuItem = this.activeMenuItem.bind(this)
         this.state = {
-            toggle: false
+            toggle: false,
+            itemactive: false
         }
+    }
+
+    /**
+     * @desc 激活当前menuItem
+     */
+    activeMenuItem(e) {
+        e.target.parentNode.parentNode.classList.add("active");
     }
 
     toogleSubMenu() {
@@ -58,7 +71,20 @@ class MenuItem extends Component {
         const toggle = this.state.toggle;
         let result;
         if (flag === 0) {
-            result = <a  href={menu.route || "javascript:;"}><span className="hp-menuitem_title"><span className={`iconfont${menu.icon ? " " + menu.icon : ""}`}></span>{menu.title}</span></a>
+            result = <a
+                onClick={e => this.activeMenuItem(e)}
+                href={menu.route || "javascript:;"}
+            >
+                <span
+                    className="hp-menuitem_title"
+                >
+                    <span
+                        className={`iconfont${menu.icon ? " " + menu.icon : ""}`}
+                    >
+                    </span>
+                    {menu.title}
+                </span>
+            </a>
         } else {
             const children = menu.children && menu.children.length ? <ul className="hp-menu-sub">
                 {menu.children.map((d, i) => <li key={i}>{this.renderItem(d)}</li>)}
