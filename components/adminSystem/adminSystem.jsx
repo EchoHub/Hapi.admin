@@ -10,12 +10,14 @@ export default class AdminSystem extends Component {
     }
     render() {
         const theme = this.props.theme;
+        const menus = this.props.menus;
         return <div className="hp-adminsystem">
             <AdminSystem_Header
                 theme={theme}
             ></AdminSystem_Header>
             <NavMenu
                 theme={theme}
+                menus={menus}
             ></NavMenu>
         </div>
     }
@@ -25,6 +27,14 @@ export class AdminSystem_Header extends Component {
     constructor(props) {
         super(props);
     }
+
+    /**
+     * @desc 展开／收缩 导航
+     */
+    toggleNavBar() {
+
+    }
+
     render() {
         const theme = this.props.theme;
         return <header className={`hp-adminsystem_header bg-${theme}`}>
@@ -34,7 +44,7 @@ export class AdminSystem_Header extends Component {
                         <img src={this.props.logo} />
                         <b>HaPi</b> Admin</span>
                 </a>
-                <span className="toggle_navmenu iconfont icon-manage_fill"></span>
+                <span className="toggle_navmenu iconfont icon-manage_fill" onClick={this.toggleNavBar}></span>
             </div>
             <div className="hp-adminsystem_header_right">
                 <span className="hp-adminsystem_header_flag iconfont icon-refresh"></span>

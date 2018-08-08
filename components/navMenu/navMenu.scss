@@ -1,4 +1,6 @@
 .hp-navmenu {
+    padding: 0;
+    margin: 0;
     &.active {
         width: 230px;
         height: calc(100% - 60px);
@@ -9,6 +11,55 @@
         overflow-y: auto;
         top: 60px;
         left: 0;
+    }
+    .hp-menuitem {
+        padding-left: 24px;
+        padding-right: 10px;
+        height: 48px;
+        user-select: none;
+        transform: height ease .3s;
+        a {
+            text-decoration: none;
+        }
+        .hp-menuitem_title {
+            text-decoration: none;
+            line-height: 48px;
+            color: #eee;
+            display: block;
+            font-weight: lighter;
+            cursor: pointer;
+            opacity: .8;
+            transition: opacity ease .3s;
+            &:hover{
+                color: #fff;
+                opacity: 1;
+            }
+            .iconfont {
+                padding-right: 10px;
+            }
+            .menu-arrow {
+                float: right;
+                font-size: 12px;
+                top: 2px;
+                position: relative;
+                transition: all ease .3s;
+                transform-origin: 30%;
+                &.up{
+                    transform: rotate(180deg);
+                }
+            }
+        }
+        .hp-menu-sub {
+            display: none;
+            list-style: none;
+            padding-left: 16px;
+        }
+        &.active {
+            height: auto;
+            .hp-menu-sub {
+                display: block;
+            }
+        }
     }
     &.primary {
         background: #30363e;
