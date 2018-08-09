@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     list-style: none;
+    transition: all ease .3s;
     &.active {
         width: 230px;
         height: calc(100% - 60px);
@@ -78,6 +79,24 @@
                 display: block;
                 background: #282d33;
             }
+        }
+    }
+    &.collapsed{
+        width: 45px;
+        .hp-menuitem_title{
+            padding: 0;
+            width: 45px;
+            height: 45px;
+            overflow: hidden;
+            .iconfont{
+                transform-origin: 50%;
+                padding: 0;
+                width: 45px;
+                text-align: center;
+            }
+        }
+        .hp-menu-sub{
+            display: none;
         }
     }
     &.primary {

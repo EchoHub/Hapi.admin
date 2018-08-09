@@ -5,7 +5,7 @@ const param = getArgv();
 const colors = require('colors');
 
 const dirPath = {
-    page: path.resolve(__dirname, "./../../page"),
+    page: path.resolve(__dirname, "./../../pages"),
     component: path.resolve(__dirname, "./../../components")
 };
 (function () {
@@ -14,7 +14,7 @@ const dirPath = {
         case "page":
             name = param[1];
             log("add", param[0], name, "html", () => {
-                return copyFile(dirPath.page, path.resolve(__dirname, `./../../page/${name}.html`), "index.html", `${name}.html`)
+                return copyFile(dirPath.page, path.resolve(__dirname, `./../../pages/${name}.jsx`), "index.jsx", `${name}.jsx`)
             });
             break;
         case "component":
@@ -25,7 +25,7 @@ const dirPath = {
             break;
         case "delete":
             name = param[2];
-            log("remove", param[1], name, "page", () => {
+            log("remove", param[1], name, "pages", () => {
                 return removeFileOrDir(dirPath.page, name, false)
             });
             break;

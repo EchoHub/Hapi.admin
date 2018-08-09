@@ -8,6 +8,13 @@
             height: 100%;
             width: 230px;
             margin-right: 10px;
+            transition: all ease .3s;
+            &.collapsed {
+                > a {
+                    display: none;
+                }
+                width: 45px;
+            }
             > a {
                 height: 60px;
                 line-height: 58px;
@@ -93,6 +100,21 @@
                     display: inline-block;
                 }
             }
+        }
+    }
+    .hp-container {
+        width: calc(100% - 230px);
+        float: right;
+        height: calc(100% - 60px);
+        position: absolute;
+        left: 230px;
+        overflow: hidden;
+        background: #fafafa;
+        .hp-topbar{
+            background: #fff;
+            height: 48px;
+            line-height: 48px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
     }
 }

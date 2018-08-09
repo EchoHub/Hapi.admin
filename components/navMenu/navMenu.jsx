@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom"
 import "./navMenu.scss"
 
 export default class NavMenu extends Component {
@@ -33,7 +34,8 @@ export default class NavMenu extends Component {
         const props = this.props;
         const theme = props.theme;
         const menus = props.menus;
-        return <ul className={`hp-navmenu ${theme} active`}>
+        const collapsed = this.props.collapsed;
+        return <ul className={`hp-navmenu ${theme} active${collapsed ? " collapsed" : ""}`}>
             {
                 this.renderMenuItem(menus, theme)
             }
@@ -71,20 +73,18 @@ class MenuItem extends Component {
         const toggle = this.state.toggle;
         let result;
         if (flag === 0) {
-            result = <a
-                onClick={e => this.activeMenuItem(e)}
-                href={menu.route || "javascript:;"}
-            >
-                <span
-                    className="hp-menuitem_title"
-                >
+            result =
+                <Link to={`${menu.route}?${btoa(new Date().getTime())}`} onClick={e => this.activeMenuItem(e)}>
                     <span
-                        className={`iconfont${menu.icon ? " " + menu.icon : ""}`}
+                        className="hp-menuitem_title"
                     >
+                        <span
+                            className={`iconfont${menu.icon ? " " + menu.icon : ""}`}
+                        >
+                        </span>
+                        {menu.title}
                     </span>
-                    {menu.title}
-                </span>
-            </a>
+                </Link>
         } else {
             const children = menu.children && menu.children.length ? <ul className="hp-menu-sub">
                 {menu.children.map((d, i) => <li key={i}>{this.renderItem(d)}</li>)}

@@ -1,44 +1,101 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import NavMenu from "navMenu/navMenu";
-import TextBox from "textBox/textBox";
+import { HashRouter as Router, Route } from "react-router-dom"
+import { TextBox, Pages } from "common"
 import "./adminSystem.scss"
 
 export default class AdminSystem extends Component {
     constructor(props) {
         super(props);
+        this.setCollapsed = this.setCollapsed.bind(this);
+        this.createRoute = this.createRoute.bind(this);
+        this.state = {
+            collapsed: false
+        }
     }
+
+    setCollapsed() {
+        this.setState({
+            collapsed: !this.state.collapsed
+        });
+    }
+
+    createRoute(menus) {
+        let result = [], index = 0;
+        if (!menus || !menus.length) return null;
+        for (const menu of menus) {
+            if (menu.flag === 1 && menu.children && menu.children.length) {
+                const _result = this.createRoute(menu.children);
+                result = result.concat(_result);
+            } else if (menu.flag === 0) {
+                const route = menu.route.indexOf("/") > -1 ? menu.route.split("/")[1] : menu.route;
+                if (Pages[route]) {
+                    result.push(<Route key={menu.route + index} path={menu.route} component={Pages[route]}></Route>);
+                }
+            }
+            index++;
+        }
+        return result;
+    }
+
     render() {
         const theme = this.props.theme;
         const menus = this.props.menus;
+        const collapsed = this.state.collapsed;
         return <div className="hp-adminsystem">
             <AdminSystem_Header
                 theme={theme}
+                collapsed={collapsed}
+                setCollapsed={this.setCollapsed}
             ></AdminSystem_Header>
-            <NavMenu
-                theme={theme}
-                menus={menus}
-            ></NavMenu>
+            <Router>
+                <div>
+                    <NavMenu
+                        theme={theme}
+                        menus={menus}
+                        collapsed={collapsed}
+                    ></NavMenu>
+                    <div className="hp-container">
+                        <TopBar></TopBar>
+                        {this.createRoute(menus)}
+                    </div>
+                </div>
+            </Router>
         </div>
     }
 }
-
 export class AdminSystem_Header extends Component {
     constructor(props) {
         super(props);
+        this.toggleNavBar = this.toggleNavBar.bind(this);
     }
 
     /**
      * @desc 展开／收缩 导航
      */
     toggleNavBar() {
+        this.props.setCollapsed(!this.props.collapsed)
+    }
 
+    /**
+     * @desc 重新加载页面
+     */
+    reloadScreen() {
+        location.reload();
+    }
+
+    /**
+     * @desc 全屏
+     */
+    fullScreen() {
+        fullScreen(document.documentElement)
     }
 
     render() {
         const theme = this.props.theme;
         return <header className={`hp-adminsystem_header bg-${theme}`}>
-            <div className="hp-adminsystem_header_left">
+            <div className={`hp-adminsystem_header_left${this.props.collapsed ? " collapsed" : ""}`}>
                 <a href="javascript:;">
                     <span className="logo">
                         <img src={this.props.logo} />
@@ -47,8 +104,8 @@ export class AdminSystem_Header extends Component {
                 <span className="toggle_navmenu iconfont icon-manage_fill" onClick={this.toggleNavBar}></span>
             </div>
             <div className="hp-adminsystem_header_right">
-                <span className="hp-adminsystem_header_flag iconfont icon-refresh"></span>
-                <span className="hp-adminsystem_header_flag iconfont icon-fullscreen"></span>
+                <span className="hp-adminsystem_header_flag iconfont icon-refresh" onClick={this.reloadScreen}></span>
+                <span className="hp-adminsystem_header_flag iconfont icon-fullscreen" onClick={this.fullScreen}></span>
                 <SearchBar theme={theme}></SearchBar>
                 <ul className="hp-adminsystem_header_right_navbar">
                     <li>
@@ -66,6 +123,14 @@ export class AdminSystem_Header extends Component {
                 </ul>
             </div>
         </header>
+    }
+}
+
+export class TopBar extends Component {
+    render() {
+        return <div className="hp-topbar">
+            1
+        </div>
     }
 }
 AdminSystem.defaultProps = {
@@ -100,5 +165,15 @@ export class SearchBar extends Component {
             <span className="iconfont icon-search"></span>
             <TextBox></TextBox>
         </div>
+    }
+}
+
+function fullScreen(element) {
+    if (element.requestFullScreen) {
+        element.requestFullScreen();
+    } else if (element.webkitRequestFullScreen) {
+        element.webkitRequestFullScreen();
+    } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
     }
 }

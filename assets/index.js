@@ -7,9 +7,8 @@ const menus = [
     {
         title: "中控台",
         icon: "icon-browse",
-        route: "",
-        flag: 0,
-        children: []
+        route: "/console",
+        flag: 0
     },
     {
         title: "组件",
@@ -19,37 +18,37 @@ const menus = [
             {
                 title: "布局",
                 icon: "",
-                route: "",
+                route: "/layout",
                 flag: 0,
             },
             {
                 title: "按钮",
                 icon: "",
-                route: "",
+                route: "/button",
                 flag: 0,
             },
             {
                 title: "表单",
                 icon: "",
-                route: "",
+                route: "/form",
                 flag: 0,
             },
             {
                 title: "表格",
                 icon: "",
-                route: "",
+                route: "/table",
                 flag: 0,
             },
             {
                 title: "通知",
                 icon: "",
-                route: "",
+                route: "/notice",
                 flag: 0,
             },
             {
                 title: "其他",
                 icon: "",
-                route: "",
+                route: "/others",
                 flag: 0,
             },
         ]
@@ -62,26 +61,31 @@ const menus = [
             {
                 title: "登陆页",
                 icon: "",
+                route: "/login",
                 flag: 0,
             },
             {
                 title: "注册页",
                 icon: "",
+                route: "/registry",
                 flag: 0,
             },
             {
                 title: "空白页",
                 icon: "",
+                route: "/blank",
                 flag: 0,
             },
             {
                 title: "结果页",
                 icon: "",
+                route: "/result",
                 flag: 0,
             },
             {
                 title: "404",
                 icon: "",
+                route: "/404",
                 flag: 0,
             }
         ]
@@ -94,13 +98,13 @@ const menus = [
             {
                 title: "详情页",
                 icon: "",
-                route: "",
+                route: "/detail",
                 flag: 0
             },
             {
                 title: "会员列表",
                 icon: "",
-                route: "",
+                route: "/member_list",
                 flag: 0
             }
         ]
