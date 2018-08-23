@@ -110,6 +110,11 @@
         left: 230px;
         overflow: hidden;
         background: #fafafa;
+        transition:  all ease .3s;
+        &.full {
+            left: 45px;
+            width: 100%;
+        }
         .hp-topbar{
             background: #fff;
             height: 48px;

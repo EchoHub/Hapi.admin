@@ -56,7 +56,7 @@ export default class AdminSystem extends Component {
                         menus={menus}
                         collapsed={collapsed}
                     ></NavMenu>
-                    <div className="hp-container">
+                    <div className={`hp-container${collapsed ? " full" : ""}`}>
                         <TopBar></TopBar>
                         {this.createRoute(menus)}
                     </div>
