@@ -79,7 +79,11 @@
         &_right {
             float: right;
             width: calc(100% - 240px);
+            transition: all ease .3s;;
             height: 60px;
+            &_full {
+                width: calc(100% - 60px);
+            }
             .hp-adminsystem_header_flag {
                 font-size: 20px;
                 width: 42px;

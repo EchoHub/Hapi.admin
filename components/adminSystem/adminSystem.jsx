@@ -127,7 +127,7 @@ export class AdminSystem_Header extends Component {
                 </a>
                 <span className="toggle_navmenu iconfont icon-manage_fill" onClick={this.toggleNavBar}></span>
             </div>
-            <div className="hp-adminsystem_header_right">
+            <div className={`hp-adminsystem_header_right${this.props.collapsed ? " hp-adminsystem_header_right_full" : ""}`}>
                 <span className="hp-adminsystem_header_flag iconfont icon-refresh" onClick={this.reloadScreen}></span>
                 <span className="hp-adminsystem_header_flag iconfont icon-fullscreen" onClick={this.fullScreen}></span>
                 <SearchBar theme={theme}></SearchBar>
