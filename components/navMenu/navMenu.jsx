@@ -7,6 +7,7 @@ export default class NavMenu extends Component {
     constructor(props) {
         super(props);
         this.renderMenuItem = this.renderMenuItem.bind(this);
+        this.setActiveItem = this.setActiveItem.bind(this);
         this.state = {
             itemactive: false
         }
@@ -22,6 +23,7 @@ export default class NavMenu extends Component {
             result.push(<MenuItem
                 key={index}
                 menu={menu}
+                itemactive={this.state.itemactive}
                 theme={theme}
                 parent={this}
             ></MenuItem>)
@@ -30,12 +32,27 @@ export default class NavMenu extends Component {
         return result;
     }
 
+    setActiveItem(node) {
+        const nodes = this.refs.navmenu.querySelectorAll(".hp-menuitem_title");
+        for (let i = 0; i < nodes.length; i++) {
+            const li = nodes[i].parentNode.parentNode;
+            if (nodes[i] !== node) {
+                if (li.childNodes[0].nodeName === "A") {
+                    li.className = li.className.replace(/hp_item_selected/, "");
+                    if(li.classList.length === 0) li.removeAttribute("class")
+                }
+            } else {
+                li.classList.add("hp_item_selected")
+            }
+        }
+    }
+
     render() {
         const props = this.props;
         const theme = props.theme;
         const menus = props.menus;
         const collapsed = this.props.collapsed;
-        return <ul className={`hp-navmenu ${theme} active${collapsed ? " collapsed" : ""}`}>
+        return <ul ref="navmenu" className={`hp-navmenu ${theme} active${collapsed ? " collapsed" : ""}`}>
             {
                 this.renderMenuItem(menus, theme)
             }
@@ -51,7 +68,8 @@ class MenuItem extends Component {
         this.activeMenuItem = this.activeMenuItem.bind(this)
         this.state = {
             toggle: false,
-            itemactive: false
+            itemactive: props.itemactive || false,
+            initial: true
         }
     }
 
@@ -59,7 +77,8 @@ class MenuItem extends Component {
      * @desc 激活当前menuItem
      */
     activeMenuItem(e) {
-        e.target.parentNode.parentNode.classList.add("active");
+        // e.target.parentNode.parentNode.classList.add("active");
+        this.props.parent.setActiveItem(e.target);
     }
 
     toogleSubMenu() {
@@ -73,6 +92,16 @@ class MenuItem extends Component {
         const toggle = this.state.toggle;
         let result;
         if (flag === 0) {
+            if (menu.active && this.state.initial) {
+                const timer = setTimeout(() => {
+                    this.setState({
+                        toggle: true,
+                        itemactive: true,
+                        initial: false
+                    })
+                    clearTimeout(timer);
+                }, 10);
+            }
             result =
                 <Link to={`${menu.route}?${btoa(new Date().getTime())}`} onClick={e => this.activeMenuItem(e)}>
                     <span
@@ -87,7 +116,7 @@ class MenuItem extends Component {
                 </Link>
         } else {
             const children = menu.children && menu.children.length ? <ul className="hp-menu-sub">
-                {menu.children.map((d, i) => <li key={i}>{this.renderItem(d)}</li>)}
+                {menu.children.map((d, i) => <li className={d.active ? "hp_item_selected" : ""} key={i}>{this.renderItem(d)}</li>)}
             </ul> : null
             result = <div>
                 <span
@@ -107,9 +136,10 @@ class MenuItem extends Component {
     render() {
         const theme = this.props.theme;
         const menu = this.props.menu;
+        const active = menu.active
         const toggle = this.state.toggle;
         return <li
-            className={`hp-menuitem ${theme}${toggle ? " active" : ""}`}
+            className={`hp-menuitem ${theme}${toggle ? " active" : ""}${active ? " hp_item_selected" : ""}`}
         >
             {
                 this.renderItem(menu)

@@ -10,8 +10,10 @@ export default class AdminSystem extends Component {
         super(props);
         this.setCollapsed = this.setCollapsed.bind(this);
         this.createRoute = this.createRoute.bind(this);
+        this.validityRoute = this.validityRoute.bind(this);
         this.state = {
-            collapsed: false
+            collapsed: false,
+            menus: this.props.menus
         }
     }
 
@@ -39,9 +41,31 @@ export default class AdminSystem extends Component {
         return result;
     }
 
+    validityRoute(curhash, menus) {
+        let result = []
+        if (!menus || !menus.length) return []
+        for (const item of menus) {
+            if (item.flag) {
+                item.children = this.validityRoute(curhash, item.children)
+            } else {
+                if(item.route === curhash) item["active"] = true
+            }
+            result.push(item)
+        }
+        return result;
+    }
+
+    componentDidMount() {
+        const curhash = (location.hash.indexOf("?") ? location.hash.split("?")[0] : location.hash).split("#")[1]
+        
+        this.setState({
+            menus: this.validityRoute(curhash, this.state.menus)
+        })
+    }
+
     render() {
         const theme = this.props.theme;
-        const menus = this.props.menus;
+        const menus = this.state.menus;
         const collapsed = this.state.collapsed;
         return <div className="hp-adminsystem">
             <AdminSystem_Header
@@ -160,9 +184,8 @@ export class SearchBar extends Component {
         const collapsed = this.state.collapsed;
         return <div
             className={`hp-searchbar ${theme}${collapsed ? "" : " active"}`}
-            onClick={this.toggleSreach}
         >
-            <span className="iconfont icon-search"></span>
+            <span className="iconfont icon-search" onClick={this.toggleSreach}></span>
             <TextBox></TextBox>
         </div>
     }

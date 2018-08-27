@@ -22,6 +22,10 @@
         transform: height ease .3s;
         a {
             text-decoration: none;
+            &.active {
+                border-left: 4px solid #2196f3;
+                background: #000;
+            }
         }
         .hp-menuitem_title {
             padding-left: 24px;
@@ -101,14 +105,30 @@
     }
     &.primary {
         background: #30363e;
+        .hp_item_selected{
+            border-left: 4px solid #4a89dc;
+            background: #000;
+        }
     }
     &.system {
         background: #30363e;
+        .hp_item_selected{
+            border-left: 4px solid #48c9a9;
+            background: #000;
+        }
     }
     &.grey {
         background: #30363e;
+        .hp_item_selected{
+            border-left: 4px solid #fff;
+            background: #000;
+        }
     }
     &.dark {
         background: #30363e;
+        .hp_item_selected{
+            border-left: 4px solid #fff;
+            background: #000;
+        }
     }
 }
