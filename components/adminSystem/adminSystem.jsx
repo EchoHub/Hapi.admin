@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import NavMenu from "navMenu/navMenu";
 import { HashRouter as Router, Route } from "react-router-dom"
-import { TextBox, Pages } from "common"
+import { TextBox, Pages, BreadCrumb } from "common"
 import "./adminSystem.scss"
 
 export default class AdminSystem extends Component {
@@ -11,9 +11,11 @@ export default class AdminSystem extends Component {
         this.setCollapsed = this.setCollapsed.bind(this);
         this.createRoute = this.createRoute.bind(this);
         this.validityRoute = this.validityRoute.bind(this);
+        this.setCurTopBarInfo = this.setCurTopBarInfo.bind(this);
         this.state = {
             collapsed: false,
-            menus: this.props.menus
+            menus: this.props.menus,
+            curTopBarInfo: {}
         }
     }
 
@@ -48,11 +50,22 @@ export default class AdminSystem extends Component {
             if (item.flag) {
                 item.children = this.validityRoute(curhash, item.children)
             } else {
-                if(item.route === curhash) item["active"] = true
+                if(item.route === curhash) {
+                    item["active"] = true
+                    this.setState({
+                        curTopBarInfo: item
+                    })
+                }
             }
             result.push(item)
         }
         return result;
+    }
+
+    setCurTopBarInfo(menu) {
+        this.setState({
+            curTopBarInfo: menu
+        })
     }
 
     componentDidMount() {
@@ -79,9 +92,10 @@ export default class AdminSystem extends Component {
                         theme={theme}
                         menus={menus}
                         collapsed={collapsed}
+                        setCurTopBarInfo={this.setCurTopBarInfo}
                     ></NavMenu>
                     <div className={`hp-container${collapsed ? " full" : ""}`}>
-                        <TopBar></TopBar>
+                        <TopBar info={this.state.curTopBarInfo}></TopBar>
                         {this.createRoute(menus)}
                     </div>
                 </div>
@@ -151,9 +165,15 @@ export class AdminSystem_Header extends Component {
 }
 
 export class TopBar extends Component {
+    
     render() {
+        const info = this.props.info;
+        info["first"] = info.title;
+        info["second"] = info.belong;
+        info["third"] = info.title;
         return <div className="hp-topbar">
-            1
+            <BreadCrumb info={info}></BreadCrumb>
+            <div className="float-right"><a className="out-btn" href="javascript:;">退出</a></div>
         </div>
     }
 }

@@ -1,4 +1,14 @@
 .hp-navmenu {
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 1px;
+    }
+    &::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+        background: #bbb;
+    }
+    &::-webkit-scrollbar-track {/*滚动条里面轨道*/
+        background: #ddd;
+    }
     padding: 0;
     margin: 0;
     list-style: none;

@@ -6,6 +6,7 @@ const root = document.getElementById("root");
 const menus = [
     {
         title: "中控台",
+        belong: "首页",
         icon: "icon-browse",
         route: "/console",
         flag: 0
@@ -17,36 +18,42 @@ const menus = [
         children: [
             {
                 title: "布局",
+                belong: "组件",
                 icon: "",
                 route: "/layout",
                 flag: 0,
             },
             {
                 title: "按钮",
+                belong: "组件",
                 icon: "",
                 route: "/button",
                 flag: 0,
             },
             {
                 title: "表单",
+                belong: "组件",
                 icon: "",
                 route: "/form",
                 flag: 0,
             },
             {
                 title: "表格",
+                belong: "组件",
                 icon: "",
                 route: "/table",
                 flag: 0,
             },
             {
                 title: "通知",
+                belong: "组件",
                 icon: "",
                 route: "/notice",
                 flag: 0,
             },
             {
                 title: "其他",
+                belong: "组件",
                 icon: "",
                 route: "/others",
                 flag: 0,
@@ -60,30 +67,35 @@ const menus = [
         children: [
             {
                 title: "登陆页",
+                belong: "页面",
                 icon: "",
                 route: "/login",
                 flag: 0,
             },
             {
                 title: "注册页",
+                belong: "页面",
                 icon: "",
                 route: "/registry",
                 flag: 0,
             },
             {
                 title: "空白页",
+                belong: "页面",
                 icon: "",
                 route: "/blank",
                 flag: 0,
             },
             {
                 title: "结果页",
+                belong: "页面",
                 icon: "",
                 route: "/result",
                 flag: 0,
             },
             {
                 title: "404",
+                belong: "页面",
                 icon: "",
                 route: "/404",
                 flag: 0,
@@ -97,12 +109,14 @@ const menus = [
         children: [
             {
                 title: "详情页",
+                belong: "演示",
                 icon: "",
                 route: "/detail",
                 flag: 0
             },
             {
                 title: "会员列表",
+                belong: "演示",
                 icon: "",
                 route: "/member_list",
                 flag: 0

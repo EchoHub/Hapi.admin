@@ -1,0 +1,23 @@
+.hp-breadcrumb {
+    color: #555;
+    display: inline-block;
+    &_first {
+        font-size: 18px;
+    }
+    &_second {
+        > a {
+            font-family: none;
+            color: #1890ff;
+            text-decoration: none;
+            font-size: 12px;
+        }
+    }
+    &_third {
+        font-size: 12px;
+    }
+    &_separator {
+        margin: 0 8px;
+        color: rgba(0,0,0,.45);
+        display: inline-block;
+    }
+}

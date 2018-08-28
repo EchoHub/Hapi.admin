@@ -24,8 +24,9 @@ export default class NavMenu extends Component {
                 key={index}
                 menu={menu}
                 itemactive={this.state.itemactive}
-                theme={theme}
                 parent={this}
+                setCurTopBarInfo={this.props.setCurTopBarInfo || (() => {})}
+                theme={theme}
             ></MenuItem>)
             index++;
         }
@@ -76,9 +77,11 @@ class MenuItem extends Component {
     /**
      * @desc 激活当前menuItem
      */
-    activeMenuItem(e) {
+    activeMenuItem(e, menu) {
         // e.target.parentNode.parentNode.classList.add("active");
-        this.props.parent.setActiveItem(e.target);
+        const parent = this.props.parent;
+        this.props.setCurTopBarInfo(menu)
+        parent.setActiveItem(e.target);
     }
 
     toogleSubMenu() {
@@ -103,7 +106,7 @@ class MenuItem extends Component {
                 }, 10);
             }
             result =
-                <Link to={`${menu.route}?${btoa(new Date().getTime())}`} onClick={e => this.activeMenuItem(e)}>
+                <Link to={`${menu.route}?${btoa(new Date().getTime())}`} onClick={e => this.activeMenuItem(e, menu)}>
                     <span
                         className="hp-menuitem_title"
                     >

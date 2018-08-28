@@ -106,6 +106,14 @@
             }
         }
     }
+    .hp-topbar{
+        padding: 0 20px;
+        .out-btn{
+            text-decoration: none;
+            color: #4a89dc;
+            font-size: 12px;
+        }
+    }
     .hp-container {
         width: calc(100% - 230px);
         float: right;
@@ -113,7 +121,7 @@
         position: absolute;
         left: 230px;
         overflow: hidden;
-        background: #fafafa;
+        background: #e5e5e5;
         transition:  all ease .3s;
         &.full {
             left: 45px;
