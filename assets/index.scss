@@ -13,8 +13,33 @@ body {
 .m-10{
     margin: 10px;
 }
+.mv-10 {
+    margin: 10px 0;
+}
 .float-right{
     float: right;
+}
+.hp-row{
+    .hp-col {
+        display: inline-block;
+    }
+    .hp-col-12 {
+        width: 50%;
+    }
+    .hp-col-24 {
+        width: 100%;
+    }
+}
+.hp-sp-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .hp-col-24 {
+        width: 100%;
+    }
+    .hp-col-12 {
+        width: calc(50% - 10px);
+    }
 }
 // .iconfont{
 //     font-family: "iconfont";

@@ -1,9 +1,10 @@
 .hp-panel {
     border: 1px solid #e5e5e5;
     box-shadow: 0 0 4px rgba(0,0,0,.1);
+    width: 100%;
     &_title {
         line-height: 36px;
-        padding: 0 10px;
+        padding: 0 14px;
         background: #fafafa;
         font-weight: 500;
         border-bottom: 1px solid #e5e5e5;
@@ -26,5 +27,6 @@
     }
     &_content {
         background: #fff;
+        padding: 10px 14px;
     }
 }
