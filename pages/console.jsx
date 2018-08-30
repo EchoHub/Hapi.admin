@@ -14,16 +14,12 @@ export default class Console extends Component {
                 </div>
             </div>
             <div className="hp-sp-row">
-                <div className="hp-col hp-col-12">
-                    <Panel className="mv-10" title="数据面板" toolbar={true}>
-                        123
-                    </Panel>
-                </div>
-                <div className="hp-col hp-col-12">
-                    <Panel className="mv-10" title="数据面板" toolbar={true}>
-                        123
-                    </Panel>
-                </div>
+                <Panel className="hp-col hp-col-12 mv-10" title="数据面板" toolbar={true}>
+                    123
+                </Panel>
+                <Panel className="hp-col hp-col-12 mv-10" title="数据面板" toolbar={true}>
+                    123
+                </Panel>
             </div>
         </div>
     }

@@ -34,6 +34,11 @@ body {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    box-sizing: border-box;
+    position: relative;
+    .hp-col {
+        display: inline-block;
+    }
     .hp-col-24 {
         width: 100%;
     }

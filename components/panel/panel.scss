@@ -18,9 +18,12 @@
                 margin: 0 6px;
                 font-size: 12px;
                 color: #999;
+                opacity: .8;
                 &:hover{
                     cursor: pointer;
                     user-select: none;
+                    opacity: 1;
+                    color: #666;
                 }
             }
         }
@@ -28,5 +31,36 @@
     &_content {
         background: #fff;
         padding: 10px 14px;
+        transition: all ease .3s;
+        width: calc(100% - 28px);
+        &.min {
+            max-height: 0;
+            padding: 0 14px;
+            overflow: hidden;
+            padding-top: 10px;
+            position: relative;
+            top: -1px;
+        }
+    }
+    &.full {
+        position: fixed;
+        width: 100%!important;
+        height: 100%!important;
+        overflow: auto;
+        z-index: 999;
+        top: 0;
+        left: 0;
+        margin: 0;
+        .hp-panel_content {
+            height: calc(100% - 58px);
+            &.min {
+                max-height: 0;
+                padding: 0 14px;
+                overflow: hidden;
+                padding-top: 10px;
+                position: relative;
+                top: -1px;
+            }
+        }
     }
 }
