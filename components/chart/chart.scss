@@ -1,0 +1,22 @@
+.hp-chart {
+    position: relative;
+    overflow: hidden;
+    &_tooltip{
+        position: absolute;
+        padding: 10px;
+        border-radius: 3px;
+        background: rgba(0,0,0,.7);
+        transition:  all ease .1s;
+        font-size: 12px;
+        .title {
+            display: block;
+            font-size: 14px;
+            color: #fff;
+        }
+        .content {
+            clear: both;;
+            display: inline-block;
+            color: #fff;
+        }
+    }
+}

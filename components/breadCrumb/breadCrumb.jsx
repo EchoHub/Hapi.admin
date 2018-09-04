@@ -5,7 +5,6 @@ import "./breadCrumb.scss"
 export default class BreadCrumb extends Component {
     render() {
         const info = this.props.info;
-        console.log(info)
         return <div className="hp-breadcrumb">
         <span className="hp-breadcrumb_first">{info.first}</span>
         <span className="hp-breadcrumb_separator">/</span>

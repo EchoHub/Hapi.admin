@@ -125,7 +125,7 @@
         transition:  all ease .3s;
         &.full {
             left: 45px;
-            width: 100%;
+            width: calc(100% - 45px);
         }
         .hp-topbar{
             background: #fff;

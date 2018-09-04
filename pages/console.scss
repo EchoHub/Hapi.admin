@@ -1,3 +1,44 @@
 .hp-console {
     padding: 20px;
+    .data-panel{
+        .hp-panel_content {
+            float: left;
+        }
+        .pl_chart{
+            width: calc(100% - 230px);
+            display: inline-block;
+            height: 283px;;
+        }
+        .pr_order{
+            width: 220px;
+            float: right;
+            .title {
+                color: #000;
+                margin-bottom: 10px;
+            }
+            > ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                li {
+                    line-height: 36px;
+                    .order_index {
+                        &.flag {
+                            background: #e0e0e0;
+                            color: #000;
+                        }
+                        font-size: 12px;
+                        font-style: normal;
+                        display: inline-block;
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50%;
+                        text-align: center;
+                        line-height: 20px;
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+    }
 }
