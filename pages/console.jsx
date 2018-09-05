@@ -46,10 +46,15 @@ export default class Console extends Component {
             options: {
                 title: "控件使用数",
                 width: this.refs.pl_chart.offsetWidth,
+                color: "#2196f3",
                 height: 283
             },
             options2: {
                 title: "控件使用数",
+                lineWidth: 50,
+                legend: true,
+                width: this.refs.pie_panel.offsetWidth,
+                height: 200
             }
         })
     }
@@ -80,18 +85,23 @@ export default class Console extends Component {
             </div>
             <div className="hp-sp-row">
                 <Panel className="hp-col hp-col-12 mv-10" title="饼状图" toolbar={true}>
-                    <Chart
-                        type="pie"
-                        data={this.tableData}
-                    >
-                    </Chart>
+                    <div ref="pie_panel">
+                        <Chart
+                            type="pie"
+                            options={this.state.options2}
+                            data={this.state.tableData}
+                        >
+                        </Chart>
+                    </div>
                 </Panel>
                 <Panel className="hp-col hp-col-12 mv-10" title="线性图" toolbar={true}>
-                    <Chart
-                        type="line"
-                        data={this.tableData}
-                    >
-                    </Chart>
+                <div ref="line_panel">
+                        <Chart
+                            type="line"
+                            data={this.tableData}
+                        >
+                        </Chart>
+                </div>
                 </Panel>
             </div>
         </div>

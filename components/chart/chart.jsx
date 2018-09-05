@@ -18,7 +18,12 @@ export default class Chart extends Component {
                 break;
             case "pie":
                 // 饼状图
+                result = pie(this, options, data);
                 break;
+            case "line":
+                // 折线图
+                result = line(this, options, data);
+                break
             default:
                 break;
         }
@@ -28,11 +33,10 @@ export default class Chart extends Component {
         </div>
     }
 }
-
 export function bar(target, options, data) {
     if (!target.refs.canvas) return null;
-    let bar, barColor = "rgb(47, 194, 91)";
     options = options || {}
+    let bar, barColor = options["color"] || "rgb(47, 194, 91)";
     const _data = data.map(d => d.data);
     const maxValue = Math.max(...(data.map(d => d.data)));
     const minValue = Math.min(...(data.map(d => d.data)));
@@ -45,6 +49,10 @@ export function bar(target, options, data) {
     canvas.style = `width: ${width / 2}px; height: ${height / 2}px`;
     const rectH = 10, rectW = 20;
 
+    // 绘制标题
+    ctx.font = "30px arial";
+    ctx.fillStyle = "#000";
+    ctx.fillText(options.title || "标题", 0, 30);
     //绘制表格
     const sourceX = 50;
     const sourceY = height - 50
@@ -112,4 +120,70 @@ export function bar(target, options, data) {
         toolTip.style = `top: ${layY}px;left: ${layX}px`;
     });
     return canvas;
+}
+
+export function pie(target, options, data) {
+    if (!target.refs.canvas) return null;
+    options = options || {}
+    let total = 0;
+    const _data = data.map(d => {
+        total += d.data || 0;
+        return d.data
+    });
+    let _new_data = []
+    for (const item of _data) {
+        _new_data.push(item / total);
+    }
+    const canvas = target.refs.canvas;
+    const width = (options.width || 150) * 2;
+    const height = (options.height || 110) * 2;
+    const originX = width / 2;
+    const originY = height / 2;
+    canvas.width = width;
+    canvas.height = height;
+    canvas.style = `width: ${width / 2}px; height: ${height / 2}px`;
+    const ctx = canvas.getContext("2d");
+    ctx.font = "30px arial";
+    ctx.fillStyle = "#000";
+    ctx.fillText(options.title || "标题", 10, 30);
+
+    // 绘制饼图
+    let startAngle = 0, num = 1;
+    for (const _data of _new_data) {
+        ctx.beginPath();
+        const color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
+        ctx.strokeStyle = color;
+        const angle =  _data * 2 * Math.PI;
+        ctx.arc(originX, originY, originX * .4, startAngle, startAngle + angle);
+        startAngle += angle;
+        ctx.lineWidth = options.lineWidth || 40;
+        ctx.stroke();
+        ctx.closePath();
+        // 绘制 legend 注释
+        if(options.legend) {
+            ctx.font = "18px arial"
+            ctx.fillStyle = color;
+            ctx.fillRect(width - 130, num * 30 - 15, 20, 15)
+            ctx.fillText(data[num - 1].title, width - 100, num * 30)
+        }
+        num ++;
+    }
+
+    canvas.addEventListener("mousemove", e => {
+        console.log(e)
+    })
+
+    return canvas;
+}
+export function line(target, options, data) {
+    if (!target.refs.canvas) return null;
+    options = options || {}
+    const canvas = target.refs.canvas;
+    const width = (options.width || 150) * 2;
+    const height = (options.height || 110) * 2;
+    canvas.width = width;
+    canvas.height = height;
+    canvas.style = `width: ${width / 2}px; height: ${height / 2}px`;
+    return canvas;
+
 }

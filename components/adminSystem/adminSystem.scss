@@ -133,6 +133,18 @@
             line-height: 48px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+        &-content{
+            overflow: auto;
+            width: 100%;
+            height: calc(100% - 48px);
+            &::-webkit-scrollbar {
+                width: 6px;
+                height: 1px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background: #bbb;
+            }
+        }
     }
 }
 .hp-searchbar {
