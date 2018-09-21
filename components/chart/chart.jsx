@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { findDOMNode } from "react-dom";
 import PropTypes from 'prop-types';
 import "./chart.scss"
 
@@ -28,7 +29,7 @@ export default class Chart extends Component {
                 break;
         }
         return <div className="hp-chart">
-            <canvas ref="canvas"></canvas>
+            <canvas className="hp-chart_canvas" ref="canvas"></canvas>
             <div ref="hp_chart_tooltip" className="hp-chart_tooltip"></div>
         </div>
     }
@@ -36,7 +37,7 @@ export default class Chart extends Component {
 export function bar(target, options, data) {
     if (!target.refs.canvas) return null;
     options = options || {}
-    let bar, barColor = options["color"] || "rgb(47, 194, 91)";
+    let barColor = options["color"] || "rgb(47, 194, 91)";
     const _data = data.map(d => d.data);
     const maxValue = Math.max(...(data.map(d => d.data)));
     const minValue = Math.min(...(data.map(d => d.data)));
@@ -46,13 +47,14 @@ export function bar(target, options, data) {
     const height = (options.height || 110) * 2;
     canvas.width = width;
     canvas.height = height;
-    canvas.style = `width: ${width / 2}px; height: ${height / 2}px`;
+    canvas.style = `opacity:1; width: ${width / 2}px; height: ${height / 2}px`;
     const rectH = 10, rectW = 20;
 
     // 绘制标题
-    ctx.font = "30px arial";
+    const fontparam = options.font || {};
+    ctx.font = `${fontparam.fontSize || "30"}px arial`;
     ctx.fillStyle = "#000";
-    ctx.fillText(options.title || "标题", 0, 30);
+    ctx.fillText(options.title || "标题", fontparam.left || 0, fontparam.top || 30);
     //绘制表格
     const sourceX = 50;
     const sourceY = height - 50
@@ -72,7 +74,7 @@ export function bar(target, options, data) {
         ctx.stroke();
         ctx.closePath();
         ctx.font = '20px "Monospaced Number","Chinese Quote",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif';
-        ctx.fillStyle = '#000';
+        ctx.fillStyle = '#555';
 
         // 绘制y轴标题
         ctx.fillText(data[i].data, 0, _height + 10);
@@ -87,11 +89,22 @@ export function bar(target, options, data) {
         ctx.stroke();
         ctx.closePath();
 
+        const h = -avgHeight * data.length + _height;
         ctx.beginPath();
-        ctx.globalCompositeOperation = "destination-over";
+        // ctx.globalCompositeOperation = "destination-over";
         ctx.fillStyle = barColor;
-        ctx.fillRect(_width - 20, avgHeight * data.length, 40, -avgHeight * data.length + _height)
-        ctx.fill();
+        let step = 0;
+        const timer = setInterval(() => {
+            if (step > h) {
+                ctx.fillRect(_width - 20, avgHeight * data.length, 40, step)
+                ctx.fill();
+                step += h / 10
+            } else {
+                clearInterval(timer)
+            }
+        }, 20);
+        // ctx.fillRect(_width - 20, avgHeight * data.length, 40, h)
+        // ctx.fill();
         ctx.closePath();
     }
     ctx.beginPath();
@@ -141,49 +154,185 @@ export function pie(target, options, data) {
     const originY = height / 2;
     canvas.width = width;
     canvas.height = height;
-    canvas.style = `width: ${width / 2}px; height: ${height / 2}px`;
+    canvas.style = `opacity:1; width: ${width / 2}px; height: ${height / 2}px`;
     const ctx = canvas.getContext("2d");
-    ctx.font = "30px arial";
+    const fontparam = options.font || {};
+    ctx.font = `${fontparam.fontSize + "px" || "30px"} arial`;
     ctx.fillStyle = "#000";
-    ctx.fillText(options.title || "标题", 10, 30);
+    ctx.fillText(options.title || "标题", fontparam.left || 0, fontparam.top || 30);
 
     // 绘制饼图
-    let startAngle = 0, num = 1;
+    let num = 1;
+    let startAngle = 0;
     for (const _data of _new_data) {
-        ctx.beginPath();
-        const color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
-        ctx.strokeStyle = color;
-        const angle =  _data * 2 * Math.PI;
-        ctx.arc(originX, originY, originX * .4, startAngle, startAngle + angle);
-        startAngle += angle;
-        ctx.lineWidth = options.lineWidth || 40;
-        ctx.stroke();
-        ctx.closePath();
+        // ctx.beginPath();
+        const color = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+        // ctx.strokeStyle = color;
+        const angle = _data * 2 * Math.PI;
+        let step = 0;
+        const targetAngle = startAngle + angle;
+        const timer = setTimeout(pieDraw.bind(null, {
+            x: originX,
+            y: originY,
+            options: options,
+        }, startAngle, step, angle, ctx, color, timer), 20);
+        startAngle += num === 1 ? angle : _new_data[num - 1] * 2 * Math.PI;
+        // ctx.arc(originX, originY, (originY < originX ? originY : originX) * .8, startAngle, startAngle + angle);
+        // startAngle += angle;
+        // ctx.lineWidth = options.lineWidth || 40;
+        // ctx.stroke();
+        // ctx.closePath();
         // 绘制 legend 注释
-        if(options.legend) {
+        if (options.legend) {
             ctx.font = "18px arial"
             ctx.fillStyle = color;
             ctx.fillRect(width - 130, num * 30 - 15, 20, 15)
             ctx.fillText(data[num - 1].title, width - 100, num * 30)
         }
-        num ++;
+        num++;
     }
-
-    canvas.addEventListener("mousemove", e => {
-        console.log(e)
-    })
+    // canvas.addEventListener("mousemove", e => {
+    //     const layX = e.layerX;
+    //     const layY = e.layerY;
+    //     const _data = {
+    //         title: 1,
+    //         data: 1
+    //     }
+    //     const toolTip = target.refs.hp_chart_tooltip;
+    //     toolTip.innerHTML = "";
+    //     const span = document.createElement("span");
+    //     span.className = "title"
+    //     span.innerHTML = _data.title;
+    //     toolTip.appendChild(span);
+    //     const span2 = document.createElement("span");
+    //     span2.className = "content"
+    //     const style = `background:"#2196f3";display:inline-block;border-radius:50%;width:8px;height:8px;margin:0 10px;`
+    //     span2.innerHTML = `<span style="${style}"></span>${_data.data}`;
+    //     toolTip.appendChild(span2);
+    //     toolTip.style = `top: ${layY}px;left: ${layX}px`;
+    // })
 
     return canvas;
+}
+function pieDraw(param, start, step, angle, canvas, color, timer) {
+    canvas.beginPath();
+    canvas.strokeStyle = color;
+    if (step < angle) {
+        step += angle / 10;
+        canvas.arc(param.x, param.y, (param.y < param.x ? param.y : param.x) * .8, start, start + step);
+        canvas.lineWidth = param.options.lineWidth || 40;
+        canvas.stroke();
+        const timer2 = setTimeout(pieDraw.bind(null, param, start, step, angle, canvas, color, timer2), 20)
+    }
+    canvas.closePath();
+    clearTimeout(timer);
 }
 export function line(target, options, data) {
     if (!target.refs.canvas) return null;
     options = options || {}
+    let barColor = options["color"] || "rgb(47, 194, 91)";
+    const _data = data.map(d => d.data);
     const canvas = target.refs.canvas;
+    const ctx = canvas.getContext("2d");
     const width = (options.width || 150) * 2;
     const height = (options.height || 110) * 2;
     canvas.width = width;
     canvas.height = height;
-    canvas.style = `width: ${width / 2}px; height: ${height / 2}px`;
+    canvas.style = `opacity:1; width: ${width / 2}px; height: ${height / 2}px`;
+    const rectH = 10, rectW = 20;
+
+    // 绘制标题
+    const fontparam = options.font || {};
+    ctx.font = `${fontparam.fontSize + "px" || "30px"} arial`;
+    ctx.fillStyle = "#000";
+    ctx.fillText(options.title || "标题", fontparam.left || 0, fontparam.top || 30);
+    //绘制表格
+    const sourceX = 50;
+    const sourceY = height - 50
+    const endX = width - 30;
+    const endY = 50;
+    let maxValue = 0, minValue = 0, len, elemLen = [], xLengend = [];
+    for (const item of _data) {
+        const _dataArea = item.map((d, i) => d.data);
+        const _dataTitle = item.map(d => d.title);
+        maxValue = Math.max(..._dataArea);
+        minValue = minValue ? Math.min(..._dataArea, minValue) : Math.min(..._dataArea);
+        elemLen.push(_dataArea.length)
+        xLengend = _dataTitle;
+    }
+    // 绘制横轴
+    len = Math.max(...elemLen);
+    const avgHeight = (sourceY - endY) / len;
+    const avgWidth = (endX - sourceX) / (len + 1);
+    const yValue = (maxValue - minValue) / (len - 1);
+    // 折线图
+    let index = 0;
+    for (const item of _data) {
+        let preX = avgWidth, preY = endY + (1 - item[0].data / maxValue) * (sourceY - endY);
+        ctx.strokeStyle = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+        ctx.strokeWidth = 10;
+        const _dataArea = item.map((d, i) => {
+            if (i > 0) {
+                ctx.beginPath();
+                const y = endY + (1 - d.data / maxValue) * (sourceY - endY);
+                ctx.moveTo(preX, preY);
+                ctx.lineTo(avgWidth * (i + 1), y);
+                preX = avgWidth * (i + 1);
+                preY = y;
+                ctx.stroke();
+                ctx.closePath();
+            }
+            return d.data
+        });
+        index ++;
+    }
+    for (let j = 0; j < len; j++) {
+        ctx.beginPath();
+        ctx.strokeStyle = "#bbb";
+        const _y = avgHeight * (j + 1);
+        const _x = avgWidth * (j + 1);
+        ctx.moveTo(sourceX, sourceY - _y);
+        ctx.lineTo(endX - 80, sourceY - _y);
+        ctx.stroke();
+        ctx.closePath();
+        ctx.fillStyle = "#555";
+        ctx.font = "18px arail";
+        // y轴 标题
+        ctx.fillText(minValue + yValue * j, 0, sourceY - _y + 9);
+        // x轴 标题
+        ctx.fillText(xLengend[j], _x - xLengend[j].length * 5, sourceY + 30)
+        ctx.beginPath();
+        ctx.moveTo(_x, sourceY);
+        ctx.lineTo(_x, sourceY - 10);
+        ctx.strokeWidth = 4;
+        ctx.strokeStyle = "#000";
+        ctx.stroke();
+        ctx.closePath();
+    }
+    ctx.beginPath();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "#000";
+    ctx.moveTo(sourceX, sourceY);
+    ctx.lineTo(endX - 80, sourceY);
+    ctx.stroke();
+    ctx.closePath();
+    // canvas.addEventListener("mousemove", e => {
+    //     const layX = e.layerX;
+    //     const layY = e.layerY;
+    //     const _data = data[Math.floor(layX * 2 / avgWidth)]
+    //     const toolTip = target.refs.hp_chart_tooltip;
+    //     toolTip.innerHTML = "";
+    //     const span = document.createElement("span");
+    //     span.className = "title"
+    //     span.innerHTML = _data.title;
+    //     toolTip.appendChild(span);
+    //     const span2 = document.createElement("span");
+    //     span2.className = "content"
+    //     const style = `background:${barColor};display:inline-block;border-radius:50%;width:8px;height:8px;margin:0 10px;`
+    //     span2.innerHTML = `<span style="${style}"></span>${_data.data}`;
+    //     toolTip.appendChild(span2);
+    //     toolTip.style = `top: ${layY}px;left: ${layX}px`;
+    // });
     return canvas;
 
 }

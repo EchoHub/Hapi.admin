@@ -1,6 +1,10 @@
 .hp-chart {
     position: relative;
     overflow: hidden;
+    &_canvas {
+        opacity: .1;
+        transition: all ease 1.5s;
+    }
     &_tooltip{
         position: absolute;
         padding: 10px;

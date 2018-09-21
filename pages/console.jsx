@@ -38,6 +38,74 @@ export default class Console extends Component {
                     data: 333
                 },
             ],
+            tableData2: [
+                {
+                    title : "按钮",
+                    data : [
+                        {
+                            title: "9.01",
+                            data: 999
+                        },
+                        {
+                            title: "9.02",
+                            data: 888
+                        },
+                        {
+                            title: "9.03",
+                            data: 666
+                        },
+                        {
+                            title: "9.04",
+                            data: 777
+                        },
+                        {
+                            title: "9.05",
+                            data: 444
+                        },
+                        {
+                            title: "9.06",
+                            data: 555
+                        },
+                        {
+                            title: "9.07",
+                            data: 111
+                        }
+                    ]
+                },
+                {
+                    title : "表单",
+                    data : [
+                        {
+                            title: "9.01",
+                            data: 222
+                        },
+                        {
+                            title: "9.02",
+                            data: 333
+                        },
+                        {
+                            title: "9.03",
+                            data: 888
+                        },
+                        {
+                            title: "9.04",
+                            data: 555
+                        },
+                        {
+                            title: "9.05",
+                            data: 777
+                        },
+                        {
+                            title: "9.06",
+                            data: 999
+                        },
+                        {
+                            title: "9.07",
+                            data: 666
+                        }
+                    ]
+                }
+            ],
             options: {}
         }
     }
@@ -51,10 +119,25 @@ export default class Console extends Component {
             },
             options2: {
                 title: "控件使用数",
+                font: {
+                    top: 20,
+                    fontSize: 24,
+                },
                 lineWidth: 50,
                 legend: true,
                 width: this.refs.pie_panel.offsetWidth,
-                height: 200
+                height: this.refs.pie_panel.offsetHeight
+            },
+            options3: {
+                title: "按钮、表单近7日使用对比",
+                font: {
+                    top: 20,
+                    fontSize: 24,
+                },
+                lineWidth: 50,
+                legend: true,
+                width: this.refs.pie_panel.offsetWidth,
+                height: this.refs.pie_panel.offsetHeight
             }
         })
     }
@@ -98,7 +181,8 @@ export default class Console extends Component {
                 <div ref="line_panel">
                         <Chart
                             type="line"
-                            data={this.tableData}
+                            options={this.state.options3}
+                            data={this.state.tableData2}
                         >
                         </Chart>
                 </div>
