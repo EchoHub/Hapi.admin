@@ -7,6 +7,7 @@ import Form from "./form"
 import Table from "./table"
 import Layout from "./layout"
 import Notice from "./notice"
+import Canvas from "./canvas"
 import Others from "./others"
 var Pages = {
     "console" : Console,
@@ -16,5 +17,6 @@ var Pages = {
     "notice" : Notice,
     "others" : Others,
     "table" : Table,
+    "canvas" : Canvas,
 };
 export default Pages;

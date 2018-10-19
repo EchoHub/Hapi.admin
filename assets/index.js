@@ -52,6 +52,13 @@ const menus = [
                 flag: 0,
             },
             {
+                title: "画布",
+                belong: "组件",
+                icon: "",
+                route: "/canvas",
+                flag: 0,
+            },
+            {
                 title: "其他",
                 belong: "组件",
                 icon: "",
