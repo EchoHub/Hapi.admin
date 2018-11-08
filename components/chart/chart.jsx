@@ -53,7 +53,7 @@ export function bar(target, options, data) {
     // 绘制标题
     const fontparam = options.font || {};
     ctx.font = `${fontparam.fontSize || "30"}px arial`;
-    ctx.fillStyle = "#000";
+    ctx.fillStyle = "rgb(51,51,51)";
     ctx.fillText(options.title || "标题", fontparam.left || 0, fontparam.top || 30);
     //绘制表格
     const sourceX = 50;
@@ -75,8 +75,9 @@ export function bar(target, options, data) {
         ctx.closePath();
         ctx.font = '20px "Monospaced Number","Chinese Quote",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif';
         ctx.fillStyle = '#555';
-
+        
         // 绘制y轴标题
+        ctx.font = '24px "Monospaced Number","Chinese Quote",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif';
         ctx.fillText(data[i].data, 0, _height + 10);
         // 绘制x轴标题
         ctx.fillText(data[i].title, _width - (data[i].title.length * 10), avgHeight * data.length + 30);
@@ -103,8 +104,6 @@ export function bar(target, options, data) {
                 clearInterval(timer)
             }
         }, 20);
-        // ctx.fillRect(_width - 20, avgHeight * data.length, 40, h)
-        // ctx.fill();
         ctx.closePath();
     }
     ctx.beginPath();
@@ -115,23 +114,26 @@ export function bar(target, options, data) {
     ctx.stroke();
     ctx.closePath();
     let _preX = 0
-    canvas.addEventListener("mousemove", e => {
-        const layX = e.layerX;
-        const layY = e.layerY;
-        const _data = data[Math.floor(layX * 2 / avgWidth)]
-        const toolTip = target.refs.hp_chart_tooltip;
-        toolTip.innerHTML = "";
-        const span = document.createElement("span");
-        span.className = "title"
-        span.innerHTML = _data.title;
-        toolTip.appendChild(span);
-        const span2 = document.createElement("span");
-        span2.className = "content"
-        const style = `background:${barColor};display:inline-block;border-radius:50%;width:8px;height:8px;margin:0 10px;`
-        span2.innerHTML = `<span style="${style}"></span>${_data.data}`;
-        toolTip.appendChild(span2);
-        toolTip.style = `top: ${layY}px;left: ${layX}px`;
-    });
+    // canvas.addEventListener("mousemove", e => {
+    //     const layX = e.layerX;
+    //     const layY = e.layerY;
+    //     const _data = data[Math.floor(layX * 2 / avgWidth)]
+    //     const toolTip = target.refs.hp_chart_tooltip;
+    //     toolTip.innerHTML = "";
+    //     const span = document.createElement("span");
+    //     span.className = "title"
+    //     span.innerHTML = _data.title;
+    //     toolTip.appendChild(span);
+    //     const span2 = document.createElement("span");
+    //     span2.className = "content"
+    //     const style = `background:${barColor};display:inline-block;border-radius:50%;width:8px;height:8px;margin:0 10px;`
+    //     span2.innerHTML = `<span style="${style}"></span>${_data.data}`;
+    //     toolTip.appendChild(span2);
+    //     toolTip.style = `top: ${layY}px;left: ${layX}px`;
+    //     canvas.addEventListener("mouseleave", e => {
+
+    //     })
+    // });
     return canvas;
 }
 
@@ -165,9 +167,12 @@ export function pie(target, options, data) {
     let num = 1;
     let startAngle = 0;
     for (const _data of _new_data) {
-        // ctx.beginPath();
-        const color = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
-        // ctx.strokeStyle = color;
+        let color;
+        if (_new_data.length <= 10) {
+            color = ["#2196f3", "#7CCD7C", "#ff6600", "#F0FFF0", "#FF69B4", "#FFD700", "#90EE90", "#48D1CC", "#AB82FF", "#FF4040"][num - 1]
+        } else {
+            color = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+        }
         const angle = _data * 2 * Math.PI;
         let step = 0;
         const targetAngle = startAngle + angle;
@@ -177,11 +182,6 @@ export function pie(target, options, data) {
             options: options,
         }, startAngle, step, angle, ctx, color, timer), 20);
         startAngle += num === 1 ? angle : _new_data[num - 1] * 2 * Math.PI;
-        // ctx.arc(originX, originY, (originY < originX ? originY : originX) * .8, startAngle, startAngle + angle);
-        // startAngle += angle;
-        // ctx.lineWidth = options.lineWidth || 40;
-        // ctx.stroke();
-        // ctx.closePath();
         // 绘制 legend 注释
         if (options.legend) {
             ctx.font = "18px arial"
@@ -191,27 +191,6 @@ export function pie(target, options, data) {
         }
         num++;
     }
-    // canvas.addEventListener("mousemove", e => {
-    //     const layX = e.layerX;
-    //     const layY = e.layerY;
-    //     const _data = {
-    //         title: 1,
-    //         data: 1
-    //     }
-    //     const toolTip = target.refs.hp_chart_tooltip;
-    //     toolTip.innerHTML = "";
-    //     const span = document.createElement("span");
-    //     span.className = "title"
-    //     span.innerHTML = _data.title;
-    //     toolTip.appendChild(span);
-    //     const span2 = document.createElement("span");
-    //     span2.className = "content"
-    //     const style = `background:"#2196f3";display:inline-block;border-radius:50%;width:8px;height:8px;margin:0 10px;`
-    //     span2.innerHTML = `<span style="${style}"></span>${_data.data}`;
-    //     toolTip.appendChild(span2);
-    //     toolTip.style = `top: ${layY}px;left: ${layX}px`;
-    // })
-
     return canvas;
 }
 function pieDraw(param, start, step, angle, canvas, color, timer) {
@@ -269,8 +248,14 @@ export function line(target, options, data) {
     let index = 0;
     for (const item of _data) {
         let preX = avgWidth, preY = endY + (1 - item[0].data / maxValue) * (sourceY - endY);
-        ctx.strokeStyle = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
-        ctx.strokeWidth = 10;
+        let color;
+        if(_data.length <= 10) {
+            color = ["#2196f3", "#7CCD7C", "#ff6600", "#F0FFF0", "#FF69B4", "#FFD700", "#90EE90", "#48D1CC", "#AB82FF", "#FF4040"][index]
+        }else {
+            color = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+        }
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
         const _dataArea = item.map((d, i) => {
             if (i > 0) {
                 ctx.beginPath();
@@ -284,8 +269,9 @@ export function line(target, options, data) {
             }
             return d.data
         });
-        index ++;
+        index++;
     }
+    ctx.lineWidth = 1;
     for (let j = 0; j < len; j++) {
         ctx.beginPath();
         ctx.strokeStyle = "#bbb";
@@ -296,9 +282,10 @@ export function line(target, options, data) {
         ctx.stroke();
         ctx.closePath();
         ctx.fillStyle = "#555";
-        ctx.font = "18px arail";
+        ctx.font = "20px arail";
         // y轴 标题
         ctx.fillText(minValue + yValue * j, 0, sourceY - _y + 9);
+        ctx.font = "24px arail";
         // x轴 标题
         ctx.fillText(xLengend[j], _x - xLengend[j].length * 5, sourceY + 30)
         ctx.beginPath();
@@ -316,23 +303,6 @@ export function line(target, options, data) {
     ctx.lineTo(endX - 80, sourceY);
     ctx.stroke();
     ctx.closePath();
-    // canvas.addEventListener("mousemove", e => {
-    //     const layX = e.layerX;
-    //     const layY = e.layerY;
-    //     const _data = data[Math.floor(layX * 2 / avgWidth)]
-    //     const toolTip = target.refs.hp_chart_tooltip;
-    //     toolTip.innerHTML = "";
-    //     const span = document.createElement("span");
-    //     span.className = "title"
-    //     span.innerHTML = _data.title;
-    //     toolTip.appendChild(span);
-    //     const span2 = document.createElement("span");
-    //     span2.className = "content"
-    //     const style = `background:${barColor};display:inline-block;border-radius:50%;width:8px;height:8px;margin:0 10px;`
-    //     span2.innerHTML = `<span style="${style}"></span>${_data.data}`;
-    //     toolTip.appendChild(span2);
-    //     toolTip.style = `top: ${layY}px;left: ${layX}px`;
-    // });
     return canvas;
 
 }

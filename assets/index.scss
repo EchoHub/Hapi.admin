@@ -23,6 +23,9 @@ body {
     .hp-col {
         display: inline-block;
     }
+    .hp-col-6 {
+        width: 25%;
+    }
     .hp-col-12 {
         width: 50%;
     }
@@ -38,6 +41,9 @@ body {
     position: relative;
     .hp-col {
         display: inline-block;
+    }
+    .hp-col-6 {
+        width: 25%;
     }
     .hp-col-24 {
         width: 100%;

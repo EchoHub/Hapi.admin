@@ -3,6 +3,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // 按需生成html模版
 const CleanWebpackPlugin = require("clean-webpack-plugin"); // 清理文件
 module.exports = {
+    // mode: "production",
     mode: "development",
     entry: path.resolve(__dirname, "assets/index.js"),
     output: {

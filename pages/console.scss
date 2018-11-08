@@ -13,7 +13,7 @@
             width: 220px;
             float: right;
             .title {
-                color: #000;
+                color: rgb(51, 51, 51);
                 margin-bottom: 10px;
             }
             > ul {
@@ -42,6 +42,60 @@
         }
         .pie_panel{
             text-align: center;
+        }
+    }
+    .contacts_ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        li {
+            a {
+                text-decoration: none;
+                width: calc(100% - 2rem);
+                display: inherit;
+                height: 48px;
+                padding: .5rem;
+                color: #fff;
+                user-select: none;
+                overflow: hidden;
+                &:hover {
+                    opacity: .9;
+                }
+                &:before {
+                    content: "";
+                    width: 30px;
+                    height: 200px;
+                    background: #e0e0e0;
+                    display: inline-block;
+                    float: left;
+                    transform: rotate(-78deg);
+                    transform-origin: top;
+                    opacity: .4;
+                }
+                &:after {
+                    content: "";
+                    width: 40px;
+                    height: 200px;
+                    background: #ddd;
+                    display: inline-block;
+                    float: right;
+                    transform: rotate(45deg);
+                    transform-origin: top;
+                    opacity: .4;
+                }
+            }
+        }
+        .github {
+            background-color: #9dd7ed;
+        }
+        .wechat {
+            background-color: #b8e5b1;
+        }
+        .qq {
+            background-color: #cbbdee;
+        }
+        .blog {
+            background-color: #f4ab9f;
         }
     }
 }
