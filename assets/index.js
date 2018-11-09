@@ -34,7 +34,7 @@ const menus = [
                 title: "表单",
                 belong: "组件",
                 icon: "",
-                route: "/form",
+                route: "/formPage",
                 flag: 0,
             },
             {

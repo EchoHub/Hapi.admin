@@ -3,7 +3,7 @@
  */
 import Console from "./console"
 import ButtonPage from "./buttonPage"
-import Form from "./form"
+import FormPage from "./formPage"
 import Table from "./table"
 import Layout from "./layout"
 import Notice from "./notice"
@@ -13,7 +13,7 @@ var Pages = {
     "console" : Console,
     "buttonPage" : ButtonPage,
     "layout" : Layout,
-    "form" : Form,
+    "formPage" : FormPage,
     "notice" : Notice,
     "others" : Others,
     "table" : Table,
