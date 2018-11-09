@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from "classnames";
 import "./gridLayout.scss"
 
 /**
@@ -8,32 +9,26 @@ import "./gridLayout.scss"
 export default class GridLayout extends Component {
     constructor(props) {
         super(props)
-        this.state = {}
-    }
-    init() {
-        // 初始化参数
-        const { theme, justify } = this.props;
-        let justifyContent = ""
-        if(theme === "flex") {
-            justifyContent = ` ${justify}`
-        }
-        this.setState({
-            className: `hp-gridlayout ${theme}${justifyContent}`
-        });
     }
     componentDidMount() {
-        this.init();
     }
     render() {
-        const { children, justify } = this.props;
-        const { className } = this.state;
-        return <div className={className}>{children}</div>
+        const { children, prefixCls, className, justify, theme } = this.props;
+        let justifyContent = "";
+        if (theme === "flex") justifyContent = justify
+        const classes = classNames(prefixCls, className, {
+            [`${prefixCls}-${theme}`]: theme,
+            [`${prefixCls}-${justifyContent}`]: justifyContent || ""
+        })
+        return <div className={classes}>{children}</div>
     }
 }
 GridLayout.propTypes = {
+    prefixCls: PropTypes.string,
     theme: PropTypes.string
 }
 GridLayout.defaultProps = {
+    prefixCls: "hp-gridlayout",
     theme: "default"
 }
 
@@ -45,25 +40,20 @@ export class Layout extends Component {
         super(props)
         this.state = {}
     }
-    init() {
-        // 初始化
-        const { children, col } = this.props;
-        this.setState({
-            className: `hp-layout hp-layout-${col}`
-        });
-    }
-    componentDidMount() {
-        this.init();
-    }
+    componentDidMount() { }
     render() {
-        const { children, col } = this.props;
-        const { className } = this.state;
-        return <div className={className}>{children}</div>
+        const { children, col, className, prefixCls } = this.props;
+        const classes = classNames(prefixCls, className, {
+            [`${prefixCls}-${col}`]: col
+        });
+        return <div className={classes}>{children}</div>
     }
 }
 Layout.propTypes = {
+    prefixClas: PropTypes.string,
     col: PropTypes.number
 }
 Layout.defaultProps = {
+    prefixCls: "hp-layout",
     col: 1
 }

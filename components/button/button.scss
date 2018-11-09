@@ -1,3 +1,108 @@
-.hp-button {
-
+$name: "hp-button";
+$buttongroup: "hp-buttongroup";
+$primary: #1890ff;
+$warning: #f5222d;
+$default: #d9d9d9;
+.#{$name} {
+    padding: 0 1rem;
+    border: 1px solid $default;
+    border-radius: 4px;
+    font-size: 14px;
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+    height: 32px;
+    color: rgba(0,0,0,.65);
+    line-height: 30px;
+    overflow: hidden;
+    position: relative;
+    transition: all ease-in-out .3s;
+    &.block {
+        width: 100%;
+        display: block;
+    }
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        opacity: .9;
+        color: $primary;
+        border:1px solid $primary;
+    }
+    &.#{$name}-primary {
+        background: $primary;
+        color: #fff;
+        border-color: $primary;
+    }
+    &.#{$name}-dashed {
+        border-style: dashed;
+        &:hover {
+            border-color: $primary;
+            color: $primary;
+        }
+    }
+    &.#{$name}-danger {
+        color: $warning;
+        border-color: $warning;
+        &:hover {
+            opacity: .9;
+            background: $warning;
+            color: #fff;
+        }
+    }
+    &.#{$name}-large {
+        font-size: 16px;
+        height: 36px;
+        line-height: 35px;
+    }
+    &.#{$name}-small {
+        font-size: 14px;
+        height: 28px;
+        line-height: 26px;
+    }
+    &.#{$name}-mini {
+        font-size: 12px;
+        height: 24px;
+        line-height: 22px;
+        border-radius: 2px;
+    }
+}
+.#{$buttongroup} {
+    border: 1px solid $default;
+    display: inline-block;
+    border-radius: 4px;
+    overflow: hidden;
+    .hp-button {
+        border-radius: 0;
+        border: 0;
+    }
+    &.#{$buttongroup}-primary {
+        border-color: $primary;
+        background: $primary;
+        .#{$name} {
+            background: $primary;
+            color: #fff;
+            &:hover {
+                background-color: #40a9ff;
+            }
+        }
+    }
+    &.#{$buttongroup}-warning {
+        border-color: $warning;
+        background: $warning;
+        .#{$name} {
+            color: $warning;
+            &:hover {
+                background-color: $warning;
+                color: #fff;
+            }
+        }
+    }
+    &.#{$buttongroup}-block {
+        display: table;
+        width: 100%;
+        .#{$name} {
+            display: table-cell;
+        }
+    }
 }

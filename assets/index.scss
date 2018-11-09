@@ -7,11 +7,23 @@ body {
     color: rgba(0,0,0,.65);
     background-color: #fff;
 }
+.clearfix {
+    clear: both;
+}
 .font-bolder{
     font-weight: bolder;
 }
+.mr-7 {
+    margin-right: 7px;
+}
 .mt-10 {
     margin-top: 10px;
+}
+.mr-10 {
+    margin-right: 10px;
+}
+.ml-10{
+    margin-left: 10px;
 }
 .m-10{
     margin: 10px;

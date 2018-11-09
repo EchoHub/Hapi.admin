@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as ReactDOM from "react-dom"
 import PropTypes from 'prop-types';
+import classNames from "classnames";
 import "./panel.scss"
 
 export default class Panel extends Component {
@@ -40,10 +41,10 @@ export default class Panel extends Component {
         this.refs.panel.parentNode.removeChild(this.refs.panel)
     }
     render() {
-        const { title, toolbar, className, children } = this.props;
+        const { title, toolbar, prefixCls, className, children } = this.props;
         const { fullScreen, min } = this.state;
-        const state = this.state;
-        return <div ref="panel" className={`hp-panel${className ? " " + className : ""}${fullScreen ? " full" : ""}`}>
+        const classes = classNames(prefixCls, className, fullScreen ? "full" : "");
+        return <div ref="panel" className={classes}>
             <div className="hp-panel_title">
                 {title}
                 {toolbar ? <ul className="hp-panel_toolbar">
@@ -56,4 +57,10 @@ export default class Panel extends Component {
             <div className={`hp-panel_content${min ? " min" : ""}`}>{children}</div>
         </div>
     }
+}
+Panel.propTypes = {
+    prefixCls: PropTypes.string
+}
+Panel.defaultProps = {
+    prefixCls: "hp-panel"
 }

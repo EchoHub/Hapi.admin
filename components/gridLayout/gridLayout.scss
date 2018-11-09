@@ -1,4 +1,5 @@
-.hp-gridlayout {
+$name: "hp-gridlayout";
+.#{$name} {
     .hp-layout {
         display: inline-block;
         @for $num from 1 through 12 {
@@ -7,21 +8,21 @@
             }
         }
     }
-    &.flex {
+    &.#{$name}-flex {
         display: flex;
-        &.center {
+        &.#{$name}-center {
             justify-content: center;
         }
-        &.flex-start {
+        &.#{$name}-flex-start {
             justify-content: flex-start;
         }
-        &.flex-end {
+        &.#{$name}-flex-end {
             justify-content: flex-end;
         }
-        &.space-around {
+        &.#{$name}-space-around {
             justify-content: space-around;
         }
-        &.space-between {
+        &.#{$name}-space-between {
             justify-content: space-between;
         }
     }
