@@ -2,7 +2,7 @@
  * @desc 页面配置信息
  */
 import Console from "./console"
-import Button from "./button"
+import ButtonPage from "./buttonPage"
 import Form from "./form"
 import Table from "./table"
 import Layout from "./layout"
@@ -11,7 +11,7 @@ import Canvas from "./canvas"
 import Others from "./others"
 var Pages = {
     "console" : Console,
-    "button" : Button,
+    "buttonPage" : ButtonPage,
     "layout" : Layout,
     "form" : Form,
     "notice" : Notice,

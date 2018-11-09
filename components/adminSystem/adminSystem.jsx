@@ -50,7 +50,7 @@ export default class AdminSystem extends Component {
             if (item.flag) {
                 item.children = this.validityRoute(curhash, item.children)
             } else {
-                if(item.route === curhash) {
+                if (item.route === curhash) {
                     item["active"] = true
                     this.setState({
                         curTopBarInfo: item
@@ -70,16 +70,15 @@ export default class AdminSystem extends Component {
 
     componentDidMount() {
         const curhash = (location.hash.indexOf("?") ? location.hash.split("?")[0] : location.hash).split("#")[1]
-        
+
         this.setState({
             menus: this.validityRoute(curhash, this.state.menus)
         })
     }
 
     render() {
-        const theme = this.props.theme;
-        const menus = this.state.menus;
-        const collapsed = this.state.collapsed;
+        const { theme } = this.props;
+        const { menus, collapsed, curTopBarInfo } = this.state;
         return <div className="hp-adminsystem">
             <AdminSystem_Header
                 theme={theme}
@@ -95,7 +94,7 @@ export default class AdminSystem extends Component {
                         setCurTopBarInfo={this.setCurTopBarInfo}
                     ></NavMenu>
                     <div className={`hp-container${collapsed ? " full" : ""}`}>
-                        <TopBar info={this.state.curTopBarInfo}></TopBar>
+                        <TopBar info={curTopBarInfo}></TopBar>
                         <div className="hp-container-content">{this.createRoute(menus)}</div>
                     </div>
                 </div>
@@ -131,17 +130,17 @@ export class AdminSystem_Header extends Component {
     }
 
     render() {
-        const theme = this.props.theme;
+        const { theme, collapsed, logo } = this.props;
         return <header className={`hp-adminsystem_header bg-${theme}`}>
-            <div className={`hp-adminsystem_header_left${this.props.collapsed ? " collapsed" : ""}`}>
+            <div className={`hp-adminsystem_header_left${collapsed ? " collapsed" : ""}`}>
                 <a href="javascript:;">
                     <span className="logo">
-                        <img src={this.props.logo} />
+                        <img src={logo} />
                         <b>HaPi</b> Admin</span>
                 </a>
                 <span className="toggle_navmenu iconfont icon-manage_fill" onClick={this.toggleNavBar}></span>
             </div>
-            <div className={`hp-adminsystem_header_right${this.props.collapsed ? " hp-adminsystem_header_right_full" : ""}`}>
+            <div className={`hp-adminsystem_header_right${collapsed ? " hp-adminsystem_header_right_full" : ""}`}>
                 <span className="hp-adminsystem_header_flag iconfont icon-refresh" onClick={this.reloadScreen}></span>
                 <span className="hp-adminsystem_header_flag iconfont icon-fullscreen" onClick={this.fullScreen}></span>
                 <SearchBar theme={theme}></SearchBar>
@@ -165,7 +164,7 @@ export class AdminSystem_Header extends Component {
 }
 
 export class TopBar extends Component {
-    
+
     render() {
         const info = this.props.info;
         info["first"] = info.title;
@@ -200,8 +199,8 @@ export class SearchBar extends Component {
         })
     }
     render() {
-        const theme = this.props.theme;
-        const collapsed = this.state.collapsed;
+        const { theme } = this.props;
+        const { collapsed } = this.state;
         return <div
             className={`hp-searchbar ${theme}${collapsed ? "" : " active"}`}
         >

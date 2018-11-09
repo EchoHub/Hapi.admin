@@ -1,0 +1,28 @@
+.hp-gridlayout {
+    .hp-layout {
+        display: inline-block;
+        @for $num from 1 through 12 {
+            &-#{$num}{
+                width: 100%*$num/12;
+            }
+        }
+    }
+    &.flex {
+        display: flex;
+        &.center {
+            justify-content: center;
+        }
+        &.flex-start {
+            justify-content: flex-start;
+        }
+        &.flex-end {
+            justify-content: flex-end;
+        }
+        &.space-around {
+            justify-content: space-around;
+        }
+        &.space-between {
+            justify-content: space-between;
+        }
+    }
+}

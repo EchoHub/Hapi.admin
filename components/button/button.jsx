@@ -7,6 +7,14 @@ export default class Button extends Component {
         super(props);
     }
     render() {
-        return <div className="hp-button">{this.props.children}</div>
+        const { children } = this.props;
+        return <div className="hp-button">{children}</div>
+    }
+}
+
+export class ButtonGroup extends Component {
+    render() {
+        const { children } = this.props;
+        return <div className="hp-buttongroup">{children}</div>
     }
 }

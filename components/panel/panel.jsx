@@ -40,19 +40,20 @@ export default class Panel extends Component {
         this.refs.panel.parentNode.removeChild(this.refs.panel)
     }
     render() {
-        const props = this.props;
+        const { title, toolbar, className, children } = this.props;
+        const { fullScreen, min } = this.state;
         const state = this.state;
-        return <div ref="panel" className={`hp-panel${props.className ? " " + props.className : ""}${state.fullScreen ? " full" : ""}`}>
+        return <div ref="panel" className={`hp-panel${className ? " " + className : ""}${fullScreen ? " full" : ""}`}>
             <div className="hp-panel_title">
-                {props.title}
-                {props.toolbar ? <ul className="hp-panel_toolbar">
+                {title}
+                {toolbar ? <ul className="hp-panel_toolbar">
                     <li><span className="iconfont icon-refresh"></span></li>
-                    <li><span className={`iconfont ${state.fullScreen ? "icon-narrow" : "icon-fullscreen"}`} onClick={this.fullScreenHandle}></span></li>
-                    <li><span className="iconfont" onClick={this.minHandle}>{state.min ? "+" : "-"}</span></li>
+                    <li><span className={`iconfont ${fullScreen ? "icon-narrow" : "icon-fullscreen"}`} onClick={this.fullScreenHandle}></span></li>
+                    <li><span className="iconfont" onClick={this.minHandle}>{min ? "+" : "-"}</span></li>
                     <li><span className="iconfont" onClick={this.closeHandle}>×</span></li>
                 </ul> : null}
             </div>
-            <div className={`hp-panel_content${state.min ? " min" : ""}`}>{props.children}</div>
+            <div className={`hp-panel_content${min ? " min" : ""}`}>{children}</div>
         </div>
     }
 }

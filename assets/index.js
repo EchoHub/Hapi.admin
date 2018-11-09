@@ -27,7 +27,7 @@ const menus = [
                 title: "按钮",
                 belong: "组件",
                 icon: "",
-                route: "/button",
+                route: "/buttonPage",
                 flag: 0,
             },
             {
