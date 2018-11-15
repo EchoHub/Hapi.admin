@@ -166,6 +166,7 @@
         color: #fff;
     }
     > .hp-textbox{
+        display: none;
         list-style: none;
         position: relative;
         float: right;
@@ -186,6 +187,11 @@
             outline: 0;
             border: none;
             box-shadow: none;
+        }
+    }
+    &.active {
+        > .hp-textbox {
+            display: inherit;
         }
     }
     &.primary {

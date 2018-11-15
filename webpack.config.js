@@ -27,12 +27,12 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /.js(x)?$/,
+                test: /\.jsx|js$/,
                 use: {
                     loader: "babel-loader",
                     options: {
                         presets: [
-                            "env", "react"
+                            "es2015","env", "react"
                         ]
                     }
                 },

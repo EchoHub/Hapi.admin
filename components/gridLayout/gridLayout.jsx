@@ -13,14 +13,14 @@ export default class GridLayout extends Component {
     componentDidMount() {
     }
     render() {
-        const { children, prefixCls, className, justify, theme } = this.props;
+        const { children, prefixCls, className, justify, theme, style } = this.props;
         let justifyContent = "";
         if (theme === "flex") justifyContent = justify
         const classes = classNames(prefixCls, className, {
             [`${prefixCls}-${theme}`]: theme,
             [`${prefixCls}-${justifyContent}`]: justifyContent || ""
         })
-        return <div className={classes}>{children}</div>
+        return <div className={classes} style={style}>{children}</div>
     }
 }
 GridLayout.propTypes = {
@@ -42,11 +42,11 @@ export class Layout extends Component {
     }
     componentDidMount() { }
     render() {
-        const { children, col, className, prefixCls } = this.props;
+        const { children, col, className, prefixCls, style } = this.props;
         const classes = classNames(prefixCls, className, {
             [`${prefixCls}-${col}`]: col
         });
-        return <div className={classes}>{children}</div>
+        return <div className={classes} style={style}>{children}</div>
     }
 }
 Layout.propTypes = {

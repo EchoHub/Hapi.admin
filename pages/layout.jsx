@@ -5,7 +5,7 @@ import "./layout.scss"
 
 export default class LayOut extends Component {
     render() {
-        return <div className="hp-layout">
+        return <div className="hp-layoutpage">
             <Panel title="栅格布局" toolbar={true}>
                 <p className="introduction">在12栅格系统的基础上，以行列的形式对页面进行信息区域划分，通过GridLayOut创建栅格盒子，并通过LayOut创建区块，以保证整个页面清晰地进行栅格布局。</p>
                 <GridLayout theme="default">

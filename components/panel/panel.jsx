@@ -41,10 +41,10 @@ export default class Panel extends Component {
         this.refs.panel.parentNode.removeChild(this.refs.panel)
     }
     render() {
-        const { title, toolbar, prefixCls, className, children } = this.props;
+        const { title, toolbar, prefixCls, className, children, style } = this.props;
         const { fullScreen, min } = this.state;
         const classes = classNames(prefixCls, className, fullScreen ? "full" : "");
-        return <div ref="panel" className={classes}>
+        return <div ref="panel" className={classes} style={style}>
             <div className="hp-panel_title">
                 {title}
                 {toolbar ? <ul className="hp-panel_toolbar">
