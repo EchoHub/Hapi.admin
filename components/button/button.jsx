@@ -10,9 +10,9 @@ export default class Button extends Component {
     }
     componentDidMount() { }
     render() {
-        const { children, prefixCls, className, type, size, block, icon, width } = this.props;
+        const { children, prefixCls, className, theme, size, block, icon, width, ...attr } = this.props;
         let classes = classNames(prefixCls, className, block ? "block" : "", {
-            [`${prefixCls}-${type}`]: type,
+            [`${prefixCls}-${theme}`]: theme,
             [`${prefixCls}-${size}`]: size
         })
         const iconFlag = icon ? <i className={`iconfont ${children ? "mr-7" : ""} ${icon}`}></i> : null;
@@ -22,6 +22,7 @@ export default class Button extends Component {
         return <button 
         className={classes}
         style={styles}
+        {...attr}
         >{iconFlag}{children}</button>
     }
 }

@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Panel, Form, GridLayout, Layout, FormLayout, FormField, TextBox } from "common";
+import { Panel, Form, GridLayout, Layout, FormLayout, FormField, TextBox, Button } from "common";
 import "./formPage.scss"
 
 export default class FormPage extends Component {
+    constructor(props) {
+        super(props)
+        this.getSubmitValues = this.getSubmitValues.bind(this);
+    }
+    /**
+     * @desc 获取提交数据
+     */
+    getSubmitValues(e) {
+        e.preventDefault();
+        console.log(this.refs.form1.value);
+    }
     render() {
         return <div className="hp-formpage">
             <GridLayout>
@@ -16,7 +26,7 @@ export default class FormPage extends Component {
             <GridLayout>
                 <Layout col={6}>
                     <Panel className="mt-10" style={{width:"calc(100% - 5px)"}} title="基本用法" toolbar={true}>
-                        <Form>
+                        <Form ref="form1">
                             <FormLayout style={{ width: "100%" }}>
                                 <FormField label="角色类型：">
                                     <TextBox name="character"></TextBox>
@@ -29,6 +39,11 @@ export default class FormPage extends Component {
                                 <FormField label="手机号码：">
                                     <TextBox name="phone_number"></TextBox>
                                 </FormField>
+                                <br/>
+                                <FormField>
+                                    <Button className="mr-10" theme="primary" type="submit" onClick={e => this.getSubmitValues(e)}>提交</Button>
+                                    <Button theme="default" type="reset">重置</Button>
+                                </FormField>
                             </FormLayout>
                         </Form>
                     </Panel>
@@ -38,15 +53,20 @@ export default class FormPage extends Component {
                         <Form>
                             <FormLayout style={{ width: "100%" }}>
                                 <FormField label="角色类型：">
-                                    <TextBox name="character" value=""></TextBox>
+                                    <TextBox name="character" defaultValue=""></TextBox>
                                 </FormField>
                                 <br />
                                 <FormField label="角色名：">
-                                    <TextBox name="name" value="哒哒"></TextBox>
+                                    <TextBox name="name" defaultValue="哒哒"></TextBox>
                                 </FormField>
                                 <br />
                                 <FormField label="手机号码：">
-                                    <TextBox name="phone_number" value="18888888888"></TextBox>
+                                    <TextBox name="phone_number" defaultValue="18888888888"></TextBox>
+                                </FormField>
+                                <br/>
+                                <FormField>
+                                    <Button className="mr-10" theme="primary" type="submit">提交</Button>
+                                    <Button theme="default" type="reset">重置</Button>
                                 </FormField>
                             </FormLayout>
                         </Form>

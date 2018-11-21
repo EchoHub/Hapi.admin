@@ -1,22 +1,35 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from "classnames";
+import { typeToString } from "utils/utils";
 import "./form.scss"
 
 export default class Form extends Component {
+    constructor(props) {
+        super(props);
+    }
 
     get value() {
-        return null;
+        let _value = {}
+        const refs = this.refs;
+        for(const key in refs) {
+            _value = Object.assign(_value,refs[key].value);
+        }
+        return _value;
     }
 
     set value(v) {
 
     }
 
+    reportValidity() {
+
+    }
+
     render() {
         const { children, className, prefixCls } = this.props;
         const classes = classNames(prefixCls, className);
-        return <form className={classes}>{children}</form>
+        return <form className={classes}>{renderChildren(children)}</form>
     }
 }
 Form.propTypes = {
@@ -32,8 +45,8 @@ export class FormLayout extends Component {
 
     static splitChildren(children) {
         let result = [], tds = [], index = 0;
-        Object.prototype.toString.call(children) !== "[object Array]" && (children = [children]);
-        for (const child of children) {
+        typeToString(children) !== "[object Array]" && (children = [children]);
+        for (const child of renderChildren(children)) {
             if (child.type instanceof Function) {
                 tds.push(child)
             } else {
@@ -44,6 +57,19 @@ export class FormLayout extends Component {
             result[index] = tds;
         }
         return result;
+    }
+
+    get value() {
+        let _value = {}
+        const refs = this.refs;
+        for(const key in refs) {
+            _value = Object.assign(_value,refs[key].value);
+        }
+        return _value;
+    }
+
+    set value(v) {
+        return null;
     }
 
     render() {
@@ -70,19 +96,33 @@ export class FormField extends Component {
     }
 
     get value() {
-        return null;
+        let _value = {}
+        const refs = this.refs;
+        for(const key in refs) {
+            _value = Object.assign(_value, refs[key].value);
+        }
+
+        return _value;
     }
 
     set value(v) {
-
+        return null;
     }
 
     render() {
         const { children, className, prefixCls, label, colSpan } = this.props;
         const classes = classNames(prefixCls, className);
         return [
-            <th key={"x-formfield_label-1"}><label className="x-formfield_label">{label}</label></th>,
-            <td key={"x-formfield_label-2"} colSpan={colSpan % 2 === 0 ? colSpan + 1 : colSpan}>{children}</td>
+            <th
+                className={classes}
+                key={"x-formfield_label-1"}
+            >
+                <label className="x-formfield_label">{label}</label>
+            </th>,
+            <td
+                className={classes} key={"x-formfield_label-2"}
+                colSpan={colSpan % 2 === 0 ? colSpan + 1 : colSpan}
+            >{renderChildren(children)}</td>
         ]
     }
 }
@@ -92,4 +132,47 @@ FormField.propTypes = {
 FormField.defaultProps = {
     prefixCls: "hp-formfield",
     colSpan: 1
+}
+
+function renderChildren(children) {
+    let _children = [], index = 0;
+    for (const item of (typeToString(children) === "[object Array]" ? children : [children])) {
+        let _item = item;
+        if(item.type instanceof Function) {
+            switch (item.type.name.toUpperCase()) {
+                case "FORMLAYOUT":
+                    const { props } = item;
+                    const tag = `formlayout-${index}`;
+                    _item = <FormLayout
+                        key={tag}
+                        ref={tag}
+                        {...props}
+                    >
+                    </FormLayout>
+                    break;
+                case "FORMFIELD":
+                    const props1 = item.props;
+                    const tag1 = `formfield-${index}`;
+                    _item = <FormField
+                        key={tag1}
+                        ref={tag1}
+                        {...props1}
+                    >
+                    </FormField>
+                    break;
+                default:
+                    const props2 = item.props;
+                    const tag2 = `${item.type.name}-${index}`;
+                    _item = <item.type
+                        key={tag}
+                        ref={tag2}
+                        {...props2}
+                    ></item.type>
+                    break;
+            }
+        }
+        _children.push(_item);
+        index++;
+    }
+    return _children;
 }

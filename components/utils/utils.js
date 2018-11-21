@@ -11,3 +11,10 @@ export function fullScreen(element) {
         element.mozRequestFullScreen();
     }
 }
+
+/**
+ * @param {@desc 获取对象类型字符串} object
+ */
+export function typeToString(object) {
+    return Object.prototype.toString.call(object)
+}
