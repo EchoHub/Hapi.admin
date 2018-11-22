@@ -16,7 +16,25 @@ export default class TextBox extends Component {
     }
 
     set value(v) {
+        const { name } = this.props;
+        if(v && Object.keys(v).length) {
+            for(const key in v) {
+                this.refs.input.value = v[name];
+            }
+        }
+    }
 
+    reportValidity() {
+        const input = this.refs.input;
+        let valid = true;
+        const { val, pattern, patternMessage } = input.value;
+        if(pattern && !pattern.test(val)) {
+            valid = false;
+        }
+        console.log(valid)
+        return {
+            valid: valid
+        };
     }
 
     render() {

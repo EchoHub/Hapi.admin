@@ -19,11 +19,20 @@ export default class Form extends Component {
     }
 
     set value(v) {
-
+        const refs = this.refs;
+        for(const key in refs) {
+            refs[key].value = v;
+        }
     }
 
     reportValidity() {
-
+        let report = []
+        const refs = this.refs;
+        for(const key in refs) {
+            report.push(refs[key].reportValidity());
+        }
+        console.log("form ", report)
+        return report;
     }
 
     render() {
@@ -69,7 +78,20 @@ export class FormLayout extends Component {
     }
 
     set value(v) {
-        return null;
+        const refs = this.refs;
+        for(const key in refs) {
+            refs[key].value = v;
+        }
+    }
+
+    reportValidity() {
+        let report = []
+        const refs = this.refs;
+        for(const key in refs) {
+            report.push(refs[key].reportValidity());
+        }
+        console.log("formlayout ", report)
+        return report;
     }
 
     render() {
@@ -106,7 +128,20 @@ export class FormField extends Component {
     }
 
     set value(v) {
-        return null;
+        const refs = this.refs;
+        for(const key in refs) {
+            refs[key].value = v;
+        }
+    }
+
+    reportValidity() {
+        let report = []
+        const refs = this.refs;
+        for(const key in refs) {
+            report.push(refs[key].reportValidity());
+        }
+        console.log("formfield ", report)
+        return report;
     }
 
     render() {
@@ -164,7 +199,7 @@ function renderChildren(children) {
                     const props2 = item.props;
                     const tag2 = `${item.type.name}-${index}`;
                     _item = <item.type
-                        key={tag}
+                        key={tag2}
                         ref={tag2}
                         {...props2}
                     ></item.type>
