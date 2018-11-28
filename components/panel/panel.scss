@@ -3,6 +3,8 @@
     width: 100%;
     background: #fff;
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     &_title {
         line-height: 36px;
         padding: 0 14px;

@@ -6,17 +6,25 @@ export default class FormPage extends Component {
     constructor(props) {
         super(props)
         this.getSubmitValues = this.getSubmitValues.bind(this);
+        this.formReportValidity = this.formReportValidity.bind(this);
     }
     /**
      * @desc 获取提交数据
      */
     getSubmitValues(e) {
-        e.preventDefault();
         this.refs.form1.value = {
             character: "Clown",
             name: "Nick",
             phone_number: "18888888888"
         }
+    }
+
+    /**
+     * @desc 表单校验
+     */
+    formReportValidity() {
+        const form = this.refs.form3;
+        console.log(form.reportValidity())
     }
     render() {
         return <div className="hp-formpage">
@@ -32,7 +40,7 @@ export default class FormPage extends Component {
                     <Panel className="mt-10" style={{ width: "calc(100% - 5px)" }} title="基本用法" toolbar={true}>
                         <Form ref="form1">
                             <FormLayout>
-                                <FormField label="Character：">
+                                <FormField label="Character：" required>
                                     <TextBox
                                         name="character"
                                         style={{ minWidth: "300px" }}
@@ -81,6 +89,36 @@ export default class FormPage extends Component {
                                 <br />
                                 <FormField>
                                     <Button className="mr-10" theme="primary" type="submit" onClick={e => e.preventDefault()}>Submit</Button>
+                                    <Button theme="default" type="reset">Reset</Button>
+                                </FormField>
+                            </FormLayout>
+                        </Form>
+                    </Panel>
+                </Layout>
+            </GridLayout>
+            <GridLayout>
+                <Layout col={12}>
+                    <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="表单校验" toolbar={true}>
+                        <Form ref="form3">
+                            <FormLayout>
+                                <FormField label="Character：" required>
+                                    <TextBox name="character" required style={{ minWidth: "300px" }}></TextBox>
+                                </FormField>
+                                <br />
+                                <FormField label="Name：" required>
+                                    <TextBox name="name" required></TextBox>
+                                </FormField>
+                                <br />
+                                <FormField label="Phone：" required>
+                                    <TextBox name="phone_number" 
+                                        required
+                                        pattern={/^1\d{10}$/}
+                                        patternMessage={"Please input the correct phone number"}
+                                    ></TextBox>
+                                </FormField>
+                                <br />
+                                <FormField>
+                                    <Button className="mr-10" theme="primary" type="submit" onClick={e => this.formReportValidity(e)}>Submit</Button>
                                     <Button theme="default" type="reset">Reset</Button>
                                 </FormField>
                             </FormLayout>

@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import { findDOMNode } from "react-dom";
 import PropTypes from 'prop-types';
 import classNames from "classnames";
+import * as DOM from "dom/dom"
 import "./button.scss"
 
 export default class Button extends Component {
     constructor(props) {
         super(props);
     }
-    componentDidMount() { }
+    componentDidMount() { 
+        const { type } = this.props;
+        if(type === "submit") {
+            DOM.on(findDOMNode(this), "click", e => e.preventDefault())
+        }
+    }
     render() {
         const { children, prefixCls, className, theme, size, block, icon, width, ...attr } = this.props;
         let classes = classNames(prefixCls, className, block ? "block" : "", {

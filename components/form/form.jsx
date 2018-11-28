@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from "classnames";
+import * as DOM from "dom/dom"
 import { typeToString } from "utils/utils";
 import "./form.scss"
 
@@ -12,27 +13,35 @@ export default class Form extends Component {
     get value() {
         let _value = {}
         const refs = this.refs;
-        for(const key in refs) {
-            _value = Object.assign(_value,refs[key].value);
+        for (const key in refs) {
+            _value = Object.assign(_value, refs[key].value);
         }
         return _value;
     }
 
     set value(v) {
         const refs = this.refs;
-        for(const key in refs) {
+        for (const key in refs) {
             refs[key].value = v;
         }
     }
 
     reportValidity() {
-        let report = []
+        let reports = [], valid = true;
         const refs = this.refs;
-        for(const key in refs) {
-            report.push(refs[key].reportValidity());
+        for (const key in refs) {
+            const report = refs[key].reportValidity()
+            if (valid && report && !report.valid) valid = false;
+            reports.push(report);
         }
-        console.log("form ", report)
-        return report;
+
+        return {
+            valid: valid,
+            reports: reports
+        };
+    }
+
+    componentDidMount() {
     }
 
     render() {
@@ -71,27 +80,31 @@ export class FormLayout extends Component {
     get value() {
         let _value = {}
         const refs = this.refs;
-        for(const key in refs) {
-            _value = Object.assign(_value,refs[key].value);
+        for (const key in refs) {
+            _value = Object.assign(_value, refs[key].value);
         }
         return _value;
     }
 
     set value(v) {
         const refs = this.refs;
-        for(const key in refs) {
+        for (const key in refs) {
             refs[key].value = v;
         }
     }
 
     reportValidity() {
-        let report = []
+        let reports = [], valid = true
         const refs = this.refs;
-        for(const key in refs) {
-            report.push(refs[key].reportValidity());
+        for (const key in refs) {
+            const report = refs[key].reportValidity();
+            if (valid && report && !report.valid) valid = false
+            reports.push(report)
         }
-        console.log("formlayout ", report)
-        return report;
+        return {
+            valid: valid,
+            reports: reports
+        };
     }
 
     render() {
@@ -120,7 +133,7 @@ export class FormField extends Component {
     get value() {
         let _value = {}
         const refs = this.refs;
-        for(const key in refs) {
+        for (const key in refs) {
             _value = Object.assign(_value, refs[key].value);
         }
 
@@ -129,33 +142,42 @@ export class FormField extends Component {
 
     set value(v) {
         const refs = this.refs;
-        for(const key in refs) {
+        for (const key in refs) {
             refs[key].value = v;
         }
     }
 
     reportValidity() {
-        let report = []
+        let reports = [], valid = true
         const refs = this.refs;
-        for(const key in refs) {
-            report.push(refs[key].reportValidity());
+        for (const key in refs) {
+            if (refs[key].reportValidity) {
+                const report = refs[key].reportValidity();
+                if (valid && report && !report.valid) valid = false
+                reports.push(report)
+            }
         }
-        console.log("formfield ", report)
-        return report;
+        return {
+            valid: valid,
+            reports: reports
+        };
+    }
+
+    componentDidMount() {
     }
 
     render() {
-        const { children, className, prefixCls, label, colSpan } = this.props;
+        const { children, className, prefixCls, label, required, colSpan } = this.props;
         const classes = classNames(prefixCls, className);
         return [
             <th
                 className={classes}
-                key={"x-formfield_label-1"}
+                key={"hp-formfield_label-1"}
             >
-                <label className="x-formfield_label">{label}</label>
+                <label className="hp-formfield_label">{required ? <span className="hp-formlayout-required">＊</span> : null}{label}</label>
             </th>,
             <td
-                className={classes} key={"x-formfield_label-2"}
+                className={classes} key={"hp-formfield_label-2"}
                 colSpan={colSpan % 2 === 0 ? colSpan + 1 : colSpan}
             >{renderChildren(children)}</td>
         ]
@@ -173,7 +195,7 @@ function renderChildren(children) {
     let _children = [], index = 0;
     for (const item of (typeToString(children) === "[object Array]" ? children : [children])) {
         let _item = item;
-        if(item.type instanceof Function) {
+        if (item.type instanceof Function) {
             switch (item.type.name.toUpperCase()) {
                 case "FORMLAYOUT":
                     const { props } = item;

@@ -4,6 +4,8 @@ $primary: #1890ff;
 $warning: #f5222d;
 $default: #d9d9d9;
 .#{$name} {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     padding: 0 1rem;
     border: 1px solid $default;
     border-radius: 4px;

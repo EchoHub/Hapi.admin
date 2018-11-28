@@ -1,6 +1,8 @@
 .hp-breadcrumb {
     color: #555;
     display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     &_first {
         font-size: 18px;
     }
