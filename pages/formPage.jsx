@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Panel, Form, GridLayout, Layout, FormLayout, FormField, TextBox, Button } from "common";
+import { Panel, Form, GridLayout, Layout, FormLayout, FormField, TextBox, Button, Notice } from "common";
 import "./formPage.scss"
 
 export default class FormPage extends Component {
@@ -24,6 +24,14 @@ export default class FormPage extends Component {
      */
     formReportValidity() {
         const form = this.refs.form3;
+        if(!form.reportValidity().valid) {
+            const notice = new Notice
+            notice.warning({
+                title: "校验提示",
+                content: "校验错误，请修改",
+                autoClose: true
+            })
+        }
         console.log(form.reportValidity())
     }
     render() {

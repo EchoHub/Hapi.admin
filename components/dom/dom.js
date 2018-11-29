@@ -39,3 +39,13 @@ export function remove(node) {
 export function find(node, selector) {
     return node.querySelector(selector)
 }
+
+
+/**
+ * 根据选择器查询所有符合的节点
+ * @param node 
+ * @param selector 
+ */
+export function query(node, selector) {
+    return node.querySelectorAll(selector)
+}

@@ -36,17 +36,17 @@ export default class TextBox extends Component {
 
     componentDidMount() {
         const { ...attr } = this.props
-        const __proto__ = propsFilter(findDOMNode(this), attr)
+        const _attr = propsFilter(findDOMNode(this), attr)
         this.setState({
-            __proto__: __proto__
+            _attr: _attr
         })
     }
 
     render() {
         const { prefixCls, className, ...attr } = this.props;
-        const { __proto__ } = this.state
+        const { _attr } = this.state
         const classes = classNames(prefixCls, className);
-        return <input ref="input" className={classes} {...__proto__} />
+        return <input ref="input" className={classes} {..._attr} />
     }
 }
 TextBox.propTypes = {

@@ -1,0 +1,51 @@
+.hp-notification{
+    position: fixed;
+    top: 30px;
+    right: -999px;
+    background: #fff;
+    z-index: 666;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    border-radius: 4px;
+    padding: 10px;
+    min-width: 220px;
+    min-height: 30px;
+    transition: right ease .5s;
+    -moz-transition: right ease .5s;
+    -ms-transition: right ease .5s;
+    -o-transition: right ease .5s;
+    -webkit-transition: right ease .5s;
+    display: flex;
+    &-title{
+        font-size: 1.2rem;
+    }
+    &-content {
+        margin-left: 30px;
+        max-width: 400px;
+        max-height: 280px;
+        overflow: auto;
+        color: rgba(0, 0, 0, 0.65);
+    }
+    &-flag{
+        display: inline-block;
+        top: 2px;
+        font-size: 20px;
+        line-height: 1;
+        padding-right: 4px;
+        position: relative;
+        .icon{
+            font-size: 1.5rem;
+        }
+    }
+    .hp-notification-close{
+        cursor: pointer;
+        float: right;
+        color: #888;
+        position: absolute;
+        right: 10px;
+        font-size: .8rem;
+        transform: scale(.7);
+        &:hover{
+            opacity: .8;
+        }
+    }
+}

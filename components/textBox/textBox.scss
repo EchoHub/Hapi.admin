@@ -1,4 +1,6 @@
+@import "adminSystem/adminSystem.scss";
 .hp-textbox {
+    font-size: 1rem;
     list-style: none;
     position: relative;
     display: inline-block;
@@ -18,13 +20,6 @@
     transition: all .3s;
     &:hover, &:focus {
         outline: 0;
-        // -webkit-box-shadow: 0 0 0 2px rgba(24,144,255,.2);
-        // box-shadow: 0 0 0 2px rgba(24,144,255,.2);
         border-color: #40a9ff;
     }
 }
-// input::-webkit-input-placeholder, input::-moz-placeholder, input:-moz-placeholder,
-// input:-ms-input-placeholder, textarea::-webkit-input-placeholder, textarea::-moz-placeholder, textarea:-moz-placeholder,
-// textarea:-ms-input-placeholder  {
-//     color: red;
-// }

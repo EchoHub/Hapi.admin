@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // 按需生成html模版
 const CleanWebpackPlugin = require("clean-webpack-plugin"); // 清理文件
+const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // 样式抽取
 module.exports = {
     // mode: "production",
     mode: "development",
@@ -37,6 +38,10 @@ module.exports = {
                     }
                 },
                 exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                loader: MiniCssExtractPlugin.loader,
             },
             {
                 test: /\.scss$/,
