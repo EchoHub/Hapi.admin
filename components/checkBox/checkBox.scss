@@ -1,3 +1,65 @@
-.hp-checkBox {
-
+@import "adminSystem/adminSystem.scss";
+.hp-checkbox {
+    color: #606266;
+    font-size: 14px;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    white-space: nowrap;
+    user-select: none;
+    &-inner{
+        top: 2px;
+        display: inline-block;
+        position: relative;
+        border: 1px solid #dcdfe6;
+        border-radius: 2px;
+        box-sizing: border-box;
+        width: 14px;
+        height: 14px;
+        background-color: #fff;
+        z-index: 1;
+        transition: border-color .25s cubic-bezier(.71,-.46,.29,1.46),background-color .25s cubic-bezier(.71,-.46,.29,1.46);
+        &:after{
+            box-sizing: content-box;
+            content: "";
+            border: 1px solid #fff;
+            border-left: 0;
+            border-top: 0;
+            height: 7px;
+            left: 4px;
+            position: absolute;
+            top: 1px;
+            transform: rotate(45deg) scaleY(0);
+            width: 3px;
+            transition: transform .15s cubic-bezier(.71,-.46,.88,.6) .05s;
+            transform-origin: center;
+        }
+        &:hover{
+            border: 1px solid $element-color-primary;
+        }
+    }
+    &.active{
+        .hp-checkbox-inner {
+            background-color: $element-color-primary;
+            color: $color-fff;
+            &:after{
+                transform: rotate(45deg) scaleY(1);
+            }
+        }
+    }
+    &-content{
+        padding-left: 4px;
+    }
+    &.disabled{
+        .hp-checkbox-inner{
+            cursor: not-allowed;
+            background: #efefef;
+            &:after{
+                border-color:#bbb;
+            }
+            &:hover{
+                border-color: #dcdfe6;
+            }
+        }
+    }
 }

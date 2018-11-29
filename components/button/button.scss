@@ -16,6 +16,8 @@ $default: #d9d9d9;
     user-select: none;
     height: 32px;
     color: rgba(0,0,0,.65);
+    box-shadow: 0 2px 0 rgba(0,0,0,.045);
+    -webkit-box-shadow: 0 2px 0 rgba(0,0,0,.045);
     line-height: 30px;
     overflow: hidden;
     position: relative;

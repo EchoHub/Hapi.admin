@@ -1,15 +1,16 @@
 @import "./../font/iconfont.scss";
 // 主题色
-$color-warning: #ffe58f;
 $color-error: #d63a29;
 $color-success: #48c9a9;
 $color-primary: #4a89dc;
-$color-warning: #ffe58f;
+$color-warning: #E6A23C;
 $color-error: #d63a29;
 $color-grey: #30363e;
 $color-dark: #001529;
+$color-fff: #fff;
 $color-light-blue: #66b1ff;
 $input-focus-color: #40a9ff;
+$element-color-primary: #1890ff;
 .hp-adminsystem {
     &_header {
         height: 60px;
@@ -122,7 +123,7 @@ $input-focus-color: #40a9ff;
         padding: 0 20px;
         .out-btn{
             text-decoration: none;
-            color: #4a89dc;
+            color: $color-primary;
             font-size: 12px;
         }
     }

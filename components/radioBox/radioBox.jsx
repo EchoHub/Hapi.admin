@@ -1,33 +1,41 @@
 import React, { Component } from "react"
 import { findDOMNode } from "react-dom"
-import { propsFilter } from "_util/_util";
+import { propsFilter } from "_util/_util"
 import classNames from "classnames"
-import "./checkBox.scss"
+import "./radioBox.scss"
 /**
- * @desc 表示一个多选框
+ * @desc 表示一个单选框
  */
-export default class CheckBox extends Component {
+export default class RadioBox extends Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {};
     }
+    /**
+     * @desc radiobox change事件
+     * @param event event
+     */
+    changeRadioBoxHandle(event) {
+        const { refs } = this.props;
+        if (this.props.disabled) return;
+        if (refs) {
+            for (const key in refs) {
+                key.indexOf("radioBox") > -1 && (refs[key].checked = false);
+            }
+        }
+        this.checked = true
+    }
+
     componentDidMount() {
         const { disabled, checked, ...attr } = this.props;
         const _attr = propsFilter(findDOMNode(this), attr)
         this.setState({
-            disabled, 
+            disabled,
             checked,
             _attr: _attr
         })
     }
-    /**
-     * @desc checkbox change事件
-     * @param event event
-     */
-    changeCheckBoxHandle() {
-        if (this.props.disabled) return;
-        this.checked = !this.checked
-    }
+
     render() {
         const { prefixCls, className, children, value } = this.props;
         const { disabled, checked } = this.state
@@ -36,12 +44,11 @@ export default class CheckBox extends Component {
             [`${checked ? "active" : ""}`]: checked,
         })
         return <div className={classes}>
-            <span
-                className="hp-checkbox-inner"
-                onClick={this.changeCheckBoxHandle.bind(this)}
-            ></span>
+            <span className="hp-radiobox-inner"
+                onClick={this.changeRadioBoxHandle.bind(this)}></span>
             <input ref="input" type="hidden" value={value} />
-            <span className="hp-checkbox-content">{children}</span>
+            <span className="hp-radiobox-content">{children}
+            </span>
         </div>
     }
 
@@ -64,6 +71,6 @@ export default class CheckBox extends Component {
         })
     }
 }
-CheckBox.defaultProps = {
-    prefixCls: "hp-checkbox"
+RadioBox.defaultProps = {
+    prefixCls: "hp-radiobox"
 }

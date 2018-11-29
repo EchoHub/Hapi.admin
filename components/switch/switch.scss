@@ -1,0 +1,57 @@
+@import "adminSystem/adminSystem";
+.e-switch{
+    background: rgba(0, 0, 0, 0.25);
+    min-width: 44px;
+    height: 22px;
+    display: inline-block;
+    border-radius: 25%;
+    border-radius: 100px;
+    vertical-align: middle;
+    cursor: pointer;
+    position: relative;
+    transition: all ease .5s;
+    &:after{
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        color: #fff;
+        display: inline-block;
+        content: "";
+        margin-left: 2px;
+        background: #fff;
+        margin-top: 1px;
+    }
+    &-content{
+        font-size: 12px;
+        position: absolute;
+        overflow: hidden;
+        width: 12px;
+        height: 18px;
+        top: 2px;
+        color: #fff;
+        line-height: 18px;
+        text-align: center;
+        &-left{
+            left: 6px;
+        }
+        &-right{
+            top: 2px;
+            left: 25px;
+        }
+    }
+    &.e-switch-checked{
+        background: $element-color-primary;
+        &:after{
+            margin-left: 22px;
+        }
+    } 
+    &.e-switch-small{
+        transform: scale(.8);
+    }
+    &.e-switch-large{
+        transform: scale(1.2);
+    }
+    &.e-switch-disabled{
+        background: rgba(0, 0, 0, .25);
+    }
+}
