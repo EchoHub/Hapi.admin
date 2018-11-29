@@ -1,46 +1,53 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 import { findDOMNode } from "react-dom"
+import * as DOM from "dom/dom"
 import { propsFilter } from "_util/_util"
 import classNames from "classnames"
-import "./switch.scss";
+import "./switch.scss"
 
 export default class Switch extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            checked: ""
+            checked: false
         }
     }
     componentDidMount() {
+        const { checked } = this.props;
         this.setState({
-            checked: this.props.defaultChecked ? true : false
-        });
+            checked: checked || false
+        })
+
+        DOM.on(findDOMNode(this), "click", event => { this.openCloseHandler(event) })
     }
     render() {
-        const newProps = Object.assign({}, this.props,
+        const { prefixCls, className, size, sizeEnum, disabled, content } = this.props;
+        const { checked } = this.state
+        const classes = classNames(prefixCls, className, {
+            [`${sizeEnum[size]}`]: size,
+            [`${checked ? "hp-switch-checked" : ""}`]: checked,
+            [`${disabled ? "hp-switch-disabled" : ""}`]: disabled,
+        })
+        const c_classes = classNames(
+            "hp-switch-content",
+            checked ? "hp-switch-content-left" : "hp-switch-content-right"
+        )
+        return <span className={classes}>
             {
-                className: `e-switch ${this.props.className || ""} ${this.props.sizeEnum[this.props.size] || ""} ${this.state.checked ? "e-switch-checked" : ""} ${this.props.disabled ? "e-switch-disabled" : ""}`
-            }
-        );
-        return <span
-            {...propsFilter(newProps) }
-            onClick={event => { this.openCloseHandler(event) }}
-        >
-            {
-                this.props.content? <span className={`e-switch-content ${this.state.checked ? "e-switch-content-left" : "e-switch-content-right"}`}>{this.props.content[this.state.checked]}</span> : null
+                content ?
+                    <span className={c_classes}>{content[checked]}</span>
+                    : null
             }
         </span >
     }
     openCloseHandler(event) {
-        if (!this.props.disabled) {
+        const { disabled } = this.props
+        const { checked } = this.state
+        if (!disabled) {
             this.setState({
-                checked: !this.state.checked
+                checked: !checked
             });
         }
-        const timer = setTimeout(() => {
-            this.props.onChange && this.props.onChange(event, this);
-            clearTimeout(timer);
-        }, 10);
     }
     /**
      * @desc 获取开关状态
@@ -51,10 +58,11 @@ export default class Switch extends Component {
 }
 Switch.defaultProps = {
     className: "",
+    prefixCls: "hp-switch",
     size: "normal",
     disabled: false,
     sizeEnum: {
-        small: "e-switch-small",
-        large: "e-switch-large"
+        small: "hp-switch-small",
+        large: "hp-switch-large"
     }
 }

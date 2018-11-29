@@ -89,9 +89,9 @@ Notification.defaultProps = {
     duration: "4500",
     iconEnum: {
         "default": "",
-        "info": "icon-xinxi",
+        "info": "icon-prompt",
         "success": "icon-success",
-        "warning": "icon-jinggao",
+        "warning": "icon-warning",
         "error": "icon-error"
     },
     themeEnum: {

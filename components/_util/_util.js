@@ -58,19 +58,18 @@ export function reportValidity(elem, val, options) {
     }
     return report
 }
-/** 所有提示文案 */
-// const messages = {
-//     requiredMessage: `该输入域为必填的`,
-//     maxLengthMessage: `该字段最大长度为 {expected}，超出 {delta}`,
-//     minLengthMessage: `该字段最少长度为 {expected}，缺少 {delta}`,
-//     maxMessage: `该字段最大为 {expected}`,
-//     minMessage: `该字段最小为 {expected}`,
-//     patternMessage: `输入的格式不正确，请重新检查`,
-//     validateErrorMessage: `该字段验证未通过`,
-//     validateStartMessage: `正在验证中...`,
-//     validateStartMessagePrefix: `<i class="x-icon x-spin">҉</i> `,
-//     validateInfoMessagePrefix: `<i class="x-icon">🛈</i> `,
-//     validateSuccessMessagePrefix: `<i class="x-icon">✓</i> `,
-//     validateWarningMessagePrefix: `<i class="x-icon">⚠</i> `,
-//     validateErrorMessagePrefix: `<i class="x-icon">&#10071;</i> `
-// }
+/**
+ * @desc 去重
+ * @param {*} arr 
+ */
+export function unique(arr) {
+    var res = [];
+    for (var i = 0, len = arr.length; i < len; i++) {
+        var obj = arr[i];
+        for (var j = 0, jlen = res.length; j < jlen; j++) {
+            if (res[j] === obj) break;
+        }
+        if (jlen === j) res.push(obj);
+    }
+    return res;
+}

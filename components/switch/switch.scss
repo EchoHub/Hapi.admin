@@ -1,6 +1,6 @@
-@import "adminSystem/adminSystem";
-.e-switch{
-    background: rgba(0, 0, 0, 0.25);
+@import "adminSystem/adminSystem.scss";
+.hp-switch{
+    background: #dcdfe6;
     min-width: 44px;
     height: 22px;
     display: inline-block;
@@ -20,6 +20,7 @@
         margin-left: 2px;
         background: #fff;
         margin-top: 1px;
+        transition: all ease .3s;
     }
     &-content{
         font-size: 12px;
@@ -39,19 +40,20 @@
             left: 25px;
         }
     }
-    &.e-switch-checked{
+    &.hp-switch-checked{
         background: $element-color-primary;
         &:after{
             margin-left: 22px;
         }
     } 
-    &.e-switch-small{
+    &.hp-switch-small{
         transform: scale(.8);
     }
-    &.e-switch-large{
+    &.hp-switch-large{
         transform: scale(1.2);
     }
-    &.e-switch-disabled{
-        background: rgba(0, 0, 0, .25);
+    &.hp-switch-disabled{
+        background: #dcdfe6;
+        cursor: not-allowed;
     }
 }

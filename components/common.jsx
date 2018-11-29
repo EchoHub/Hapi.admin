@@ -4,6 +4,7 @@ export { default as CheckBoxGroup } from "checkBoxGroup/checkBoxGroup";
 export { default as RadioBox } from "radioBox/radioBox";
 export { default as RadioBoxGroup } from "radioBoxGroup/radioBoxGroup";
 export { default as Switch } from "switch/switch";
+export { default as Rate } from "rate/rate";
 export { default as TextBox } from "textBox/textBox";
 export { default as Form, FormLayout, FormField } from "form/form";
 export { default as BreadCrumb } from "breadCrumb/breadCrumb";

@@ -28,11 +28,9 @@ export default class RadioBox extends Component {
 
     componentDidMount() {
         const { disabled, checked, ...attr } = this.props;
-        const _attr = propsFilter(findDOMNode(this), attr)
         this.setState({
             disabled,
             checked,
-            _attr: _attr
         })
     }
 

@@ -49,3 +49,17 @@ export function find(node, selector) {
 export function query(node, selector) {
     return node.querySelectorAll(selector)
 }
+
+/**
+ * @desc 向上寻找指定节点
+ */
+export function closest(node, selector) {
+    var matchesSelector = node.matches || node.webkitMatchesSelector || node.mozMatchesSelector || node.msMatchesSelector;
+    while (el) {
+        if (matchesSelector.call(el, selector)) {
+            break;
+        }
+        el = node.parentElement;
+    }
+    return el;
+}

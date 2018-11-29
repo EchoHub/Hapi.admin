@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     Panel, Form, GridLayout, Layout, FormLayout, FormField, Button, Notice,
-    TextBox, CheckBox, CheckBoxGroup, RadioBox, RadioBoxGroup, Switch
+    TextBox, CheckBox, CheckBoxGroup, RadioBox, RadioBoxGroup, Switch, Rate
 } from "common";
 import "./formPage.scss"
 
@@ -139,26 +139,57 @@ export default class FormPage extends Component {
             </GridLayout>
             <GridLayout className="display-flex">
                 <Layout col={4}>
-                    <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="多选框／单选框／开关" toolbar={true}>
-                        <CheckBoxGroup ref="checkbox_1" name="checkbox">
-                            <CheckBox value={1} checked>CB 1</CheckBox>
-                            <CheckBox className="ml-10" value={2} checked disabled>CB 2</CheckBox>
-                            <CheckBox className="ml-10" value={3}>CB 3</CheckBox>
-                        </CheckBoxGroup>
+                    <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="开关" toolbar={true}>
+                        <h5 >
+                            <strong>单选框</strong>：多个备选项中选取一个备选项，常和 RadioBoxGroup 一起使用。）
+                        </h5>
                         <RadioBoxGroup className="mt-10" ref="radiobox_1" name="radiobox">
                             <RadioBox value={1} checked>RB 1</RadioBox>
                             <RadioBox className="ml-10" disabled value={2}>RB 2</RadioBox>
                             <RadioBox className="ml-10" value={3}>RB 3</RadioBox>
                         </RadioBoxGroup>
+                        <h5 >
+                            <strong>多选框</strong>：多个备选项中选取任意个备选项，常和 CheckBoxGroup 一起使用。
+                        </h5>
+                        <CheckBoxGroup ref="checkbox_1" name="checkbox">
+                            <CheckBox value={1} checked>CB 1</CheckBox>
+                            <CheckBox className="ml-10" value={2} checked disabled>CB 2</CheckBox>
+                            <CheckBox className="ml-10" value={3}>CB 3</CheckBox>
+                        </CheckBoxGroup>
+                        <h5 ><strong>开关</strong>：开关选择器，表示开关状态／两种状态之间的切换。</h5>
                         <div className="mt-10">
                             <Switch></Switch>
                             <Switch className="ml-10" name="swtich2" disabled></Switch>
-                            <Switch content={{ true: 1, false: 0 }}></Switch>
+                            <Switch className="ml-10" content={{ true: 1, false: 0 }}></Switch>
                         </div>
                         <div className="mt-10">
-                            <Switch></Switch>
-                            <Switch defaultChecked size="small"></Switch>
-                            <Switch defaultChecked size="large"></Switch>
+                            <Switch checked size="small"></Switch>
+                            <Switch className="ml-10"></Switch>
+                            <Switch className="ml-10" content={{ true: "开", false: "关" }} checked size="large"></Switch>
+                        </div>
+                        <div className="mt-10">
+                            <h5 ><strong>评分</strong>：评分器。</h5>
+                            <Rate></Rate>
+                            <br/>
+                            <Rate
+                                colors={["#dddddd", "#ffcc00", "#ff9900"]}
+                            ></Rate>
+                            <br/>
+                            <Rate
+                                colors={["#bbbbbb", "#ffcc00", "#ff9900"]}
+                                icons={["icon-collection", "icon-collection_fill"]}
+                            ></Rate>
+                            <br/>
+                            <Rate
+                                colors={["#bbbbbb", "#ffcc00", "#ff9900"]}
+                                showText
+                                texts={["极差", "失望", "一般", "满意", "惊喜"]}
+                            ></Rate>
+                            <br/>
+                            <Rate
+                                readOnly
+                                value={3.7}
+                            ></Rate>
                         </div>
                     </Panel>
                 </Layout>
