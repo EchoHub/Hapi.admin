@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
     Panel, Form, GridLayout, Layout, FormLayout, FormField, Button, Notice,
-    TextBox, CheckBox, CheckBoxGroup, RadioBox, RadioBoxGroup, Switch, Rate
+    TextBox, CheckBox, CheckBoxGroup, RadioBox, RadioBoxGroup, Switch, Rate,
+    TextArea, Select
 } from "common";
 import "./formPage.scss"
 
@@ -128,6 +129,14 @@ export default class FormPage extends Component {
                                     ></TextBox>
                                 </FormField>
                                 <br />
+                                <FormField label="Introduce：" required>
+                                    <TextArea name="remark"
+                                        required
+                                        minLength={10}
+                                        patternMessage={"Please input 10 len at least"}
+                                    ></TextArea>
+                                </FormField>
+                                <br />
                                 <FormField>
                                     <Button className="mr-10" theme="primary" type="submit" onClick={e => this.formReportValidity(e)}>Submit</Button>
                                     <Button theme="default" type="reset">Reset</Button>
@@ -170,22 +179,22 @@ export default class FormPage extends Component {
                         <div className="mt-10">
                             <h5 ><strong>评分</strong>：评分器。</h5>
                             <Rate></Rate>
-                            <br/>
+                            <br />
                             <Rate
                                 colors={["#dddddd", "#ffcc00", "#ff9900"]}
                             ></Rate>
-                            <br/>
+                            <br />
                             <Rate
                                 colors={["#bbbbbb", "#ffcc00", "#ff9900"]}
                                 icons={["icon-collection", "icon-collection_fill"]}
                             ></Rate>
-                            <br/>
+                            <br />
                             <Rate
                                 colors={["#bbbbbb", "#ffcc00", "#ff9900"]}
                                 showText
                                 texts={["极差", "失望", "一般", "满意", "惊喜"]}
                             ></Rate>
-                            <br/>
+                            <br />
                             <Rate
                                 readOnly
                                 value={3.7}
@@ -196,6 +205,8 @@ export default class FormPage extends Component {
                 <Layout col={4}>
                     <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="输入框" toolbar={true}>
                         <TextBox name="furit" checked></TextBox>
+                        <Select className="mt-10"></Select>
+                        <TextArea className="mt-10"></TextArea>
                     </Panel>
                 </Layout>
                 <Layout col={4}>

@@ -29,9 +29,9 @@ export default class TextBox extends Component {
 
     reportValidity() {
         const input = this.refs.input;
-        const { pattern, patternMessage, required, max, min } = this.props;
+        const { pattern, patternMessage, required, max, min, maxLength, minLength } = this.props;
         const value = input.value;
-        return reportValidity(input, value, { pattern, patternMessage, required, max, min })
+        return reportValidity(input, value, { pattern, patternMessage, required, max, min, maxLength, minLength })
     }
 
     componentDidMount() {
@@ -46,7 +46,7 @@ export default class TextBox extends Component {
         const { prefixCls, className, ...attr } = this.props;
         const { _attr } = this.state
         const classes = classNames(prefixCls, className);
-        return <input ref="input" className={classes} {..._attr} />
+        return <input {..._attr} ref="input" className={classes}/>
     }
 }
 TextBox.propTypes = {

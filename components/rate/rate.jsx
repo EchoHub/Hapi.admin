@@ -11,7 +11,7 @@ export default class Rate extends Component {
         super(props);
         this.state = {
             score: props.score,
-            staicScore: props.score,
+            staticScore: props.score,
             totalScore: props.total,
             units: props.units
         };
@@ -81,8 +81,9 @@ export default class Rate extends Component {
                         onClick={() => {
                             // 点击选择分数
                             this.setState({
-                                staicScore: i + 1
+                                staticScore: i + 1
                             });
+                            
                         }}
                     ></i>
                 )
@@ -98,7 +99,7 @@ export default class Rate extends Component {
     }
 
     get value() {
-        return this.state.staicScore
+        return this.state.staticScore
     }
 
     set value(v) {
@@ -110,7 +111,7 @@ export default class Rate extends Component {
 /**
  * @param className 类名
  * @param score 分数
- * @param staicScore 选中的分数
+ * @param staticScore 选中的分数
  * @param totalScore 总分
  * @param colors 区分评分颜色 最多支持三种
  * @param showText 是否显示辅助文字
@@ -120,7 +121,7 @@ export default class Rate extends Component {
 Rate.defaultProps = {
     prefixCls: "hp-rate",
     score: 0,
-    staicScore: 0,
+    staticScore: 0,
     totalScore: 5,
     colors: [],
     showText: false,

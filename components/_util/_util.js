@@ -32,24 +32,49 @@ export function reportValidity(elem, val, options) {
         valid: true,
         message: ""
     };
-    const { required, pattern, patternMessage, max, min } = options
-    if (
-        (required && val.replace(/\s/g, "") === "")
-        || (pattern && !pattern.test(val))
-    ) {
+    const { required, pattern, patternMessage, max, min, maxLength, minLength } = options
+    let msg = "", valid = true
+    if (required) {
+        if (val.replace(/\s/g, "") === "") {
+            msg = "该输入域为必填的"
+            valid = false
+        } else if (pattern && !pattern.test(val)) {
+            msg = patternMessage
+            valid = false
+        } else if (max !== undefined) {
+            if (isNaN(+val)) {
+                msg = `该字段类型错误`
+            } else if (max < val) {
+                msg = `该字段最大为${max}`
+            }
+            valid = false
+        } else if (min !== undefined) {
+            if (isNaN(+val)) {
+                msg = `该字段类型错误`
+            } else if (min > val) {
+                msg = `该字段最小为${max}`
+            }
+            valid = false
+        } else if (maxLength !== undefined && val.toString().length > maxLength) {
+            msg = `该字段最大长度为${maxLength}`
+            valid = false
+        } else if (minLength !== undefined && val.toString().length < minLength) {
+            msg = `该字段最小长度为${minLength}`
+            valid = false
+        }
         report = {
             elem: elem,
-            valid: false,
-            message: patternMessage
+            valid: valid,
+            message: msg
         };
         const span = document.createElement("span")
         span.className = "hp-tooltip"
-        span.innerHTML = patternMessage;
+        span.innerHTML = msg;
         const parentNode = (elem.parentNode || elem.parentElement);
         const toolTip = DOM.find(parentNode, ".hp-tooltip");
         if (!toolTip) DOM.append(parentNode, span)
         else {
-            toolTip.innerHTML = patternMessage
+            toolTip.innerHTML = msg
         }
     } else {
         const parentNode = (elem.parentNode || elem.parentElement);

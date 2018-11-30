@@ -132,7 +132,7 @@ function copyDirFiles(src, dst, target) {
                 const _result = data.replace(/_template/g, target);
                 const result = _result.replace(/Template/g, target[0].toUpperCase() + target.slice(1));
                 fs.createWriteStream(`${dst}/${target}.${item.split(".")[1]}`)
-                fs.writeFile(`${dst}/${target}.${item.split(".")[1]}`, result)
+                fs.writeFile(`${dst}/${target}.${item.split(".")[1]}`, result, null, () => {})
             }
         })
         return true;

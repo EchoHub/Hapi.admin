@@ -151,7 +151,7 @@ export class FormField extends Component {
         let reports = [], valid = true
         const refs = this.refs;
         for (const key in refs) {
-            if (refs[key].reportValidity) {
+            if (refs[key] && refs[key].reportValidity) {
                 const report = refs[key].reportValidity();
                 if (valid && report && !report.valid) valid = false
                 reports.push(report)
@@ -195,7 +195,7 @@ function renderChildren(children) {
     let _children = [], index = 0;
     for (const item of (typeToString(children) === "[object Array]" ? children : [children])) {
         let _item = item;
-        if (item.type instanceof Function) {
+        if (item && item.type instanceof Function) {
             switch (item.type.name.toUpperCase()) {
                 case "FORMLAYOUT":
                     const { props } = item;

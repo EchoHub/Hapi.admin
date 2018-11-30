@@ -23,6 +23,11 @@
                 padding-bottom: 1rem;
                 min-width: 8rem;
             }
+            & > th, & > td {
+                .hp-textbox {
+                    width: 100%;
+                }
+            }
         }
     }
 }
