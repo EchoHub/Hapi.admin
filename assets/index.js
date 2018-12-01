@@ -106,6 +106,13 @@ const menus = [
                 icon: "",
                 route: "/404",
                 flag: 0,
+            },
+            {
+                title: "专家详情",
+                belong: "页面",
+                icon: "",
+                route: "/expertPage",
+                flag: 0,
             }
         ]
     },

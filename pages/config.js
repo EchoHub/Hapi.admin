@@ -9,6 +9,7 @@ import Layout from "./layout"
 import Notice from "./notice"
 import Canvas from "./canvas"
 import Others from "./others"
+import ExpertPage from "./expertPage"
 var Pages = {
     "console" : Console,
     "buttonPage" : ButtonPage,
@@ -17,6 +18,7 @@ var Pages = {
     "notice" : Notice,
     "others" : Others,
     "table" : Table,
-    "canvas" : Canvas
+    "canvas" : Canvas,
+    "expertPage" : ExpertPage,
 };
 export default Pages;
