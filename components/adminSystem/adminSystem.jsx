@@ -172,8 +172,18 @@ export class TopBar extends Component {
         info["third"] = info.title;
         return <div className="hp-topbar">
             <BreadCrumb info={info}></BreadCrumb>
-            <div className="float-right"><a className="out-btn" href="javascript:;">退出</a></div>
+            <div className="float-right">
+                <a className="out-btn" href="javascript:;"
+                    onClick={this.logoutHandle}>退出</a>
+            </div>
         </div>
+    }
+
+    /**
+     * @desc 登出
+     */
+    logoutHandle() {
+        location.href = `login.html?${Number(new Date())}`
     }
 }
 AdminSystem.defaultProps = {

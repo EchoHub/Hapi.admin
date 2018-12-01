@@ -64,7 +64,7 @@ const menus = [
                 icon: "",
                 route: "/others",
                 flag: 0,
-            },
+            }
         ]
     },
     {

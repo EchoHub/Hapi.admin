@@ -17,6 +17,6 @@ var Pages = {
     "notice" : Notice,
     "others" : Others,
     "table" : Table,
-    "canvas" : Canvas,
+    "canvas" : Canvas
 };
 export default Pages;

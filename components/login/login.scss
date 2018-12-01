@@ -1,0 +1,243 @@
+$bg-color-main: #357bd8;
+$bg-color-sub: rgba(53,123,216,.6);
+// .hp-login {
+//     width: 100%;
+//     height: 100%;
+//     background: -webkit-linear-gradient(bottom right, $bg-color-main, $bg-color-sub); /* Safari 5.1 - 6.0 */
+//     background: -o-linear-gradient(bottom right, $bg-color-main, $bg-color-sub); /* Opera 11.1 - 12.0 */
+//     background: -moz-linear-gradient(bottom right, $bg-color-main, $bg-color-sub); /* Firefox 3.6 - 15 */
+//     background: linear-gradient(to bottom right, $bg-color-main, $bg-color-sub); /* 标准的语法 */
+//     position: absolute;
+//     overflow: hidden;
+// }
+.hp-login.bg {
+    font-weight: lighter;
+    height: 100%;
+    background-image: url(./../../assets/static/login_bg.png);
+    background-size: cover;
+    // background-image: -webkit-linear-gradient(bottom, #4d9ed1, #3642c9); /* Safari 5.1 - 6.0 */
+    // background-image: -o-linear-gradient(bottom, #4d9ed1, #3642c9); /* Opera 11.1 - 12.0 */
+    // background-image: -moz-linear-gradient(bottom, #4d9ed1, #3642c9); /* Firefox 3.6 - 15 */
+    // background-image: linear-gradient(bottom, #4d9ed1, #3642c9); /* 标准的语法 */
+    .no-margin {
+        margin: 0;
+    }
+    .mt-30 {
+        margin-top: 30px;
+    }
+    .mt-32 {
+        margin-top: 32px;
+    }
+    .mt-40{
+        margin-top: 40px;
+    }
+    .mt-45{
+        margin-top: 45px;
+    }
+    .margin-bottom-1rem {
+        margin-bottom: 1rem;
+    }
+    
+    
+    .margin-bottom-1-5rem {
+        margin-bottom: 1.5rem;
+    }
+    
+    .margin-bottom-20 {
+        margin-bottom: 20px;
+    }
+
+    .hp-checkbox {
+        font-size: smaller;
+    }
+    
+    .signup-button {
+        border: none;
+        height: 40px;
+        background: linear-gradient(270deg,rgba(25,134,255,1) 0%,rgba(46,91,255,1) 100%);
+        color: #ffffff;
+        font-size: 14px;
+        border-radius: 2px;
+        margin-bottom: 36px;
+        &:hover, &:focus{
+            background: linear-gradient(270deg,rgba(25,134,255,1) 0%,rgba(46,91,255,1) 100%)!important;
+            opacity: .9;
+        }
+    }
+    
+    .login-title {
+        font-size: 16px;
+        // margin-bottom: 2rem;
+        width: 275px;
+        position: relative;
+        top: -66px;
+        color: #fff;
+        text-align: center;
+        img {
+            height: 20px;
+        }
+    
+        span {
+            vertical-align: sub;
+            font-weight: bold;
+            margin-left: 0.25rem;
+    
+            background-image: -webkit-linear-gradient(-69deg, #1cd0f6, #3a81ec); /* Safari 5.1 - 6.0 */
+            background-image: -o-linear-gradient(-69deg, #1cd0f6, #3a81ec); /* Opera 11.1 - 12.0 */
+            background-image: -moz-linear-gradient(-69deg, #1cd0f6, #3a81ec); /* Firefox 3.6 - 15 */
+            background-image: linear-gradient(-69deg, #1cd0f6, #3a81ec); /* 标准的语法 */
+            -webkit-background-clip: text;
+            -o-background-clip: text;
+            -moz-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -o-text-fill-color: transparent;
+            -moz-text-fill-color: transparent;
+            text-fill-color: transparent;
+        }
+    }
+    .absolute-center{
+        width: 288px;
+        height: 280px;
+        // padding: 0px 38px;
+        border-radius: 6px;
+        background: #fff;
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        z-index: 99;
+        // margin-top: -225px;
+        margin-top: -140px;
+        margin-left: -144px;
+        .login-title{
+            font-size: 24px;
+            font-weight: bold;
+            // color: #000;
+            font-family: "PingFangSC";
+        }
+        .hp-textbox{
+            height: 32px;
+            width: 200px;
+            min-width: 200px;
+            line-height: 32px;
+            background: #fff;
+            outline:none
+        }
+        // .x-form-input label{
+        //     width: 40px;
+        //     height: 40px;
+        //     border: 1px solid #dddddd;
+        //     padding: 11px 10px;
+        //     border-right: 0;
+        //     color: #dddddd;
+        //     .x-icon{
+        //         font-size: 18px;
+        //     }
+        // }
+        .x-form-input label{
+            font-family:PingFangSC-Regular;
+            font-weight:400;
+            color:rgba(51,51,51,1);
+            line-height:20px;
+        }
+        .login-tip{
+            font-size: 12px;
+            color: RGBA(201, 201, 201, 1);
+            text-align: center;
+            margin-top: 26px;
+        }
+        .login-content {
+            position: relative;
+            top: -64px;
+            height: 100%;
+            .login-method_tab {
+                padding: 0;
+                list-style: none;
+                margin-bottom: 0;
+                li {
+                    display: inline-block;
+                    color: RGBA(255, 255, 255, .7);
+                    width: 50%;
+                    background: RGBA(23, 64, 235, 1);
+                    line-height: 42px;
+                    text-align: center;
+                    user-select: none;
+                    font-family:PingFangSC-Regular;
+                    &:first-child {
+                        border-top-left-radius: 6px;
+                    }
+                    &:last-child {
+                        border-top-right-radius: 6px;
+                    }
+                    &.active {
+                        background: #fff;
+                        color: RGBA(51, 51, 51, 1);
+                        font-weight:400;
+                    }
+                    &.forbid {
+                        cursor: not-allowed;
+                    }
+                }
+            }
+            .hp-form {
+                padding: 0 20px;
+                margin-top: 2rem;
+                // margin-bottom: 1rem;
+                th {
+                    padding-right: 0;
+                }
+                th,td {
+                    padding-bottom: 2rem;
+                }
+                th.hp-formfield {
+                    > label {
+                        min-width: 0;
+                        i.icon {
+                            font-size: 24px;
+                        }
+                    }
+                }
+                .hp-textbox {
+                    width: inherit;
+                    min-width: inherit;
+                }
+            }
+            .hp-button-primary {
+                background: RGBA(23, 64, 235, 1);
+                border-color: RGBA(23, 64, 235, 1);
+            }
+            .forget-psw {
+                float: right;
+                margin-right: 20px;
+                margin-top: 10px;
+                text-decoration: none;
+                color: RGBA(23, 64, 235, 1);
+            }
+        }
+    }
+    .login-footer {
+        bottom: 40px;
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        color: #fff;
+        font-size: 12px;
+        .other-info {
+            padding: 0;
+            list-style: none;
+            width: 260px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-size: 12px;
+            li {
+                display: inline-block;
+                width: 33%;
+                user-select: none;
+                &:hover {
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

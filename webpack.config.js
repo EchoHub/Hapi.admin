@@ -6,11 +6,14 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // 样式抽取
 module.exports = {
     // mode: "production",
     mode: "development",
-    entry: path.resolve(__dirname, "assets/index.js"),
+    entry: {
+        index: path.resolve(__dirname, "assets/index.js"),
+        login: path.resolve(__dirname, "assets/login.js"),
+    },
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: "hapidog.bundle.[hash].js",
-        publicPath: ""
+        filename: "hapidog.[name].bundle.[hash].js",
+        // publicPath: "/dist"
     },
     resolve: {
         extensions: [".js", ".jsx", ".js"],
@@ -22,7 +25,7 @@ module.exports = {
     },
     devServer: {
         port: 9000,
-        openPage: "",
+        openPage: "login.html",
         contentBase: "./dist"
     },
     module: {
@@ -53,17 +56,17 @@ module.exports = {
                     loader: "sass-loader"
                 }]
             },
-            {
-                test: /\.(png|svg|jpg|gif|ico)$/,
-                use: "file-loader" //加载图片， 混合到css中 
-            },
+            // {
+            //     test: /\.(png|svg|jpg|gif|ico)$/,
+            //     use: "file-loader" //加载图片， 混合到css中 
+            // },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
                 use: ["file-loader", "url-loader"] // 加载字体
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
-                use: "url-loader?limit=8192&name=images/[hash:8].[name].[ext]"
+                use: "url-loader?limit=8192&name=./static/[name].[hash:8].[ext]"
             }
         ]
     },
@@ -72,7 +75,16 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: __dirname + "/pages/index.html"
+            template: __dirname + "/pages/index.html",
+            filename: "index.html",
+            title: "index",
+            chunks:['index']
+        }),
+        new HtmlWebpackPlugin({
+            template: __dirname + "/pages/login.html",
+            filename: "login.html",
+            title: "login",
+            chunks: ["login"]
         }),
         new CleanWebpackPlugin('dist/**/*.*', {
             root: __dirname,
