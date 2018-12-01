@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Form, FormLayout, FormField, TextBox, Button } from "common"
+import { ajax, Form, FormLayout, FormField, TextBox, Button, Notice } from "common"
 import "./login.scss"
 
 export default class Login extends Component {
@@ -19,13 +19,22 @@ export default class Login extends Component {
                     <Form>
                         <FormLayout>
                             <FormField label={"用户名："}><TextBox name=""></TextBox></FormField>
-                            <br/>
+                            <br />
                             <FormField label={"密码："}><TextBox name=""></TextBox></FormField>
-                            <br/>
+                            <br />
                         </FormLayout>
                     </Form>
-                    <div className="mh-20"><Button theme="primary" block>登陆</Button></div>
-                    <a className="forget-psw"href="javascript:;" onClick={() => {}}>忘记密码</a>
+                    <div className="mh-20"><Button theme="primary" block onClick={() => { location.href = "index.html#console" }}>登陆</Button></div>
+                    <a className="forget-psw" href="javascript:;"
+                        onClick={() => {
+                            const notice = new Notice
+                            notice.warning({
+                                title: "提示",
+                                content: "请联系系统管理员",
+                                autoClose: true
+                            })
+                        }}
+                    >忘记密码</a>
                 </div>
             </div>
             <div className="login-footer">
@@ -148,3 +157,15 @@ function loadBgAnimation() {
         }, 16);
     }
 }
+
+// export function all(loanId?: string, success?: (data: Result<OrderAllInfoVO>["data"], response: Result<OrderAllInfoVO>, xhr: any) => void, error?: (message: Result<OrderAllInfoVO>["message"], response: Result<OrderAllInfoVO>, xhr: any) => void, options?: any): Promise<Result<OrderAllInfoVO>["data"]> {
+//     return ajax({
+//         url: "/agc/applyinfo/all",
+//         data: {
+//             loanId: loanId
+//         },
+//         success: success,
+//         error: error,
+//         ...options
+//     }) as any;
+// }
