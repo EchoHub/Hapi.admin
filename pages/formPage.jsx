@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     Panel, Form, GridLayout, Layout, FormLayout, FormField, Button, Notice,
     TextBox, CheckBox, CheckBoxGroup, RadioBox, RadioBoxGroup, Switch, Rate,
-    TextArea, Select
+    TextArea, Select, ListItem
 } from "common";
 import "./formPage.scss"
 
@@ -205,7 +205,11 @@ export default class FormPage extends Component {
                 <Layout col={4}>
                     <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="输入框" toolbar={true}>
                         <TextBox name="furit" checked></TextBox>
-                        <Select className="mt-10"></Select>
+                        <Select className="mt-10">
+                            <ListItem value={1}>Option One</ListItem>
+                            <ListItem value={2}>Option Two</ListItem>
+                            <ListItem value={3}>Option Three</ListItem>
+                        </Select>
                         <TextArea className="mt-10"></TextArea>
                     </Panel>
                 </Layout>

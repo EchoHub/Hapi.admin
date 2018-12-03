@@ -16,11 +16,13 @@ ListBox.defaultProps = {
 
 export class ListItem extends Component {
     render() {
-        const { prefixCls, className } = this.props
+        const { prefixCls, className, children, value } = this.props
         const classes = classNames(prefixCls, className)
-        return <li className={classes}></li>
+        return <li className={classes}>
+            <a href="javascript:;" data-key={value}>{children}</a>
+        </li>
     }
 }
 ListItem.defaultProps = {
-    prefixCls: "x-listbox"
+    prefixCls: "hp-listitem"
 }
