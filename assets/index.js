@@ -106,13 +106,6 @@ const menus = [
                 icon: "",
                 route: "/404",
                 flag: 0,
-            },
-            {
-                title: "专家详情",
-                belong: "页面",
-                icon: "",
-                route: "/expertPage",
-                flag: 0,
             }
         ]
     },
@@ -129,11 +122,18 @@ const menus = [
                 flag: 0
             },
             {
-                title: "会员列表",
+                title: "专家列表",
                 belong: "演示",
                 icon: "",
-                route: "/member_list",
+                route: "/expertList",
                 flag: 0
+            },
+            {
+                title: "专家详情",
+                belong: "演示",
+                icon: "",
+                route: "/expertPage",
+                flag: 0,
             }
         ]
     }

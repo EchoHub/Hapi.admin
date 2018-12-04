@@ -10,6 +10,7 @@ import Notice from "./notice"
 import Canvas from "./canvas"
 import Others from "./others"
 import ExpertPage from "./expertPage"
+import ExpertList from "./expertList"
 var Pages = {
     "console" : Console,
     "buttonPage" : ButtonPage,
@@ -20,5 +21,6 @@ var Pages = {
     "tablePage" : TablePage,
     "canvas" : Canvas,
     "expertPage" : ExpertPage,
+    "expertList" : ExpertList,
 };
 export default Pages;
