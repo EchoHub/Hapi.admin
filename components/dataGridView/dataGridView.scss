@@ -1,0 +1,38 @@
+.hp-datagridview {
+    overflow-x: auto;
+    border-radius: 4px;
+    border: 1px solid #e8e8e8;
+    padding: 8px;
+    > table {
+        border-collapse: collapse;
+        border: none;
+        text-align: left;
+        width: 100%;
+        background: #fff;
+        color: rgba(0,0,0,.65);
+        th, td {
+            padding: 8px;
+        }
+        th {
+            font-weight: 700;
+            color: #666;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            background: #fafafa;
+            -webkit-transition: background .3s ease;
+            -o-transition: background .3s ease;
+            transition: background .3s ease;
+            text-align: left;
+        }
+        tr {
+            &:nth-child(odd) {
+                background: #f6f6f6;
+            }
+            &:hover {
+                background: rgba(45,183,245,.2);
+            }
+        }
+    }
+}

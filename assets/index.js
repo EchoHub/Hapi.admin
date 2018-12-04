@@ -41,7 +41,7 @@ const menus = [
                 title: "表格",
                 belong: "组件",
                 icon: "",
-                route: "/table",
+                route: "/tablePage",
                 flag: 0,
             },
             {

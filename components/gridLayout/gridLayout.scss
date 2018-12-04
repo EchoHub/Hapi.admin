@@ -1,5 +1,6 @@
 $name: "hp-gridlayout";
 .#{$name} {
+    display: flex;
     .hp-layout {
         display: inline-block;
         @for $num from 1 through 12 {

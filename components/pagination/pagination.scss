@@ -1,0 +1,36 @@
+@import "adminSystem/adminSystem.scss";
+.hp-pagination {
+    list-style: none;
+    padding: 0 10px;
+    margin: 0;
+    margin-top: 10px;
+    > li, > section > li {
+        display: inline-block;
+        cursor: pointer;
+        > a{
+            text-decoration: none;
+            color: #666;
+            margin: 0 7px;
+            display: inline-block;
+            text-align: center;
+            line-height: 1;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+        > .hp-select {
+            > input {
+                width: 72px;
+            }
+        }
+        > .hp-textbox {
+            width: 64px;
+        }
+        &.active {
+            border: 1px solid $element-color-primary;
+            border-radius: 4px;
+            > a {
+                color: $element-color-primary;
+            }
+        }
+    }
+}

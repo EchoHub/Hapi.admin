@@ -8,6 +8,8 @@ export { default as Rate } from "rate/rate";
 export { default as TextBox } from "textBox/textBox";
 export { default as TextArea } from "textArea/textArea";
 export { default as Select } from "select/select";
+export { default as DataGridView, Column } from "dataGridView/dataGridView";
+export { default as Pagination } from "pagination/pagination";
 export { default as ListBox, ListItem } from "listBox/listBox";
 export { default as Form, FormLayout, FormField } from "form/form";
 export { default as BreadCrumb } from "breadCrumb/breadCrumb";

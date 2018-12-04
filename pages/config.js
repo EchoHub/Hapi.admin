@@ -4,7 +4,7 @@
 import Console from "./console"
 import ButtonPage from "./buttonPage"
 import FormPage from "./formPage"
-import Table from "./table"
+import TablePage from "./tablePage"
 import Layout from "./layout"
 import Notice from "./notice"
 import Canvas from "./canvas"
@@ -17,7 +17,7 @@ var Pages = {
     "formPage" : FormPage,
     "notice" : Notice,
     "others" : Others,
-    "table" : Table,
+    "tablePage" : TablePage,
     "canvas" : Canvas,
     "expertPage" : ExpertPage,
 };

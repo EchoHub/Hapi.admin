@@ -129,6 +129,13 @@ export default class FormPage extends Component {
                                     ></TextBox>
                                 </FormField>
                                 <br />
+                                <FormField label="Sex：" required>
+                                    <Select name="sex" value={3} required>
+                                        <ListItem value={1}>Male</ListItem>
+                                        <ListItem value={0}>Female</ListItem>
+                                    </Select>
+                                </FormField>
+                                <br />
                                 <FormField label="Introduce：" required>
                                     <TextArea name="remark"
                                         required
@@ -205,7 +212,7 @@ export default class FormPage extends Component {
                 <Layout col={4}>
                     <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="输入框" toolbar={true}>
                         <TextBox name="furit" checked></TextBox>
-                        <Select className="mt-10">
+                        <Select className="mt-10" value={2}>
                             <ListItem value={1}>Option One</ListItem>
                             <ListItem value={2}>Option Two</ListItem>
                             <ListItem value={3}>Option Three</ListItem>

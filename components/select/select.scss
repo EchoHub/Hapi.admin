@@ -39,7 +39,7 @@
                 cursor: pointer;
                 transition: all ease .3s;
             }
-            &:hover {
+            &:hover, &.hp-listitem_selected {
                 > a {
                     background: $color-primary;
                     color: #fff;
