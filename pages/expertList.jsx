@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { findDOMNode } from "react-dom";
-import PropTypes from 'prop-types';
-import { DataGridView, Column, Button, Notice } from "common"
+
+import React, { Component } from "react";
+import { DataGridView, Column, Button, Notice, getCookie } from "common"
+import { PropTypes } from 'prop-types';
+import { expertList } from "api/api";
 import "./expertList.scss"
 
 export default class ExpertList extends Component {
@@ -9,10 +10,43 @@ export default class ExpertList extends Component {
         super(props);
         this.state = {}
     }
+    loadInfo() {
+        // {
+        //     "page": 0,
+        //     "query_words": "string",
+        //     "size": 0,
+        //     "sort_direction": "ASC",
+        //     "sort_field": "createdTime"
+        //   }
+        const access_token = getCookie("access_token");
+        const param = {
+            page: 1,
+            size: 10
+        }
+        expertList(param, {
+            contentType: "application/json",
+            type: "POST"
+        }, (data, res) => {
+            console.log(data)
+        }, error => {
+
+        }, {
+            headers : {
+                access_token: access_token
+            }
+        })
+    }
     componentDidMount() {
+        this.loadInfo()
     }
     render() {
         return <div className="hp-expertlist">
+            <Button
+                className="hp-button-primary mb-10"
+                onClick={() => { location.href = "#/expertPage" }}>
+                新增
+            </Button>
+
             <DataGridView dataSource={[
                 {
                     name: "李雷",

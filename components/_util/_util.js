@@ -1,6 +1,23 @@
 import * as DOM from "dom/dom"
 import ToolTip from "toolTip/toolTip"
 /**
+ * 获取cookie值
+ * @param name
+ */
+export function getCookie(name) {
+    const cookie = document.cookie;
+    let result = ""
+    let cookieJson = {}
+    if(cookie) {
+        const _params = cookie.split("&");
+        for(const _param of _params) {
+            cookieJson[_param.split("=")[0]] = _param.split("=")[1];
+        }
+        return cookieJson[name]
+    }
+    return result;
+}
+/**
  * @desc 元素属性过滤
  * @param 目标对象
  * @param 属性

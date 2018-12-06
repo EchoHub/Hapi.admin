@@ -1,4 +1,5 @@
 
+// component
 export { default as CheckBox } from "checkBox/checkBox";
 export { default as CheckBoxGroup } from "checkBoxGroup/checkBoxGroup";
 export { default as RadioBox } from "radioBox/radioBox";
@@ -19,6 +20,10 @@ export { default as Canvas } from "canvas/canvas";
 export { default as GridLayout, Layout } from "gridLayout/gridLayout";
 export { default as Button, ButtonGroup } from "button/button";
 export { default as Notification, Notice } from "notification/notification";
+
+// _hapi
 export * from "_util/_util";
-export { ajax } from "web/ajax";
-export { default as Pages } from "config"
+export { ajax, getQuery, setQuery, appendQuery, formatQuery } from "web/ajax";
+
+// pages
+export { default as Pages } from "config";

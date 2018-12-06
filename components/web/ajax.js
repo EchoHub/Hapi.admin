@@ -3,7 +3,7 @@
  * @param options 发送的选项。
  * @return 返回请求对象。
  */
-export default function ajax(options) {
+export function ajax(options) {
     const r = new Ajax();
     Object.assign(r, options);
     if (r.data != undefined && !(r.data instanceof FormData)) {
@@ -168,7 +168,7 @@ export class Ajax {
         }
 
         try {
-            xhr.onreadystatechange = this.progress;
+            xhr.onreadystatechange = this.progress.bind(this);
             xhr.send(this.data);
         } catch (sendError) {
             // 地址错误时会产生异常。

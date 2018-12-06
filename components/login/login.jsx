@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ajax, Form, FormLayout, FormField, TextBox, Button, Notice } from "common"
+import { Form, FormLayout, FormField, TextBox, Button, Notice } from "common"
+import { login } from "api/api";
 import "./login.scss"
 
 export default class Login extends Component {
+    constructor(props) {
+        super(props)
+        this.loginHandle = this.loginHandle.bind(this)
+    }
     render() {
         return <div className="hp-login bg">
             <canvas id="Mycanvas"></canvas>
@@ -16,15 +21,15 @@ export default class Login extends Component {
                         <li className="account active">账号密码登陆</li>
                         <li className="phone forbid">手机号登陆</li>
                     </ul>
-                    <Form>
+                    <Form ref="loginForm">
                         <FormLayout>
-                            <FormField label={"用户名："}><TextBox name=""></TextBox></FormField>
+                            <FormField label={"用户名："} required><TextBox name="username" required></TextBox></FormField>
                             <br />
-                            <FormField label={"密码："}><TextBox name=""></TextBox></FormField>
+                            <FormField label={"密码："} required><TextBox name="password" required></TextBox></FormField>
                             <br />
                         </FormLayout>
                     </Form>
-                    <div className="mh-20"><Button theme="primary" block onClick={() => { location.href = "index.html#console" }}>登陆</Button></div>
+                    <div className="mh-20"><Button theme="primary" block onClick={this.loginHandle}>登陆</Button></div>
                     <a className="forget-psw" href="javascript:;"
                         onClick={() => {
                             const notice = new Notice
@@ -52,6 +57,35 @@ export default class Login extends Component {
 
     componentDidMount() {
         loadBgAnimation()
+    }
+
+    loginHandle() {
+        const form = this.refs.loginForm;
+        if(form.reportValidity().valid) {
+            const param = {
+                ...form.value,
+                grant_type: "password",
+                client_id: "web",
+                client_secret: "7e8a29f9f597036d85bb88486a1137fd723e0024"
+            }
+            login(param, {
+                type: "POST"
+            }, (data, res) => {
+                const _data = JSON.parse(data);
+                if(_data.success) {
+                    const d = _data.data;
+                    document.cookie = `access_token=${d.access_token}`;
+                    location.href = "index.html#console"
+                }
+            }, (error, res) => {
+                const notice = new Notice;
+                notice.warning({
+                    title: "登陆提示",
+                    content: "登陆失败，请重新登陆",
+                    autoClose: true
+                });
+            })
+        }
     }
 }
 function loadBgAnimation() {
@@ -157,15 +191,3 @@ function loadBgAnimation() {
         }, 16);
     }
 }
-
-// export function all(loanId?: string, success?: (data: Result<OrderAllInfoVO>["data"], response: Result<OrderAllInfoVO>, xhr: any) => void, error?: (message: Result<OrderAllInfoVO>["message"], response: Result<OrderAllInfoVO>, xhr: any) => void, options?: any): Promise<Result<OrderAllInfoVO>["data"]> {
-//     return ajax({
-//         url: "/agc/applyinfo/all",
-//         data: {
-//             loanId: loanId
-//         },
-//         success: success,
-//         error: error,
-//         ...options
-//     }) as any;
-// }

@@ -10,6 +10,12 @@ export default class DataGridView extends Component {
         this.renderBody = this.renderBody.bind(this)
         this.selectedRowsHandle = this.selectedRowsHandle.bind(this)
     }
+    componentDidMount() {
+        // const { load } = this.props;
+        // if(load instanceof Function) {
+        //     load()
+        // }
+    }
     render() {
         const { prefixCls, className, dataSource, children, multiply, showPagination, paginationOptions } = this.props
         const classes = classNames(prefixCls, className);
@@ -26,9 +32,9 @@ export default class DataGridView extends Component {
      * @param {*} page 
      * @param {*} pageSize 
      */
-    load(page, pageSize) {
-        console.log(page, pageSize)
-    }
+    // set load(_load) {
+    //     _load instanceof Function && _load()
+    // }
 
     set selectedRow(v) {
         this._selectedRow = v

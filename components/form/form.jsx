@@ -134,7 +134,8 @@ export class FormField extends Component {
         let _value = {}
         const refs = this.refs;
         for (const key in refs) {
-            _value = Object.assign(_value, refs[key].value);
+            const { name } = refs[key].props;
+            _value[name] = refs[key].value
         }
 
         return _value;
@@ -163,8 +164,7 @@ export class FormField extends Component {
         };
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() { }
 
     render() {
         const { children, className, prefixCls, label, required, colSpan } = this.props;
@@ -219,7 +219,7 @@ function renderChildren(children) {
                     break;
                 default:
                     const props2 = item.props;
-                    const tag2 = `${item.type.name}-${index}`;
+                    const tag2 = `${props2.name}-${index}`;
                     _item = <item.type
                         key={tag2}
                         ref={tag2}

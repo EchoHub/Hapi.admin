@@ -1,0 +1,5 @@
+{
+    "token": "oauth/token",
+    "expertList": "/api/v1/expert/list"
+
+}
