@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from "classnames"
-import { checkBox, radioBox, Pagination } from "common"
+import { CheckBox, RadioBox, RadioBoxGroup, Pagination } from "common"
 import "./dataGridView.scss"
 
 export default class DataGridView extends Component {
     constructor(props) {
         super(props)
         this.renderBody = this.renderBody.bind(this)
+        this.selectedRowsHandle = this.selectedRowsHandle.bind(this)
     }
     render() {
         const { prefixCls, className, dataSource, children, multiply, showPagination, paginationOptions } = this.props
@@ -16,7 +17,7 @@ export default class DataGridView extends Component {
             <table className={classes}>
                 {this.renderBody(dataSource, children, { multiply })}
             </table>
-            { showPagination ? <Pagination load={this.load} {...paginationOptions}></Pagination> : null}
+            {showPagination ? <Pagination load={this.load} {...paginationOptions}></Pagination> : null}
         </div>
     }
 
@@ -33,6 +34,14 @@ export default class DataGridView extends Component {
         this._selectedRow = v
     }
 
+    /**
+     * 多选控制
+     * @param {*} hasChecked 
+     * @param {*} data 
+     */
+    selectedRowsHandle(hasChecked, data) {
+        
+    }
     /**
      * 渲染列表
      * @param {*} dataSource 
@@ -54,8 +63,8 @@ export default class DataGridView extends Component {
                     let td = null;
                     if (indicator) { // 是否可选
                         td = multiply ?
-                            <CheckBox onClick={e => { console.log(e) }}></CheckBox> :
-                            <RadioBox onClick={() => { this.selectedRow = data }}></RadioBox>
+                            <CheckBox onClick={(vNode, e) => { this.selectedRowsHandle(vNode.value, data) }}></CheckBox> :
+                            <RadioBox onClick={() => { this.selectedRow = [data] }}></RadioBox>
                     } else if (children instanceof Function) {
                         td = children(data)
                     } else {
@@ -70,6 +79,7 @@ export default class DataGridView extends Component {
         const tbody = <tbody key={`tbody-${Math.random() * Number(new Date())}`}>{dataSource ? trs : <tr><td colSpan={ths.length}>(无数据)</td></tr>}</tbody>
         return [thead, tbody]
     }
+
 }
 DataGridView.defaultProps = {
     prefixCls: "hp-datagridview",

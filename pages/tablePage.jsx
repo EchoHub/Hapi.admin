@@ -32,6 +32,36 @@ export default class TablePage extends Component {
                                 name: "章三",
                                 age: 21,
                                 address: "印度"
+                            },
+                            {
+                                name: "王五",
+                                age: 21,
+                                address: "华盛顿"
+                            },
+                            {
+                                name: "韩梅梅",
+                                age: 21,
+                                address: "香港"
+                            },
+                            {
+                                name: "韩磊",
+                                age: 21,
+                                address: "印度"
+                            },
+                            {
+                                name: "王五",
+                                age: 21,
+                                address: "华盛顿"
+                            },
+                            {
+                                name: "韩梅梅",
+                                age: 21,
+                                address: "香港"
+                            },
+                            {
+                                name: "韩磊",
+                                age: 21,
+                                address: "印度"
                             }
                         ]}>
                             <Column title="姓名">{row => row.name}</Column>
@@ -105,7 +135,7 @@ export default class TablePage extends Component {
                                 }
                             ]}
                             showPagination
-                            paginationOptions = {
+                            paginationOptions={
                                 {
                                     page: 1,
                                     pageSize: 10,
@@ -128,6 +158,86 @@ export default class TablePage extends Component {
                                         })
                                     }
                                 }></Button>
+                            </div>}</Column>
+                        </DataGridView>
+                    </Panel>
+                </Layout>
+            </GridLayout>
+            <GridLayout>
+                <Layout col={12}>
+                    <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginRight: "5px" }}
+                        title="单选／多选" toolbar={true}>
+                        <DataGridView multiply dataSource={[
+                            {
+                                name: "李雷",
+                                age: 21,
+                                address: "华盛顿"
+                            },
+                            {
+                                name: "韩梅梅",
+                                age: 21,
+                                address: "香港"
+                            },
+                            {
+                                name: "章三",
+                                age: 21,
+                                address: "印度"
+                            }
+                        ]}>
+                            <Column indicator></Column>
+                            <Column title="姓名">{row => row.name}</Column>
+                            <Column title="年龄">{row => row.age}</Column>
+                            <Column title="地址">{row => row.address}</Column>
+                            <Column title="操作">{row => <div>
+                                <Button className="hp-button-small hp-button-primary" onClick={() => { console.log(row) }}>查看</Button>
+                                <Button className="ml-10 hp-button-danger hp-button-small" onClick={
+                                    () => {
+                                        const notice = new Notice
+                                        notice.info({
+                                            title: "删除提示",
+                                            content: "删除成功",
+                                            autoClose: true
+                                        })
+                                    }
+                                }>删除</Button>
+                            </div>}</Column>
+                        </DataGridView>
+                    </Panel>
+                    <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginRight: "5px" }}
+                        title="单选／多选" toolbar={true}>
+                        <DataGridView dataSource={[
+                            {
+                                name: "李雷",
+                                age: 21,
+                                address: "华盛顿"
+                            },
+                            {
+                                name: "韩梅梅",
+                                age: 21,
+                                address: "香港"
+                            },
+                            {
+                                name: "章三",
+                                age: 21,
+                                address: "印度"
+                            }
+                        ]}>
+                            <Column indicator></Column>
+                            <Column title="姓名">{row => row.name}</Column>
+                            <Column title="年龄">{row => row.age}</Column>
+                            <Column title="地址">{row => row.address}</Column>
+                            <Column title="操作">{row => <div>
+                                <Button className="hp-button-small hp-button-primary" onClick={() => { console.log(row) }}>查看</Button>
+                                <Button className="ml-10 hp-button-danger hp-button-small" onClick={
+                                    () => {
+                                        const notice = new Notice
+                                        notice.info({
+                                            title: "删除提示",
+                                            content: "删除成功",
+                                            autoClose: true
+                                        })
+                                    }
+                                }>删除</Button>
                             </div>}</Column>
                         </DataGridView>
                     </Panel>

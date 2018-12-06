@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { findDOMNode } from "react-dom"
 import { propsFilter } from "_util/_util";
+import * as DOM from "dom/dom";
 import classNames from "classnames"
 import "./checkBox.scss"
 /**
@@ -16,7 +17,7 @@ export default class CheckBox extends Component {
         const _attr = propsFilter(findDOMNode(this), attr)
         this.setState({
             disabled, 
-            checked,
+            checked: checked || false,
             _attr: _attr
         })
     }
@@ -26,10 +27,10 @@ export default class CheckBox extends Component {
      */
     changeCheckBoxHandle() {
         if (this.props.disabled) return;
-        this.checked = !this.checked
+        this.checked = !this.state.checked
     }
     render() {
-        const { prefixCls, className, children, value } = this.props;
+        const { prefixCls, className, children, value, onClick } = this.props;
         const { disabled, checked } = this.state
         const classes = classNames(prefixCls, className, {
             [`${disabled ? "disabled" : ""}`]: disabled,
@@ -37,8 +38,15 @@ export default class CheckBox extends Component {
         })
         return <div className={classes}>
             <span
+                ref = "cb"
                 className="hp-checkbox-inner"
-                onClick={this.changeCheckBoxHandle.bind(this)}
+                onClick={(event) => {
+                    this.changeCheckBoxHandle()
+                    const timer = setTimeout(() => {
+                        onClick instanceof Function && onClick(this, event);
+                        clearTimeout(timer)
+                    }, 10)
+                }}
             ></span>
             <input ref="input" type="hidden" value={value} />
             <span className="hp-checkbox-content">{children}</span>
