@@ -78,7 +78,6 @@ export default class ExpertPage extends Component {
     componentDidMount() {
         const id = getQuery("id")
         const detail = getQuery("detail")
-        console.log(detail)
         this.setState({
             id: id,
             detail: detail || false
@@ -94,10 +93,10 @@ export default class ExpertPage extends Component {
                 <Form ref="metaInfo">
                     <FormLayout>
                         <FormField label="FirstName(CN)：" required>
-                            <TextBox name="first_name_cn" disabled={detail} required></TextBox>
+                            <TextBox name="first_name_cn" required></TextBox>
                         </FormField>
                         <FormField label="FirstName(EN)：" required>
-                            <TextBox name="first_name_en" disabled={detail} required></TextBox>
+                            <TextBox name="first_name_en" required></TextBox>
                         </FormField>
                         <br/>
                         <FormField label="LastName(CN)：" required>

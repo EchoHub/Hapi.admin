@@ -34,6 +34,14 @@ export default class TextBox extends Component {
         return reportValidity(input, value, { pattern, patternMessage, required, max, min, maxLength, minLength })
     }
 
+    componentWillReceiveProps(props) {
+        const { ...attr } = props
+        const _attr = propsFilter(findDOMNode(this), attr)
+        this.setState({
+            _attr: _attr
+        })
+    }
+
     componentDidMount() {
         const { ...attr } = this.props
         const _attr = propsFilter(findDOMNode(this), attr)
