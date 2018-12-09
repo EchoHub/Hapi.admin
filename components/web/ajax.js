@@ -176,7 +176,7 @@ export class Ajax {
             return false;
         }
         if (this.timeout >= 0) {
-            setTimeout(this.progress, this.timeout, "Timeout", -2);
+            setTimeout(this.progress.bind(this), this.timeout, "Timeout", -2);
         }
 
         return true;
@@ -208,10 +208,10 @@ export class Ajax {
             } else if (checkStatus(this.status = xhr.status)) {
                 try {
                     switch (this.responseType) {
-                        case undefined:
                         case "text":
-                            this.response = xhr.responseText;
-                            break;
+                        this.response = xhr.responseText;
+                        break;
+                        case undefined:
                         case "json":
                             this.response = JSON.parse(xhr.responseText);
                             break;

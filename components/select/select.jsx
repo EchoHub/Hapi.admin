@@ -17,6 +17,11 @@ export default class Select extends Component {
         this.setValueHandle = this.setValueHandle.bind(this)
     }
 
+    componentWillReceiveProps(props) {
+        const { value, children } = props
+        this.setValueHandle(value, children)
+    }
+
     componentDidMount() {
         const { value, children, ...attr } = this.props
         const _attr = propsFilter(findDOMNode(this), attr)
@@ -32,7 +37,7 @@ export default class Select extends Component {
         const { _attr } = this.state
         const classes = classNames(prefixCls, className)
         return <div className={classes}>
-            <input ref="input" className="hp-textbox" name={name} {..._attr} readOnly />
+            <input ref="input" {..._attr} className="hp-textbox" name={name} readOnly />
             <button onClick={this.handleButtonClick}><i className="iconfont icon icon-unfold"></i></button>
             <ul ref="ul" className="hp-listbox">{children}</ul>
         </div>
@@ -107,7 +112,7 @@ export default class Select extends Component {
      * @param children 
      */
     setValueHandle(value, children) {
-        if (!children) return
+        if (value === undefined || !children) return
         for (const child of children) {
             const props = child.props;
             if (props && value === props.value) {

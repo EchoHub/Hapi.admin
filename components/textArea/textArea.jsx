@@ -37,7 +37,12 @@ export default class TextArea extends Component {
     }
 
     set value(v) {
-        this.refs.input.value = v
+        const { name } = this.props;
+        if (v && Object.keys(v).length) {
+            for (const key in v) {
+                this.refs.input.value = v[name];
+            }
+        }
     }
 
     /**

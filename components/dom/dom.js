@@ -1,14 +1,14 @@
 /**
  * @desc 绑定事件
  */
-export function on(elem, eventName, eventHandler, eventOptions = { capture: false}) {
+export function on(elem, eventName, eventHandler, eventOptions = { capture: false }) {
     let elems = []
-    if(!Object.prototype.toString.call(elem) === "[object NodeList]") {
+    if (Object.prototype.toString.call(elem) !== "[object NodeList]") {
         elems = [elem]
-    }else {
+    } else {
         elems = Array.prototype.slice.call(elem)
     }
-    for(const _elem of elems) {
+    for (const _elem of elems) {
         if (_elem.addEventListener) {
             // capture:  Boolean，表示 listener 会在该类型的事件捕获阶段传播到该 EventTarget 时触发。
             // once:  Boolean，表示 listener 在添加之后最多只调用一次。如果是 true， listener 会在其被调用之后自动移除。
@@ -65,13 +65,13 @@ export function query(elem, selector) {
  */
 export function closest(elem, selector) {
     var matchesSelector = elem.matches || elem.webkitMatchesSelector || elem.mozMatchesSelector || elem.msMatchesSelector;
-    while (el) {
-        if (matchesSelector.call(el, selector)) {
+    while (elem) {
+        if (matchesSelector.call(elem, selector)) {
             break;
         }
-        el = elem.parentElement;
+        elem = elem.parentElement;
     }
-    return el;
+    return elem;
 }
 
 /**

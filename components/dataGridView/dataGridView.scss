@@ -13,6 +13,7 @@
         color: rgba(0,0,0,.65);
         th, td {
             padding: 8px;
+            white-space: nowrap;
         }
         th {
             font-weight: 700;
@@ -28,11 +29,14 @@
             text-align: left;
         }
         tr {
-            &:nth-child(odd) {
+            &:nth-child(even) {
                 background: #f6f6f6;
             }
             &:hover {
                 background: rgba(45,183,245,.2);
+            }
+            &.selected-tr {
+                background: #fffde7;
             }
         }
     }

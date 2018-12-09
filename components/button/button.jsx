@@ -40,6 +40,7 @@ Button.propTypes = {
 Button.defaultProps = {
     prefixCls: "hp-button",
     theme: "default",
+    type: "button",
     icon: null
 }
 

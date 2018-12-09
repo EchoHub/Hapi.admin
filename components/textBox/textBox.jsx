@@ -43,7 +43,7 @@ export default class TextBox extends Component {
     }
 
     render() {
-        const { prefixCls, className, ...attr } = this.props;
+        const { prefixCls, className } = this.props;
         const { _attr } = this.state
         const classes = classNames(prefixCls, className);
         return <input {..._attr} ref="input" className={classes}/>

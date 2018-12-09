@@ -71,9 +71,8 @@ export default class Login extends Component {
             login(param, {
                 type: "POST"
             }, (data, res) => {
-                const _data = JSON.parse(data);
-                if(_data.success) {
-                    const d = _data.data;
+                if(data.success) {
+                    const d = data.data;
                     document.cookie = `access_token=${d.access_token}`;
                     location.href = "index.html#console"
                 }

@@ -115,3 +115,8 @@ export function unique(arr) {
     }
     return res;
 }
+
+export function paramFormat(str) {
+    if(str === undefined || str === null) return ""
+    return str
+}

@@ -1,3 +1,63 @@
-.hp-dialog {
-
+@import "adminSystem/adminSystem.scss";
+.hp-dialog-mask{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 888;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    overflow: auto;
+    .hp-dialog {
+        min-width: 200px;
+        position: relative;
+        display: inline-block;
+        top: 50%;
+        left: 50%;
+        background: #fff;
+        border-radius: 4px;
+        font-size: 14px;
+        font-variant: tabular-nums;
+        line-height: 1.5;
+        color: rgba(0,0,0,.65);
+        list-style: none;
+        &-header {
+            padding: .5rem 1rem;
+            border-radius: 4px 4px 0 0;
+            background: #fff;
+            color: rgba(0,0,0,.7);
+            font-weight: bold;
+            border-bottom: 1px solid #e8e8e8;
+            > i {
+                float: right;
+                cursor: pointer;
+                &:hover {
+                    opacity: .7;
+                }
+            }
+        }
+        &-footer {
+            padding: .5rem 1rem;
+            display: flex;
+            justify-content: flex-end;
+            .hp-dialog-ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                float: right;
+                > li {
+                    display: inline-block;
+                    &:first-child {
+                        margin-right: .5rem
+                    }
+                }
+            }
+        }
+        &-confirm_icon {
+            font-size: 30px;
+            margin-right: .5rem;
+            position: relative;
+            top: 6px;
+            color: $color-warning
+        }
+    }
 }

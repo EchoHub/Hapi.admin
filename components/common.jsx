@@ -20,6 +20,7 @@ export { default as Canvas } from "canvas/canvas";
 export { default as GridLayout, Layout } from "gridLayout/gridLayout";
 export { default as Button, ButtonGroup } from "button/button";
 export { default as Notification, Notice } from "notification/notification";
+export { default as Dialog } from "dialog/dialog";
 
 // _hapi
 export * from "_util/_util";

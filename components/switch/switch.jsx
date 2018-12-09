@@ -17,7 +17,6 @@ export default class Switch extends Component {
         this.setState({
             checked: checked || false
         })
-
         DOM.on(findDOMNode(this), "click", event => { this.openCloseHandler(event) })
     }
     render() {
@@ -25,8 +24,8 @@ export default class Switch extends Component {
         const { checked } = this.state
         const classes = classNames(prefixCls, className, {
             [`${sizeEnum[size]}`]: size,
-            [`${checked ? "hp-switch-checked" : ""}`]: checked,
-            [`${disabled ? "hp-switch-disabled" : ""}`]: disabled,
+            [`${checked ? "hp-switch-checked" : "hp-switch"}`]: checked || false,
+            [`${disabled ? "hp-switch-disabled" : "hp-switch"}`]: disabled || false,
         })
         const c_classes = classNames(
             "hp-switch-content",
@@ -62,6 +61,7 @@ Switch.defaultProps = {
     size: "normal",
     disabled: false,
     sizeEnum: {
+        normal: "hp-switch",
         small: "hp-switch-small",
         large: "hp-switch-large"
     }
