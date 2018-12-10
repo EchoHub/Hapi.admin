@@ -98,14 +98,14 @@ export default class ExpertPage extends Component {
                         <FormField label="FirstName(EN)：" required>
                             <TextBox name="first_name_en" required></TextBox>
                         </FormField>
-                        <br/>
+                        <br />
                         <FormField label="LastName(CN)：" required>
                             <TextBox name="last_name_cn" required></TextBox>
                         </FormField>
                         <FormField label="LastName(EN)：" required>
                             <TextBox name="last_name_en" required></TextBox>
                         </FormField>
-                        <br/>
+                        <br />
                         <FormField label="NickName：" required>
                             <TextBox name="nick_name" required></TextBox>
                         </FormField>
@@ -116,7 +116,7 @@ export default class ExpertPage extends Component {
                         <FormField colSpan={3} label="Background(CN)：" required>
                             <TextArea name="background_cn" required></TextArea>
                         </FormField>
-                        <br/>
+                        <br />
                         <FormField colSpan={3} label="Background(EN)：" required>
                             <TextArea name="background_en" required></TextArea>
                         </FormField>
@@ -124,7 +124,7 @@ export default class ExpertPage extends Component {
                         <FormField colSpan={3} label="Expertise(CN)：" required>
                             <TextArea name="expertise_cn" required></TextArea>
                         </FormField>
-                        <br/>
+                        <br />
                         <FormField colSpan={3} label="Expertise(EN)：" required>
                             <TextArea name="expertise_en" required></TextArea>
                         </FormField>
@@ -437,16 +437,14 @@ export default class ExpertPage extends Component {
                     type: "POST"
                 }, (data, res) => {
                     if (data.success) {
-                        const notice = new Notice;
-                        notice.info({
+                        Notice.info({
                             title: "提示",
                             content: "保存成功",
                             autoClose: true
                         });
                     }
                 }, error => {
-                    const notice = new Notice;
-                    notice.warning({
+                    Notice.error({
                         title: "错误提示",
                         content: "数据保存失败，请稍后重试",
                         autoClose: true
@@ -464,8 +462,7 @@ export default class ExpertPage extends Component {
         }, (data, res) => {
             if (data.success) callback(data)
         }, error => {
-            const notice = new Notice;
-            notice.warning({
+            Notice.error({
                 title: "错误提示",
                 content: "接口请求失败，请稍后",
                 autoClose: true
@@ -489,16 +486,15 @@ export default class ExpertPage extends Component {
                 type: "POST"
             }, (data, res) => {
                 if (data.success) {
-                    const notice = new Notice;
-                    notice.info({
+
+                    Notice.info({
                         title: "提示",
                         content: "保存成功",
                         autoClose: true
                     });
                 }
             }, error => {
-                const notice = new Notice;
-                notice.warning({
+                Notice.error({
                     title: "错误提示",
                     content: "数据保存失败，请稍后重试",
                     autoClose: true
@@ -516,8 +512,7 @@ export default class ExpertPage extends Component {
         }, (data, res) => {
             if (data.success) callback(data)
         }, error => {
-            const notice = new Notice;
-            notice.warning({
+            Notice.error({
                 title: "错误提示",
                 content: "接口请求失败，请稍后",
                 autoClose: true
@@ -541,16 +536,15 @@ export default class ExpertPage extends Component {
                 type: "POST"
             }, (data, res) => {
                 if (data.success) {
-                    const notice = new Notice;
-                    notice.info({
+
+                    Notice.info({
                         title: "提示",
                         content: "保存成功",
                         autoClose: true
                     });
                 }
             }, error => {
-                const notice = new Notice;
-                notice.warning({
+                Notice.error({
                     title: "错误提示",
                     content: "数据保存失败，请稍后重试",
                     autoClose: true
@@ -568,8 +562,7 @@ export default class ExpertPage extends Component {
         }, (data, res) => {
             if (data.success) callback(data)
         }, error => {
-            const notice = new Notice;
-            notice.warning({
+            Notice.error({
                 title: "错误提示",
                 content: "接口请求失败，请稍后",
                 autoClose: true
@@ -593,16 +586,16 @@ export default class ExpertPage extends Component {
                 type: "POST"
             }, (data, res) => {
                 if (data.success) {
-                    const notice = new Notice;
-                    notice.info({
+
+                    Notice.info({
                         title: "提示",
                         content: "保存成功",
                         autoClose: true
                     });
                 }
             }, error => {
-                const notice = new Notice;
-                notice.info({
+
+                Notice.info({
                     title: "错误提示",
                     content: "接口请求失败，请稍后"
                 })
@@ -623,8 +616,7 @@ export default class ExpertPage extends Component {
             }, (data, res) => {
                 if (data.success) callback(data);
             }, error => {
-                const notice = new Notice;
-                notice.warning({
+                Notice.error({
                     title: "错误提示",
                     content: "接口请求失败，请稍后",
                     autoClose: true
@@ -710,8 +702,8 @@ export default class ExpertPage extends Component {
                             this.refs.work_table.reload()
                         }
                     }, error => {
-                        const notice = new Notice;
-                        notice.info({
+
+                        Notice.info({
                             title: "错误提示",
                             content: "接口请求失败，请稍后"
                         })
@@ -722,22 +714,22 @@ export default class ExpertPage extends Component {
 
     // 删除工作经验
     deleteWorkExpHandle(row) {
-        Dialog.comfirm("确认删除该条工作信息吗？", "删除提示", () => {
+        Dialog.confirm("确认删除该条工作信息吗？", "删除提示", () => {
             expertDeleteWorkExp({ id: row.id, }, {
                 withCredentials: true,
                 contentType: "application/json",
                 type: "POST"
             }, (data, res) => {
-                const notice = new Notice
-                notice.info({
+                
+                Notice.info({
                     title: "删除提示",
                     content: "删除成功",
                     autoClose: true
                 })
                 this.refs.work_table.reload()
             }, error => {
-                const notice = new Notice;
-                notice.warning({
+
+                Notice.error({
                     title: "错误提示",
                     content: "接口请求失败，请稍后",
                     autoClose: true
@@ -761,8 +753,8 @@ export default class ExpertPage extends Component {
                     if (data.data) callback(data.data)
                 }
             }, error => {
-                const notice = new Notice;
-                notice.warning({
+
+                Notice.error({
                     title: "错误提示",
                     content: "接口请求失败，请稍后",
                     autoClose: true
@@ -841,8 +833,8 @@ export default class ExpertPage extends Component {
                             this.refs.edu_table.reload()
                         }
                     }, error => {
-                        const notice = new Notice;
-                        notice.info({
+
+                        Notice.info({
                             title: "错误提示",
                             content: "接口请求失败，请稍后"
                         })
@@ -853,22 +845,22 @@ export default class ExpertPage extends Component {
 
     // 删除工作经验
     deleteEduExpHandle(row) {
-        Dialog.comfirm("确认删除该条教育经历吗？", "删除提示", () => {
+        Dialog.confirm("确认删除该条教育经历吗？", "删除提示", () => {
             expertDeleteEduExp({ id: row.id, }, {
                 withCredentials: true,
                 contentType: "application/json",
                 type: "POST"
             }, (data, res) => {
-                const notice = new Notice
-                notice.info({
+                
+                Notice.info({
                     title: "删除提示",
                     content: "删除成功",
                     autoClose: true
                 })
                 this.refs.edu_table.reload()
             }, error => {
-                const notice = new Notice;
-                notice.warning({
+
+                Notice.error({
                     title: "错误提示",
                     content: "接口请求失败，请稍后",
                     autoClose: true
@@ -892,8 +884,8 @@ export default class ExpertPage extends Component {
                     if (data.data) callback(data.data)
                 }
             }, error => {
-                const notice = new Notice;
-                notice.warning({
+
+                Notice.error({
                     title: "错误提示",
                     content: "接口请求失败，请稍后",
                     autoClose: true
@@ -943,8 +935,8 @@ export default class ExpertPage extends Component {
                             this.refs.comments_table.reload()
                         }
                     }, error => {
-                        const notice = new Notice;
-                        notice.info({
+
+                        Notice.info({
                             title: "错误提示",
                             content: "接口请求失败，请稍后"
                         })
@@ -957,22 +949,22 @@ export default class ExpertPage extends Component {
 
     // 删除总体介绍
     deleteCommentsHandle(row) {
-        Dialog.comfirm("确认删除该条总体介绍吗？", "删除提示", () => {
+        Dialog.confirm("确认删除该条总体介绍吗？", "删除提示", () => {
             expertDeleteGeneralComments({ id: row.id, }, {
                 withCredentials: true,
                 contentType: "application/json",
                 type: "POST"
             }, (data, res) => {
-                const notice = new Notice
-                notice.info({
+                
+                Notice.info({
                     title: "删除提示",
                     content: "删除成功",
                     autoClose: true
                 })
                 this.refs.comments_table.reload()
             }, error => {
-                const notice = new Notice;
-                notice.warning({
+
+                Notice.error({
                     title: "错误提示",
                     content: "接口请求失败，请稍后",
                     autoClose: true
@@ -996,8 +988,8 @@ export default class ExpertPage extends Component {
                     if (data.data) callback(data.data)
                 }
             }, error => {
-                const notice = new Notice;
-                notice.warning({
+
+                Notice.error({
                     title: "错误提示",
                     content: "接口请求失败，请稍后",
                     autoClose: true
@@ -1048,8 +1040,8 @@ export default class ExpertPage extends Component {
                             this.refs.notes_table.reload()
                         }
                     }, error => {
-                        const notice = new Notice;
-                        notice.info({
+
+                        Notice.info({
                             title: "错误提示",
                             content: "接口请求失败，请稍后"
                         })
@@ -1060,22 +1052,22 @@ export default class ExpertPage extends Component {
 
     // 删除注释信息
     deleteNotesHandle(row) {
-        Dialog.comfirm("确认删除该条注释信息吗？", "删除提示", () => {
+        Dialog.confirm("确认删除该条注释信息吗？", "删除提示", () => {
             expertDeleteNotes({ id: row.id, }, {
                 withCredentials: true,
                 contentType: "application/json",
                 type: "POST"
             }, (data, res) => {
-                const notice = new Notice
-                notice.info({
+                
+                Notice.info({
                     title: "删除提示",
                     content: "删除成功",
                     autoClose: true
                 })
                 this.refs.notes_table.reload()
             }, error => {
-                const notice = new Notice;
-                notice.warning({
+
+                Notice.error({
                     title: "错误提示",
                     content: "接口请求失败，请稍后",
                     autoClose: true
@@ -1099,8 +1091,8 @@ export default class ExpertPage extends Component {
                     if (data.data) callback(data.data)
                 }
             }, error => {
-                const notice = new Notice;
-                notice.warning({
+
+                Notice.error({
                     title: "错误提示",
                     content: "接口请求失败，请稍后",
                     autoClose: true
@@ -1124,16 +1116,16 @@ export default class ExpertPage extends Component {
                 type: "POST"
             }, (data, res) => {
                 if (data.success) {
-                    const notice = new Notice;
-                    notice.info({
+
+                    Notice.info({
                         title: "提示",
                         content: "保存成功",
                         autoClose: true
                     });
                 }
             }, error => {
-                const notice = new Notice;
-                notice.info({
+
+                Notice.info({
                     title: "错误提示",
                     content: "接口请求失败，请稍后"
                 })
@@ -1154,8 +1146,8 @@ export default class ExpertPage extends Component {
             }, (data, res) => {
                 if (data.success) callback(data);
             }, error => {
-                const notice = new Notice;
-                notice.warning({
+
+                Notice.error({
                     title: "错误提示",
                     content: "接口请求失败，请稍后",
                     autoClose: true

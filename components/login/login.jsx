@@ -23,17 +23,16 @@ export default class Login extends Component {
                     </ul>
                     <Form ref="loginForm">
                         <FormLayout>
-                            <FormField label={"用户名："} required><TextBox name="username" required></TextBox></FormField>
+                            <FormField label={"用户名："}><TextBox name="username" required></TextBox></FormField>
                             <br />
-                            <FormField label={"密码："} required><TextBox name="password" required></TextBox></FormField>
+                            <FormField label={"密码："}><TextBox name="password" required></TextBox></FormField>
                             <br />
                         </FormLayout>
                     </Form>
                     <div className="mh-20"><Button theme="primary" block onClick={this.loginHandle}>登陆</Button></div>
                     <a className="forget-psw" href="javascript:;"
                         onClick={() => {
-                            const notice = new Notice
-                            notice.warning({
+                            Notice.warning({
                                 title: "提示",
                                 content: "请联系系统管理员",
                                 autoClose: true
@@ -77,8 +76,7 @@ export default class Login extends Component {
                     location.href = "index.html#console"
                 }
             }, (error, res) => {
-                const notice = new Notice;
-                notice.warning({
+                Notice.warning({
                     title: "登陆提示",
                     content: "登陆失败，请重新登陆",
                     autoClose: true

@@ -6,7 +6,8 @@ import ButtonPage from "./buttonPage"
 import FormPage from "./formPage"
 import TablePage from "./tablePage"
 import Layout from "./layout"
-import Notice from "./notice"
+import NoticePage from "./noticePage"
+import ModalPage from "./modalPage"
 import Canvas from "./canvas"
 import Others from "./others"
 import ExpertPage from "./expertPage"
@@ -16,7 +17,8 @@ var Pages = {
     "buttonPage" : ButtonPage,
     "layout" : Layout,
     "formPage" : FormPage,
-    "notice" : Notice,
+    "noticePage" : NoticePage,
+    "modalPage" : ModalPage,
     "others" : Others,
     "tablePage" : TablePage,
     "canvas" : Canvas,

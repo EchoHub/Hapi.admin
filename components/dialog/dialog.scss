@@ -20,6 +20,12 @@
         line-height: 1.5;
         color: rgba(0,0,0,.65);
         list-style: none;
+        transform: scale(0);
+        -moz-transform: scale(0);
+        -ms-transform: scale(0);
+        -o-transform: scale(0);
+        transform-origin: left;
+        transition: all ease .3s;
         &-header {
             padding: .5rem 1rem;
             border-radius: 4px 4px 0 0;
@@ -57,7 +63,18 @@
             margin-right: .5rem;
             position: relative;
             top: 6px;
-            color: $color-warning
+            &.primary {
+                color: $color-primary
+            }
+            &.success {
+                color: $color-success
+            }
+            &.warning {
+                color: $color-warning
+            }
+            &.error {
+                color: $color-error
+            }
         }
     }
 }

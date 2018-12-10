@@ -12,12 +12,13 @@ export default class Dialog extends Component {
         this.onOk = this.onOk.bind(this)
         this.onCancel = this.onCancel.bind(this)
         this.close = this.close.bind(this)
+        this.show = this.close.bind(this)
     }
     componentDidMount() {
         const dialog = findDOMNode(this);
         const width = dialog.offsetWidth;
         const height = dialog.offsetHeight;
-        dialog.style = `margin-left: -${width / 2}px;margin-top: -${height / 2}px`;
+        dialog.style = `margin-left: -${width / 2}px;margin-top: -${height / 2}px;transform:scale(1)`;
     }
     render() {
         const { prefixCls, className, title, children, buttons } = this.props
@@ -72,31 +73,74 @@ export default class Dialog extends Component {
 
     close() {
         const el = findDOMNode(this);
-        DOM.remove(el.parentElement || el.parentNode)
+        el.style = "transform:scale(0)";
+        const timer = setTimeout(() => {
+            DOM.remove(el.parentElement || el.parentNode)
+            clearTimeout(timer);
+        }, 300)
     }
 
     static show(content, title, buttons, onOk, onCancel) {
-        const modalContianer = document.createElement("div");
-        modalContianer.className = "hp-dialog-mask";
-        document.body.appendChild(modalContianer);
+        const modalContainer = document.createElement("div");
+        modalContainer.className = "hp-dialog-mask";
+        document.body.appendChild(modalContainer);
         render(<Dialog
             title={title}
             buttons={buttons}
             onOk={onOk}
             onCancel={onCancel}
-        >{content}</Dialog>, modalContianer)
+        >{content}</Dialog>, modalContainer)
     }
 
-    static comfirm(content, title, onOk, onCancel) {
-        const modalContianer = document.createElement("div");
-        modalContianer.className = "hp-dialog-mask";
-        document.body.appendChild(modalContianer);
+    static confirm(content, title, onOk, onCancel) {
+        const modalContainer = document.createElement("div");
+        modalContainer.className = "hp-dialog-mask";
+        document.body.appendChild(modalContainer);
         render(<Dialog
             title={title}
-            buttons={{确认: true, 取消: false}}
+            buttons={{ 确认: true, 取消: false }}
             onOk={onOk}
             onCancel={onCancel}
-        ><div className="p-1rem"><i className="hp-dialog-confirm_icon icon iconfont icon-prompt_fill"></i>{content}</div></Dialog>, modalContianer)
+        ><div className="p-1rem"><i className="hp-dialog-confirm_icon icon iconfont icon-feedback_fill"></i>{content}</div></Dialog>, modalContainer)
+    }
+
+    static info(content, title) {
+        Dialog.alert(content, title, "prompt")
+    }
+    static success(content, title) {
+        Dialog.alert(content, title, "success")
+    }
+    static warning(content, title) {
+        Dialog.alert(content, title, "warning")
+    }
+    static error(content, title) {
+        Dialog.alert(content, title, "delete")
+    }
+
+    static alert(content, title, theme = "prompt") {
+        const modalContainer = document.createElement("div");
+        modalContainer.className = "hp-dialog-mask";
+        document.body.appendChild(modalContainer);
+        const colorEnum = {
+            prompt: "primary",
+            success: "success",
+            warning: "warning",
+            error: "danger"
+        }
+        const classes = classNames("hp-dialog-confirm_icon icon iconfont", {
+            [`icon-${theme}`]: theme,
+            [`${colorEnum[theme]}`]: theme
+        })
+        render(
+            <Dialog
+                title={title}
+                buttons={{ 确认: true }}
+            >
+                <div className="p-1rem">
+                    <i className={classes}></i>
+                    {content}
+                </div>
+            </Dialog>, modalContainer)
     }
 }
 Dialog.defaultProps = {

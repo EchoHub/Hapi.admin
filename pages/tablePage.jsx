@@ -71,8 +71,7 @@ export default class TablePage extends Component {
                                 <Button className="hp-button-small hp-button-primary" onClick={() => { console.log(row) }}>查看</Button>
                                 <Button className="ml-10 hp-button-danger hp-button-small" onClick={
                                     () => {
-                                        const notice = new Notice
-                                        notice.info({
+                                        Notice.info({
                                             title: "删除提示",
                                             content: "删除成功",
                                             autoClose: true
@@ -150,8 +149,7 @@ export default class TablePage extends Component {
                                 <Button className="hp-button-small hp-button-primary icon iconfont icon-brush" onClick={() => { console.log(row) }}></Button>
                                 <Button className="ml-10 hp-button-danger hp-button-small icon iconfont icon-trash" onClick={
                                     () => {
-                                        const notice = new Notice
-                                        notice.info({
+                                        Notice.info({
                                             title: "删除提示",
                                             content: "删除成功",
                                             autoClose: true
@@ -192,8 +190,7 @@ export default class TablePage extends Component {
                                 <Button className="hp-button-small hp-button-primary" onClick={() => { console.log(row) }}>查看</Button>
                                 <Button className="ml-10 hp-button-danger hp-button-small" onClick={
                                     () => {
-                                        const notice = new Notice
-                                        notice.info({
+                                        Notice.info({
                                             title: "删除提示",
                                             content: "删除成功",
                                             autoClose: true
@@ -230,8 +227,7 @@ export default class TablePage extends Component {
                                 <Button className="hp-button-small hp-button-primary" onClick={() => { console.log(row) }}>查看</Button>
                                 <Button className="ml-10 hp-button-danger hp-button-small" onClick={
                                     () => {
-                                        const notice = new Notice
-                                        notice.info({
+                                        Notice.info({
                                             title: "删除提示",
                                             content: "删除成功",
                                             autoClose: true

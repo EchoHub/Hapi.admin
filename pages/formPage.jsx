@@ -29,8 +29,7 @@ export default class FormPage extends Component {
     formReportValidity() {
         const form = this.refs.form3;
         if (!form.reportValidity().valid) {
-            const notice = new Notice
-            notice.warning({
+            Notice.warning({
                 title: "校验提示",
                 content: "校验错误，请修改",
                 autoClose: true

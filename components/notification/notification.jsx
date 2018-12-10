@@ -40,7 +40,7 @@ export default class Notification extends Component {
         _self.style.right = "-999px";
         const moveHeight = _self.offsetHeight + 10
         const removeTimer = setTimeout(() => {
-            _self.remove();
+            (_self.parentElement || _self.parentNode).remove();
             clearTimeout(removeTimer);
             // 当前元素后面兄弟元素上移
             if (notices.length) {
@@ -92,7 +92,7 @@ Notification.defaultProps = {
         "info": "icon-prompt",
         "success": "icon-success",
         "warning": "icon-warning",
-        "error": "icon-error"
+        "error": "icon-delete"
     },
     themeEnum: {
         "default": "",
@@ -110,35 +110,60 @@ export class Notice {
      * @desc 创建一个消息通知框
      * @param {*} options 
      */
-    info(options) {
-        this.createNotification(options, "info", true)
+    static info(options) {
+        Notice.createNotification(options, "info", true)
     }
     /**
      * @desc 创建一个成功消息通知框
      * @param {*} options 
      */
-    success(options) {
-        this.createNotification(options, "success", true)
+    static success(options) {
+        Notice.createNotification(options, "success", true)
     }
     /**
      * @desc 创建一个错误消息通知框
      * @param {*} options 
      */
-    error(options) {
-        this.createNotification(options, "error", true)
+    static error(options) {
+        Notice.createNotification(options, "error", true)
     }
     /**
      * @desc 创建一个警告消息通知框
      * @param {*} options 
      */
-    warning(options) {
-        this.createNotification(options, "warning", true)
+    static warning(options) {
+        Notice.createNotification(options, "warning", true)
     }
 
-    createNotification(options, theme, isFlag) {
-        const notificationContainer = document.createElement("div");
-        notificationContainer.className = "hp-notification-container";
-        document.body.appendChild(notificationContainer);
-        render(<Notification {...options} theme={theme} isFlag={isFlag}></Notification>, notificationContainer);
+    static createNotification(options, theme, isFlag) {
+        const key = options.key;
+        const noticeElem = DOM.find(document.body, `[data-key=${key}]`);
+        if (!noticeElem) {
+            const notificationContainer = document.createElement("div");
+            notificationContainer.className = "hp-notification-container";
+            notificationContainer.setAttribute("data-key", options.key)
+            DOM.append(document.body, notificationContainer);
+            render(<Notification {...options} theme={theme} isFlag={isFlag}></Notification>, notificationContainer);
+            return
+        }
+        render(options.content, DOM.find(noticeElem, ".hp-notification-content"));
+    }
+
+    info(options) {
+        Notice.createNotification(options, "info", true)
+    }
+
+    success(options) {
+        Notice.createNotification(options, "success", true)
+    }
+
+    error(options) {
+        Notice.createNotification(options, "error", true)
+    }
+
+    warning(options) {
+        Notice.createNotification(options, "warning", true)
     }
 }
+
+Notice.defaultProps = {}

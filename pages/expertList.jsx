@@ -31,8 +31,7 @@ export default class ExpertList extends Component {
                 callback && callback(info.items, info.total_count)
             }
         }, error => {
-            const notice = new Notice;
-            notice.warning({
+            Notice.warning({
                 title: "错误提示",
                 content: "接口请求失败，请稍后",
                 autoClose: true
@@ -127,16 +126,14 @@ export default class ExpertList extends Component {
                     type: "POST"
                 }, (data, res) => {
                     if (data.success) {
-                        const notice = new Notice;
-                        notice.info({
+                        Notice.info({
                             title: "操作提示",
                             content: "操作成功"
                         })
                         this.loadInfo()
                     }
                 }, error => {
-                    const notice = new Notice;
-                    notice.info({
+                    Notice.info({
                         title: "错误提示",
                         content: "接口请求失败，请稍后"
                     })
@@ -169,23 +166,21 @@ export default class ExpertList extends Component {
      * 删除专家
      */
     deleteHandle(row) {
-        Dialog.comfirm("确认删除该条专家信息吗？", "删除提示", () => {
+        Dialog.confirm("确认删除该条专家信息吗？", "删除提示", () => {
             const access_token = getCookie("access_token");
             expertDelete({ expert_id: row.id, }, {
                 withCredentials: true,
                 contentType: "application/json",
                 type: "POST"
             }, (data, res) => {
-                const notice = new Notice
-                notice.info({
+                Notice.info({
                     title: "删除提示",
                     content: "删除成功",
                     autoClose: true
                 })
                 this.loadInfo()
             }, error => {
-                const notice = new Notice;
-                notice.warning({
+                Notice.warning({
                     title: "错误提示",
                     content: "接口请求失败，请稍后",
                     autoClose: true

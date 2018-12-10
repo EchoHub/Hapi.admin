@@ -54,5 +54,5 @@ export default class RadioBoxGroup extends Component {
 
 }
 RadioBoxGroup.defaultProps = {
-    prefixCls: "hp-radioBoxGroup",
+    prefixCls: "hp-radioboxgroup",
 }

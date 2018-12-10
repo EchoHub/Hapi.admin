@@ -48,7 +48,14 @@ const menus = [
                 title: "通知",
                 belong: "组件",
                 icon: "",
-                route: "/notice",
+                route: "/noticePage",
+                flag: 0,
+            },
+            {
+                title: "模态窗",
+                belong: "组件",
+                icon: "",
+                route: "/modalPage",
                 flag: 0,
             },
             {
