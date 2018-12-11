@@ -80,7 +80,7 @@ class MenuItem extends Component {
         // e.target.parentNode.parentNode.classList.add("active");
         const parent = this.props.parent;
         this.props.setCurTopBarInfo(menu)
-        parent.setActiveItem(e.target);
+        parent.setActiveItem(e.target || window.event.target);
     }
 
     toogleSubMenu() {

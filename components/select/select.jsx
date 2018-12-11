@@ -15,6 +15,7 @@ export default class Select extends Component {
         this.handleButtonClick = this.handleButtonClick.bind(this)
         this.selectItemHandle = this.selectItemHandle.bind(this)
         this.setValueHandle = this.setValueHandle.bind(this)
+        this.toggleHandle = this.toggleHandle.bind(this)
     }
 
     componentWillReceiveProps(props) {
@@ -30,6 +31,10 @@ export default class Select extends Component {
         })
         this.setValueHandle(value, children)
         DOM.on(DOM.query(this.refs.ul, ".hp-listitem"), "click", this.selectItemHandle);
+        DOM.on(document.body, "click", e => {
+            const node = DOM.closest(e.target, ".hp-select");
+            if (!node) this.toggleHandle(true)
+        })
     }
 
     render() {
@@ -38,17 +43,34 @@ export default class Select extends Component {
         const classes = classNames(prefixCls, className)
         return <div className={classes}>
             <input ref="input" {..._attr} className="hp-textbox" name={name} readOnly />
-            <button onClick={this.handleButtonClick}><i className="iconfont icon icon-unfold"></i></button>
+            <button onClick={e => { this.handleButtonClick(e) }}><i className="iconfont icon icon-unfold"></i></button>
             <ul ref="ul" className="hp-listbox">{children}</ul>
         </div>
     }
 
-    handleButtonClick() {
+    handleButtonClick(e) {
         const elem = this.refs.ul;
         if (elem.className.indexOf("hp-listbox-collapsable") > -1) {
             this.toggleHandle(true)
+            elem.style = null;
         } else {
             this.toggleHandle(false)
+
+            // hp-listbox 定位
+            const event = e || window.event;
+            const target = event.target;
+            const selectNode = DOM.closest(target, ".hp-select");
+            const ulHeight = elem.offsetHeight;
+            const width = selectNode.offsetWidth;
+            const height = selectNode.offsetHeight;
+            const parentLeft = selectNode.offsetLeft;
+            const parentTop = selectNode.offsetTop;
+            const x = parentLeft + 230;
+            let y = parentTop - DOM.find(document.body, ".hp-container-content").scrollTop + height + 60;
+            if (window.innerHeight - event.clientY - height < ulHeight) {
+                y = y - height - ulHeight;
+            }
+            elem.style = `position:fixed; width: ${width}px; top: ${y}px; left:${x}px; z-index:99`;
         }
     }
 
@@ -69,7 +91,7 @@ export default class Select extends Component {
     }
 
     selectItemHandle(event) {
-        const elem = event.target;
+        const elem = event.target || window.event.target;
         const { onChange } = this.props;
         const dataKey = elem.getAttribute("data-key");
         this.selectedItem = {

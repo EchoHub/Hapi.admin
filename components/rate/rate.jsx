@@ -20,7 +20,7 @@ export default class Rate extends Component {
      * @desc 分数控制
     */
     scorehandler(event, behavor) {
-        const _node = event.target;
+        const _node = event.target || window.event.target;
         const { colors, readOnly } = this.props;
         if (readOnly) {
             return;

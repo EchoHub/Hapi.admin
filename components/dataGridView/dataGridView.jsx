@@ -89,7 +89,7 @@ export default class DataGridView extends Component {
      */
     selectedRowsHandle(event, data, indicator) {
         const { multiply } = this.props;
-        const tr = DOM.closest(event.target, "tr");
+        const tr = DOM.closest(event.target || window.event.target, "tr");
         const trs = DOM.query(this.refs.table, "tbody tr");
         if (indicator) {
             if (multiply) {
@@ -163,7 +163,7 @@ export default class DataGridView extends Component {
                 }
                 trs.push(<tr
                     key={`tr-${Math.random() * Number(new Date())}`}
-                    onClick={() => { this.selectedRowsHandle(event, data, _indicator) }}
+                    onClick={event => { this.selectedRowsHandle(event, data, _indicator) }}
                 >{tds}</tr>);
             }
         }
