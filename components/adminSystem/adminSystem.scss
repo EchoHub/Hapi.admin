@@ -121,6 +121,15 @@ $element-color-primary: #1890ff;
     }
     .hp-topbar{
         padding: 0 20px;
+        .back-btn{
+            text-decoration: none;
+            color: #666;
+            transition: all ease .3s;
+            margin-right: 10px;
+            &:hover {
+                color: $color-primary;
+            }
+        }
         .out-btn{
             text-decoration: none;
             color: $color-primary;

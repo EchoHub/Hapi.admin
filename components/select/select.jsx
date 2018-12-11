@@ -37,6 +37,10 @@ export default class Select extends Component {
         })
     }
 
+    componentWillUnmount() {
+        DOM.on(document.body, "click", null)
+    }
+
     render() {
         const { prefixCls, className, children, name } = this.props
         const { _attr } = this.state
@@ -76,6 +80,7 @@ export default class Select extends Component {
 
     toggleHandle(toggle) {
         const ul = findDOMNode(this.refs.ul)
+        if(!ul) return false;
         if (toggle) {
             DOM.removeClass(ul, "hp-listbox-collapsable")
             DOM.addClass(findDOMNode(ul), "hp-listbox-collapsed")

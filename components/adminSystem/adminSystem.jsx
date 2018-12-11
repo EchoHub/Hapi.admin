@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import NavMenu from "navMenu/navMenu";
 import { HashRouter as Router, Route } from "react-router-dom"
-import { TextBox, Pages, BreadCrumb } from "common"
+import { TextBox, Pages, BreadCrumb, Dialog } from "common"
 import "./adminSystem.scss"
 
 export default class AdminSystem extends Component {
@@ -26,21 +26,28 @@ export default class AdminSystem extends Component {
     }
 
     createRoute(menus) {
-        let result = [], index = 0;
-        if (!menus || !menus.length) return null;
-        for (const menu of menus) {
-            if (menu.flag === 1 && menu.children && menu.children.length) {
-                const _result = this.createRoute(menu.children);
-                result = result.concat(_result);
-            } else if (menu.flag === 0) {
-                const route = menu.route.indexOf("/") > -1 ? menu.route.split("/")[1] : menu.route;
-                if (Pages[route]) {
-                    result.push(<Route key={menu.route + index} path={menu.route} component={Pages[route]}></Route>);
-                }
+        let result = [];
+        if (Pages && Object.keys(Pages).length) {
+            for (const route in Pages) {
+                result.push(<Route key={route} path={"/" + route} component={Pages[route]}></Route>);
             }
-            index++;
         }
         return result;
+        // let result = [], index = 0;
+        // if (!menus || !menus.length) return null;
+        // for (const menu of menus) {
+        //     if (menu.flag === 1 && menu.children && menu.children.length) {
+        //         const _result = this.createRoute(menu.children);
+        //         result = result.concat(_result);
+        //     } else if (menu.flag === 0) {
+        //         const route = menu.route.indexOf("/") > -1 ? menu.route.split("/")[1] : menu.route;
+        //         if (Pages[route]) {
+        //             result.push(<Route key={menu.route + index} path={menu.route} component={Pages[route]}></Route>);
+        //         }
+        //     }
+        //     index++;
+        // }
+        // return result;
     }
 
     validityRoute(curhash, menus) {
@@ -171,10 +178,15 @@ export class TopBar extends Component {
         info["second"] = info.belong;
         info["third"] = info.title;
         return <div className="hp-topbar">
+            <a className="back-btn" href="javascript:;" onClick={() => { window.history.back() }}>
+                <i className="icon iconfont icon-undo"></i>
+            </a>
             <BreadCrumb info={info}></BreadCrumb>
             <div className="float-right">
                 <a className="out-btn" href="javascript:;"
-                    onClick={this.logoutHandle}>退出</a>
+                    onClick={this.logoutHandle}>
+                    <i className="icon iconfont icon-send"></i>
+                </a>
             </div>
         </div>
     }
@@ -183,7 +195,10 @@ export class TopBar extends Component {
      * @desc 登出
      */
     logoutHandle() {
-        location.href = `login.html?${Number(new Date())}`
+        Dialog.confirm("确认登出系统吗？",
+            "登出提示", () => {
+                location.href = `login.html?${Number(new Date())}`
+            })
     }
 }
 AdminSystem.defaultProps = {
