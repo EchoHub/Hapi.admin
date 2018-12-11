@@ -138,7 +138,7 @@ export class Notice {
     static createNotification(options, theme, isFlag) {
         const key = options.key;
         const noticeElem = DOM.find(document.body, `[data-key=${key}]`);
-        if (!noticeElem) {
+        if (key === undefined || !noticeElem) {
             const notificationContainer = document.createElement("div");
             notificationContainer.className = "hp-notification-container";
             notificationContainer.setAttribute("data-key", options.key)

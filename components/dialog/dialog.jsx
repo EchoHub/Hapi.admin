@@ -9,21 +9,51 @@ import "./dialog.scss"
 export default class Dialog extends Component {
     constructor(props) {
         super(props)
+        this.state = { duration: 5000 }
         this.onOk = this.onOk.bind(this)
         this.onCancel = this.onCancel.bind(this)
         this.close = this.close.bind(this)
-        this.show = this.close.bind(this)
+        this.show = this.show.bind(this)
+        this.setIntervalHandle = this.setIntervalHandle.bind(this)
+    }
+    componentWillReceiveProps(props) {
+        const { duration } = props
+        this.setState({
+            duration: duration
+        })
     }
     componentDidMount() {
         const dialog = findDOMNode(this);
         const width = dialog.offsetWidth;
         const height = dialog.offsetHeight;
         dialog.style = `margin-left: -${width / 2}px;margin-top: -${height / 2}px;transform:scale(1)`;
+
+        const { autoClose, duration } = this.props;
+        if (autoClose) {
+            const timer1 = setTimeout(() => {
+                this.close();
+                clearTimeout(timer1);
+            }, duration)
+        }
+    }
+
+    // 设置自动关闭定时器
+    setIntervalHandle(duration) {
+        duration -= 1000;
+        const timer = setInterval(() => {
+            this.setState({
+                duration: duration
+            })
+            if(duration < 1) {
+                clearInterval(timer)
+            }
+        }, 1000)
     }
     render() {
-        const { prefixCls, className, title, children, buttons } = this.props
+        const { prefixCls, className, title, children, buttons, autoClose } = this.props
+        const { duration } = this.state
         const classes = classNames(prefixCls, className)
-
+        autoClose && this.setIntervalHandle(duration)
         const _buttons = []
         if (buttons && Object.prototype.toString.call(buttons) && Object.keys(buttons).length) {
             for (const key in buttons) {
@@ -50,6 +80,7 @@ export default class Dialog extends Component {
                                     className={`${button.type ? "hp-button-primary" : ""}`}
                                     onClick={button.type ? this.onOk : this.onCancel}
                                 >{button.name}
+                                {autoClose && (_buttons.length === 1 || button.type) ? `(${duration/1000}S)` : null}
                                 </Button>
                             </li>
                         })
@@ -80,7 +111,7 @@ export default class Dialog extends Component {
         }, 300)
     }
 
-    static show(content, title, buttons, onOk, onCancel) {
+    show(content, title, buttons, onOk, onCancel, options) {
         const modalContainer = document.createElement("div");
         modalContainer.className = "hp-dialog-mask";
         document.body.appendChild(modalContainer);
@@ -89,10 +120,24 @@ export default class Dialog extends Component {
             buttons={buttons}
             onOk={onOk}
             onCancel={onCancel}
+            {...options}
         >{content}</Dialog>, modalContainer)
     }
 
-    static confirm(content, title, onOk, onCancel) {
+    static show(content, title, buttons, onOk, onCancel, options) {
+        const modalContainer = document.createElement("div");
+        modalContainer.className = "hp-dialog-mask";
+        document.body.appendChild(modalContainer);
+        render(<Dialog
+            title={title}
+            buttons={buttons}
+            onOk={onOk}
+            onCancel={onCancel}
+            {...options}
+        >{content}</Dialog>, modalContainer)
+    }
+
+    static confirm(content, title, onOk, onCancel, options) {
         const modalContainer = document.createElement("div");
         modalContainer.className = "hp-dialog-mask";
         document.body.appendChild(modalContainer);
@@ -101,6 +146,7 @@ export default class Dialog extends Component {
             buttons={{ 确认: true, 取消: false }}
             onOk={onOk}
             onCancel={onCancel}
+            {...options}
         ><div className="p-1rem"><i className="hp-dialog-confirm_icon icon iconfont icon-feedback_fill"></i>{content}</div></Dialog>, modalContainer)
     }
 
@@ -143,6 +189,14 @@ export default class Dialog extends Component {
             </Dialog>, modalContainer)
     }
 }
+Dialog.propTypes = {
+    prefixCls: PropTypes.string,
+    autoClose: PropTypes.bool,
+    duration: PropTypes.number
+}
+
 Dialog.defaultProps = {
-    prefixCls: "hp-dialog"
+    prefixCls: "hp-dialog",
+    autoClose: false, // 设置自动关闭窗口
+    duration: 5000 // 自动关闭窗口时间（单位:ms）
 }

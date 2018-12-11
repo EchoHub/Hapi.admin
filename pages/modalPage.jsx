@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-    Panel, GridLayout, Layout, Button, Notice, Dialog, Form, FormLayout, FormField, 
-    TextBox, RadioBoxGroup, RadioBox, TextArea
+    Panel, GridLayout, Layout, Button, Notice, Dialog, Form, FormLayout, FormField,
+    TextBox, RadioBoxGroup, RadioBox, TextArea, DataGridView, Column
 } from "common";
 import "./modalPage.scss"
 
@@ -35,6 +35,17 @@ export default class NoticePage extends Component {
                             </div>,
                                 "Modal Title", { 取消: false, 确认: true })
                         }}>基本对话框</Button>
+                        <br />
+                        <Button className="mt-10" theme="dashed" onClick={() => {
+                            const dialog = new Dialog();
+                            dialog.show(<div className="m-20">
+                                This modal will be destroyed after 5 second.
+                            </div>,
+                                "Modal Title", { 取消: false, 确认: true }, null, null, {
+                                    autoClose: true,
+                                    // duration: 3000
+                                })
+                        }}>设置自动关闭（默认 5s）</Button>
                     </Panel>
                 </Layout>
                 <Layout col={4}>
@@ -88,13 +99,13 @@ export default class NoticePage extends Component {
                                             <TextBox></TextBox>
                                         </FormField>
                                     </FormLayout>
-                                    <br/>
+                                    <br />
                                     <FormLayout required>
                                         <FormField label="Tel:">
                                             <TextBox></TextBox>
                                         </FormField>
                                     </FormLayout>
-                                    <br/>
+                                    <br />
                                     <FormLayout required>
                                         <FormField label="Sex:">
                                             <RadioBoxGroup>
@@ -103,7 +114,7 @@ export default class NoticePage extends Component {
                                             </RadioBoxGroup>
                                         </FormField>
                                     </FormLayout>
-                                    <br/>
+                                    <br />
                                     <FormLayout>
                                         <FormField label="Introduce:">
                                             <TextArea></TextArea>
@@ -113,6 +124,65 @@ export default class NoticePage extends Component {
                             </div>,
                                 "Modal Title", { Cancel: false, Submit: true })
                         }}>带表单的对话框</Button>
+                    </Panel>
+                </Layout>
+                <Layout col={6}>
+                    <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginRight: "5px" }} title="带表单对话框" toolbar={true}>
+                        <p><strong>对话框包含列表，常用于查看当前页面相关的数据集合。</strong></p>
+                        <Button onClick={() => {
+                            Dialog.show(<div className="m-20">
+                                <DataGridView dataSource={[
+                                    {
+                                        nickName: "Nike",
+                                        tel: 18888888888,
+                                        sexValue: "Male",
+                                        address: "blablablablablabla..."
+                                    },
+                                    {
+                                        nickName: "Tony",
+                                        tel: 18222228888,
+                                        sexValue: "Male",
+                                        address: "blablablablablabla..."
+                                    },
+                                    {
+                                        nickName: "Hellen",
+                                        tel: 14433228888,
+                                        sexValue: "FeMale",
+                                        address: "blablablablablabla..."
+                                    }
+                                ]}>
+                                    <Column title="NickName">{row => row.nickName}</Column>
+                                    <Column title="Tel">{row => row.tel}</Column>
+                                    <Column title="Sex">{row => row.sexValue}</Column>
+                                    <Column title="Address">{row => row.address}</Column>
+                                    <Column title="操作">{row => <div>
+                                        <Button
+                                            className="hp-button-small hp-button-primary icon iconfont icon-browse"
+                                            onClick={() => { }}>
+                                        </Button>
+                                        <Button
+                                            className="ml-10 hp-button-primary hp-button-small icon iconfont icon-editor"
+                                            onClick={() => {
+                                                Notice.info({
+                                                    title: "Notification",
+                                                    content: "Edit Success"
+                                                })
+                                            }}>
+                                        </Button>
+                                        <Button className="ml-10 hp-button-danger hp-button-small icon iconfont icon-trash"
+                                            onClick={() => {
+                                                Notice.info({
+                                                    title: "Notification",
+                                                    content: "Delete Success"
+                                                })
+                                            }}>
+                                        </Button>
+                                    </div>}</Column>
+                                </DataGridView>
+                            </div>,
+                                "Modal Title", { Cancel: false })
+                        }}>带列表的对话框
+                    </Button>
                     </Panel>
                 </Layout>
             </GridLayout>
