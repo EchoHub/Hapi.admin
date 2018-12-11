@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
+import { findDOMNode } from "react-dom";
 import PropTypes from 'prop-types';
 import NavMenu from "navMenu/navMenu";
 import { HashRouter as Router, Route } from "react-router-dom"
 import { TextBox, Pages, BreadCrumb, Dialog } from "common"
+import * as DOM from "dom/dom"
 import "./adminSystem.scss"
 
 export default class AdminSystem extends Component {
     constructor(props) {
         super(props);
+        this.hashChange = this.hashChange.bind(this);
+
         this.setCollapsed = this.setCollapsed.bind(this);
         this.createRoute = this.createRoute.bind(this);
         this.validityRoute = this.validityRoute.bind(this);
@@ -81,6 +85,7 @@ export default class AdminSystem extends Component {
         this.setState({
             menus: this.validityRoute(curhash, this.state.menus)
         })
+        // window.onhashchange = this.hashChange
     }
 
     render() {
@@ -107,6 +112,22 @@ export default class AdminSystem extends Component {
                 </div>
             </Router>
         </div>
+    }
+
+    // 监听hash地址变化
+    hashChange(e) {
+        const hash = location.hash.split("#")[1].split("?")[0]
+        const nodes = DOM.query(DOM.find(findDOMNode(this), ".hp-navmenu"), ".hp-menuitem_title");
+        for(const item of nodes) {
+            const item_hash = (item.parentNode || item.parentElement).href
+            const li = item.parentNode.parentNode || item.parentElement.parentElement;
+            console.log(item, item_hash)
+            if(item_hash !== hash) {
+                DOM.removeClass(li, "hp_item_selected")
+            } else {
+                DOM.addClass(li, "hp_item_selected")
+            }
+        }
     }
 }
 export class AdminSystem_Header extends Component {

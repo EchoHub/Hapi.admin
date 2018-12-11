@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom"
+import * as DOM from "dom/dom"
 import "./navMenu.scss"
 
 export default class NavMenu extends Component {
@@ -33,7 +34,7 @@ export default class NavMenu extends Component {
     }
 
     setActiveItem(node) {
-        const nodes = this.refs.navmenu.querySelectorAll(".hp-menuitem_title");
+        const nodes = DOM.query(this.refs.navmenu, ".hp-menuitem_title");
         for (let i = 0; i < nodes.length; i++) {
             const li = nodes[i].parentNode.parentNode;
             if (nodes[i] !== node) {
@@ -78,8 +79,8 @@ class MenuItem extends Component {
      */
     activeMenuItem(e, menu) {
         // e.target.parentNode.parentNode.classList.add("active");
-        const parent = this.props.parent;
-        this.props.setCurTopBarInfo(menu)
+        const { parent, setCurTopBarInfo } = this.props;
+        setCurTopBarInfo(menu)
         parent.setActiveItem(e.target || window.event.target);
     }
 
