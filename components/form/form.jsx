@@ -65,7 +65,7 @@ export class FormLayout extends Component {
         let result = [], tds = [], index = 0;
         typeToString(children) !== "[object Array]" && (children = [children]);
         for (const child of renderChildren(children)) {
-            if (child.type instanceof Function) {
+            if (child && child.type instanceof Function) {
                 tds.push(child)
             } else {
                 tds = [];
@@ -193,9 +193,10 @@ FormField.defaultProps = {
 
 function renderChildren(children) {
     let _children = [], index = 0;
+    if (!children) return null;
     for (const item of (typeToString(children) === "[object Array]" ? children : [children])) {
         let _item = item;
-        if (item && item.type instanceof Function) {
+        if (item && item.type && item.type instanceof Function) {
             switch (item.type.name.toUpperCase()) {
                 case "FORMLAYOUT":
                     const { props } = item;

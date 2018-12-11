@@ -135,11 +135,19 @@ export default class DataGridView extends Component {
         let ths = [], trs = []
         const { multiply } = options
         for (const item of _children) {
-            const { title, indicator } = item.props
-            if (indicator) {
-                multiply && ths.push(<th key={`all_all`}><CheckBox ref="allcb" onClick={this.selectAllRowsHandle}></CheckBox></th>)
+            if (item) {
+                let title, indicator
+                if (item.props) {
+                    title = item.props.title
+                    indicator = item.props.indicator
+                }
+                if (indicator) {
+                    multiply && ths.push(<th key={`all_all`}><CheckBox ref="allcb" onClick={this.selectAllRowsHandle}></CheckBox></th>)
+                } else {
+                    ths.push(<th key={`td_${title}`}>{title}</th>)
+                }
             } else {
-                ths.push(<th key={`td_${title}`}>{title}</th>)
+                ths.push(item)
             }
         }
         if (dataSource && dataSource.length) {
@@ -147,19 +155,22 @@ export default class DataGridView extends Component {
             for (const data of dataSource) {
                 let tds = []
                 for (const item of _children) {
-                    const { indicator, children } = item.props;
-                    let td = null;
-                    if (indicator) { // 是否可选
-                        !_indicator && (_indicator = indicator)
-                        td = multiply ?
-                            <CheckBox></CheckBox> :
-                            <RadioBox></RadioBox>
-                    } else if (children instanceof Function) {
-                        td = children(data)
-                    } else {
-                        td = item
-                    }
-                    tds.push(<td key={`td-${Math.random() * Number(new Date())}`}>{td}</td>)
+                    if (item) {
+                        const { indicator, children } = item.props;
+                        let td = null;
+                        if (indicator) { // 是否可选
+                            !_indicator && (_indicator = indicator)
+                            td = multiply ?
+                                <CheckBox></CheckBox> :
+                                <RadioBox></RadioBox>
+                        } else if (children instanceof Function) {
+                            td = children(data)
+                        } else {
+                            td = item
+                        }
+                        tds.push(<td key={`td-${Math.random() * Number(new Date())}`}>{td}</td>)
+                    }else 
+                        tds.push(item)
                 }
                 trs.push(<tr
                     key={`tr-${Math.random() * Number(new Date())}`}

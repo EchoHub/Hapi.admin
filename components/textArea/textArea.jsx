@@ -13,6 +13,14 @@ export default class TextArea extends Component {
         this.state = { }
     }
 
+    componentWillReceiveProps(props) {
+        const { ...attr } = props
+        const _attr = propsFilter(findDOMNode(this), attr)
+        this.setState({
+            _attr: _attr
+        })
+    }
+
     componentDidMount() {
         const { ...attr } = this.props
         const _attr = propsFilter(findDOMNode(this), attr)

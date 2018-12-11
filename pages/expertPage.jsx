@@ -6,7 +6,7 @@ import {
     Notice, Dialog
 } from "common"
 import {
-    expertCreate, expertCreateEduExp, expertCreateGeneralComments,
+    expertCreateEduExp, expertCreateGeneralComments,
     expertCreateNotes, expertCreateWorkExp,
     expertDeleteEduExp, expertDeleteGeneralComments, expertDeleteNotes,
     expertDeleteWorkExp,
@@ -24,6 +24,8 @@ export default class ExpertPage extends Component {
     constructor(props) {
         super(props);
         this.state = {}
+
+        this.renderText = this.renderText.bind(this)
 
         this.loadAllInfo = this.loadAllInfo.bind(this)
 
@@ -87,54 +89,95 @@ export default class ExpertPage extends Component {
     }
     render() {
         const { detail } = this.state
-        console.log(detail)
         return <div className="hp-expertpage">
             <Panel className="mv-10 data-panel" title="Meta Info" toolbar={true}>
                 <Form ref="metaInfo">
                     <FormLayout>
                         <FormField label="FirstName(CN)：" required>
-                            <TextBox name="first_name_cn" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="first_name_cn" required ></TextBox> :
+                                    this.renderText(this.state.metaInfoValue || {}, "first_name_cn")
+                            }
                         </FormField>
                         <FormField label="FirstName(EN)：" required>
-                            <TextBox name="first_name_en" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="first_name_en" required ></TextBox> :
+                                    this.renderText(this.state.metaInfoValue || {}, "first_name_en")
+                            }
                         </FormField>
                         <br />
                         <FormField label="LastName(CN)：" required>
-                            <TextBox name="last_name_cn" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="last_name_cn" required ></TextBox> :
+                                    this.renderText(this.state.metaInfoValue || {}, "last_name_cn")
+                            }
                         </FormField>
                         <FormField label="LastName(EN)：" required>
-                            <TextBox name="last_name_en" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="last_name_en" required ></TextBox> :
+                                    this.renderText(this.state.metaInfoValue || {}, "last_name_en")
+                            }
                         </FormField>
                         <br />
                         <FormField label="NickName：" required>
-                            <TextBox name="nick_name" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="nick_name" required ></TextBox> :
+                                    this.renderText(this.state.metaInfoValue || {}, "nick_name")
+                            }
                         </FormField>
                         <FormField label="Source：" required>
-                            <TextBox name="source" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="source" required ></TextBox> :
+                                    this.renderText(this.state.metaInfoValue || {}, "source")
+                            }
                         </FormField>
                         <br />
                         <FormField colSpan={3} label="Background(CN)：" required>
-                            <TextArea name="background_cn" required></TextArea>
+                            {
+                                !detail ?
+                                    <TextArea name="background_cn" required ></TextArea> :
+                                    this.renderText(this.state.metaInfoValue || {}, "background_cn")
+                            }
                         </FormField>
                         <br />
                         <FormField colSpan={3} label="Background(EN)：" required>
-                            <TextArea name="background_en" required></TextArea>
+                            {
+                                !detail ?
+                                    <TextArea name="background_en" required ></TextArea> :
+                                    this.renderText(this.state.metaInfoValue || {}, "background_en")
+                            }
                         </FormField>
                         <br />
                         <FormField colSpan={3} label="Expertise(CN)：" required>
-                            <TextArea name="expertise_cn" required></TextArea>
+                            {
+                                !detail ?
+                                    <TextArea name="expertise_cn" required ></TextArea> :
+                                    this.renderText(this.state.metaInfoValue || {}, "expertise_cn")
+                            }
                         </FormField>
                         <br />
                         <FormField colSpan={3} label="Expertise(EN)：" required>
-                            <TextArea name="expertise_en" required></TextArea>
+                            {
+                                !detail ?
+                                    <TextArea name="expertise_en" required ></TextArea> :
+                                    this.renderText(this.state.metaInfoValue || {}, "expertise_en")
+                            }
                         </FormField>
                         <br />
-                        <FormField>
-                            <Button
-                                className="hp-button-primary"
-                                onClick={this.saveMetaInfoHandle}
-                            >提交</Button>
-                        </FormField>
+                        {
+                            !detail ? <FormField>
+                                <Button
+                                    className="hp-button-primary"
+                                    onClick={this.saveMetaInfoHandle}
+                                >提交</Button>
+                            </FormField> : null
+                        }
                     </FormLayout>
                 </Form>
             </Panel>
@@ -142,21 +185,35 @@ export default class ExpertPage extends Component {
                 <Form ref="financeInfo">
                     <FormLayout>
                         <FormField label="Bank：" required>
-                            <TextBox name="bank" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="bank" required ></TextBox> :
+                                    this.renderText(this.state.financeInfoValue || {}, "bank")
+                            }
                         </FormField>
                         <FormField label="Account No：" required>
-                            <TextBox name="account_no" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="account_no" required ></TextBox> :
+                                    this.renderText(this.state.financeInfoValue || {}, "account_no")
+                            }
                         </FormField>
                         <FormField label="Unit Price：" required>
-                            <TextBox name="unit_price" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="unit_price" required ></TextBox> :
+                                    this.renderText(this.state.financeInfoValue || {}, "unit_price")
+                            }
                         </FormField>
                         <br />
-                        <FormField>
-                            <Button
-                                className="hp-button-primary"
-                                onClick={this.saveFinanceInfoHandle}
-                            >提交</Button>
-                        </FormField>
+                        {
+                            !detail ? <FormField>
+                                <Button
+                                    className="hp-button-primary"
+                                    onClick={this.saveFinanceInfoHandle}
+                                >提交</Button>
+                            </FormField> : null
+                        }
                     </FormLayout>
                 </Form>
             </Panel>
@@ -164,41 +221,79 @@ export default class ExpertPage extends Component {
                 <Form ref="contactInfo">
                     <FormLayout>
                         <FormField label="Primary Mobile：" required>
-                            <TextBox name="primary_mobile" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="primary_mobile" required ></TextBox> :
+                                    this.renderText(this.state.contactInfoValue || {}, "primary_mobile")
+                            }
                         </FormField>
                         <FormField label="Primary Email：" required>
-                            <TextBox name="primary_email" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="primary_email" required ></TextBox> :
+                                    this.renderText(this.state.contactInfoValue || {}, "primary_email")
+                            }
                         </FormField>
                         <FormField label="Tel：" required>
-                            <TextBox name="tel" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="tel" required ></TextBox> :
+                                    this.renderText(this.state.contactInfoValue || {}, "tel")
+                            }
                         </FormField>
                         <br />
                         <FormField label="Address：" required>
-                            <TextBox name="address" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="address" required ></TextBox> :
+                                    this.renderText(this.state.contactInfoValue || {}, "address")
+                            }
                         </FormField>
                         <FormField label="Weixin：" required>
-                            <TextBox name="weixin" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="weixin" required ></TextBox> :
+                                    this.renderText(this.state.contactInfoValue || {}, "weixin")
+                            }
                         </FormField>
                         <FormField label="Linkedin：" required>
-                            <TextBox name="linkedin" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="linkedin" required ></TextBox> :
+                                    this.renderText(this.state.contactInfoValue || {}, "linkedin")
+                            }
                         </FormField>
                         <br />
                         <FormField label="Facebook：" required>
-                            <TextBox name="facebook" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="facebook" required ></TextBox> :
+                                    this.renderText(this.state.contactInfoValue || {}, "facebook")
+                            }
                         </FormField>
                         <FormField label="Twitter：" required>
-                            <TextBox name="twitter" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="twitter" required ></TextBox> :
+                                    this.renderText(this.state.contactInfoValue || {}, "twitter")
+                            }
                         </FormField>
                         <FormField label="Weibo：" required>
-                            <TextBox name="weibo" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="weibo" required ></TextBox> :
+                                    this.renderText(this.state.contactInfoValue || {}, "weibo")
+                            }
                         </FormField>
                         <br />
-                        <FormField>
-                            <Button
-                                className="hp-button-primary"
-                                onClick={this.saveContactInfoHandle}
-                            >提交</Button>
-                        </FormField>
+                        {
+                            !detail ? <FormField>
+                                <Button
+                                    className="hp-button-primary"
+                                    onClick={this.saveContactInfoHandle}
+                                >提交</Button>
+                            </FormField> : null
+                        }
                     </FormLayout>
                 </Form>
             </Panel>
@@ -206,46 +301,57 @@ export default class ExpertPage extends Component {
                 <Form ref="identifyInfo">
                     <FormLayout>
                         <FormField label="Name(CN)：" required>
-                            <TextBox name="name_cn" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="name_cn" required ></TextBox> :
+                                    this.renderText(this.state.identifyInfoValue || {}, "name_cn")
+                            }
                         </FormField>
                         <FormField label="Name(EN)：" required>
-                            <TextBox name="name_en" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="name_en" required ></TextBox> :
+                                    this.renderText(this.state.identifyInfoValue || {}, "name_en")
+                            }
                         </FormField>
-                        <FormField label="Type：" required>
-                            <TextBox name="type" required></TextBox>
+                        <FormField label="ID Type：" required>
+                            {
+                                !detail ?
+                                    <TextBox name="id_type" required ></TextBox> :
+                                    this.renderText(this.state.identifyInfoValue || {}, "id_type")
+                            }
                         </FormField>
                         <br />
                         <FormField label="Id Number：" required>
-                            <TextBox name="id_number" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="id_number" required ></TextBox> :
+                                    this.renderText(this.state.identifyInfoValue || {}, "id_number")
+                            }
                         </FormField>
                         <FormField label="Country：" required>
-                            <TextBox name="country" required></TextBox>
-                        </FormField>
-                        <FormField label="Linkedin：" required>
-                            <TextBox name="linkedin" required></TextBox>
-                        </FormField>
-                        <br />
-                        <FormField label="Facebook：" required>
-                            <TextBox name="facebook" required></TextBox>
-                        </FormField>
-                        <FormField label="Twitter：" required>
-                            <TextBox name="twitter" required></TextBox>
-                        </FormField>
-                        <FormField label="Weibo：" required>
-                            <TextBox name="weibo" required></TextBox>
+                            {
+                                !detail ?
+                                    <TextBox name="country" required ></TextBox> :
+                                    this.renderText(this.state.identifyInfoValue || {}, "country")
+                            }
                         </FormField>
                         <br />
-                        <FormField>
-                            <Button
-                                className="hp-button-primary"
-                                onClick={this.saveIdentifyInfoHandle}
-                            >提交</Button>
-                        </FormField>
+                        {
+                            !detail ? <FormField>
+                                <Button
+                                    className="hp-button-primary"
+                                    onClick={this.saveIdentifyInfoHandle}
+                                >提交</Button>
+                            </FormField> : null
+                        }
                     </FormLayout>
                 </Form>
             </Panel>
             <Panel className="mv-10 data-panel" title="Work Experiences" toolbar={true}>
-                <Button className="mv-10 hp-button-primary" onClick={this.addWorkExpHandle}>Add</Button>
+                {
+                    !detail ? <Button className="mv-10 hp-button-primary" onClick={this.addWorkExpHandle}>Add</Button> : null
+                }
                 <DataGridView
                     ref="work_table"
                     showPagination
@@ -257,20 +363,22 @@ export default class ExpertPage extends Component {
                     <Column title="Responsibility">{row => row.responsibility}</Column>
                     <Column title="Start Date">{row => row.start_date}</Column>
                     <Column title="End Date">{row => row.end_date}</Column>
-                    <Column title="Handle">{
-                        row => <div>
-                            <Button className="ml-10 hp-button-primary hp-button-small" onClick={() => { this.editWorkExpHandle(row) }}>Edit</Button>
-                            <Button className="ml-10 hp-button-danger hp-button-small" onClick={
-                                () => {
-                                    this.deleteWorkExpHandle(row)
-                                }
-                            }>Delete</Button>
-                        </div>
-                    }</Column>
+                    {
+                        !detail ? <Column title="Handle">{
+                            row => <div>
+                                <Button className="ml-10 hp-button-primary hp-button-small" onClick={() => { this.editWorkExpHandle(row) }}>Edit</Button>
+                                <Button className="ml-10 hp-button-danger hp-button-small" onClick={
+                                    () => {
+                                        this.deleteWorkExpHandle(row)
+                                    }
+                                }>Delete</Button>
+                            </div>
+                        }</Column> : null
+                    }
                 </DataGridView>
             </Panel>
             <Panel className="mv-10 data-panel" title="Education Experiences" toolbar={true}>
-                <Button className="mv-10 hp-button-primary" onClick={this.addEduExpHandle}>Add</Button>
+                {!detail ? <Button className="mv-10 hp-button-primary" onClick={this.addEduExpHandle}>Add</Button> : null}
                 <DataGridView
                     ref="edu_table"
                     showPagination
@@ -281,24 +389,26 @@ export default class ExpertPage extends Component {
                     <Column title="Major">{row => row.major}</Column>
                     <Column title="Start Date">{row => row.start_date}</Column>
                     <Column title="End Date">{row => row.end_date}</Column>
-                    <Column title="Handle">{
-                        row => <div>
-                            <Button className="ml-10 hp-button-primary hp-button-small" onClick={
-                                () => {
-                                    this.editEduExpHandle(row)
-                                }
-                            }>Edit</Button>
-                            <Button className="ml-10 hp-button-danger hp-button-small" onClick={
-                                () => {
-                                    this.deleteEduExpHandle(row)
-                                }
-                            }>Delete</Button>
-                        </div>
-                    }</Column>
+                    {
+                        !detail ? <Column title="Handle">{
+                            row => <div>
+                                <Button className="ml-10 hp-button-primary hp-button-small" onClick={
+                                    () => {
+                                        this.editEduExpHandle(row)
+                                    }
+                                }>Edit</Button>
+                                <Button className="ml-10 hp-button-danger hp-button-small" onClick={
+                                    () => {
+                                        this.deleteEduExpHandle(row)
+                                    }
+                                }>Delete</Button>
+                            </div>
+                        }</Column> : null
+                    }
                 </DataGridView>
             </Panel>
             <Panel className="mv-10 data-panel" title="Comments" toolbar={true}>
-                <Button className="mv-10 hp-button-primary" onClick={this.addCommentsHandle}>Add</Button>
+                {!detail ? <Button className="mv-10 hp-button-primary" onClick={this.addCommentsHandle}>Add</Button> : null}
                 <DataGridView
                     ref="comments_table"
                     showPagination
@@ -309,24 +419,26 @@ export default class ExpertPage extends Component {
                     <Column title="Created Time">{row => row.weixin}</Column>
                     <Column title="Last Modified">{row => row.email}</Column>
                     <Column title="Last ModifiedTime">{row => row.email}</Column> */}
-                    <Column title="Handle">{
-                        row => <div>
-                            <Button className="ml-10 hp-button-primary hp-button-small" onClick={
-                                () => {
-                                    this.eidtCommentsHandle(row)
-                                }
-                            }>Edit</Button>
-                            <Button className="ml-10 hp-button-danger hp-button-small" onClick={
-                                () => {
-                                    this.deleteCommentsHandle(row)
-                                }
-                            }>Delete</Button>
-                        </div>
-                    }</Column>
+                    {
+                        !detail ? <Column title="Handle">{
+                            row => <div>
+                                <Button className="ml-10 hp-button-primary hp-button-small" onClick={
+                                    () => {
+                                        this.eidtCommentsHandle(row)
+                                    }
+                                }>Edit</Button>
+                                <Button className="ml-10 hp-button-danger hp-button-small" onClick={
+                                    () => {
+                                        this.deleteCommentsHandle(row)
+                                    }
+                                }>Delete</Button>
+                            </div>
+                        }</Column> : null
+                    }
                 </DataGridView>
             </Panel>
             <Panel className="mv-10 data-panel" title="Notes" toolbar={true}>
-                <Button className="mv-10 hp-button-primary" onClick={this.addNotesHandle}>Add</Button>
+                {!detail ? <Button className="mv-10 hp-button-primary" onClick={this.addNotesHandle}>Add</Button> : null}
                 <DataGridView
                     ref="notes_table"
                     showPagination
@@ -337,43 +449,60 @@ export default class ExpertPage extends Component {
                     <Column title="Created Time">{row => row.weixin}</Column>
                     <Column title="Last Modified">{row => row.email}</Column>
                     <Column title="Last ModifiedTime">{row => row.email}</Column> */}
-                    <Column title="Handle">{
-                        row => <div>
-                            <Button className="ml-10 hp-button-primary hp-button-small" onClick={
-                                () => {
-                                    this.editNotesHandle(row)
-                                }
-                            }>Edit</Button>
-                            <Button className="ml-10 hp-button-danger hp-button-small" onClick={
-                                () => {
-                                    this.deleteNotesHandle(row)
-                                }
-                            }>Delete</Button>
-                        </div>
-                    }</Column>
+                    {
+                        !detail ? <Column title="Handle">{
+                            row => <div>
+                                <Button className="ml-10 hp-button-primary hp-button-small" onClick={
+                                    () => {
+                                        this.editNotesHandle(row)
+                                    }
+                                }>Edit</Button>
+                                <Button className="ml-10 hp-button-danger hp-button-small" onClick={
+                                    () => {
+                                        this.deleteNotesHandle(row)
+                                    }
+                                }>Delete</Button>
+                            </div>
+                        }</Column> : null
+                    }
                 </DataGridView>
             </Panel>
             <Panel className="mv-10 data-panel" title="Resume" toolbar={true}>
                 <Form ref="resumeInfo">
                     <FormLayout>
                         <FormField colSpan={3} label="Resume(CN)：" required>
-                            <TextArea style={{ minWidth: "400px" }} name="resume_cn" required></TextArea>
+                            {
+                                !detail ?
+                                    <TextArea style={{ minWidth: "400px" }} name="resume_cn" required ></TextArea> :
+                                    this.renderText(this.state.resumeInfoValue || {}, "resume_cn")
+                            }
                         </FormField>
                         <br />
                         <FormField colSpan={3} label="Resume(EN)：" required>
-                            <TextArea style={{ minWidth: "400px" }} name="resume_en" required></TextArea>
+                            {
+                                !detail ?
+                                    <TextArea style={{ minWidth: "400px" }} name="resume_en" required ></TextArea> :
+                                    this.renderText(this.state.resumeInfoValue || {}, "resume_en")
+                            }
                         </FormField>
                         <br />
-                        <FormField>
-                            <Button
-                                className="hp-button-primary"
-                                onClick={this.saveResumeInfoHandle}
-                            >提交</Button>
-                        </FormField>
+                        {
+                            !detail ? <FormField>
+                                <Button
+                                    className="hp-button-primary"
+                                    onClick={this.saveResumeInfoHandle}
+                                >提交</Button>
+                            </FormField> : null
+                        }
                     </FormLayout>
                 </Form>
             </Panel>
         </div>
+    }
+
+    renderText(data, name) {
+        if ((data || {})[name] === undefined) return "-"
+        else return data[name]
     }
 
     /**
@@ -387,6 +516,9 @@ export default class ExpertPage extends Component {
         p.then(data => {
             const info = data.data
             this.refs.metaInfo.value = info;
+            this.setState({
+                metaInfoValue: info
+            })
         })
         let p1 = new Promise((resolve, rejects) => {
             const param = { expert_id: id }
@@ -395,6 +527,9 @@ export default class ExpertPage extends Component {
         p1.then(data => {
             const info = data.data
             this.refs.financeInfo.value = info;
+            this.setState({
+                financeInfoValue: info
+            });
         })
         let p2 = new Promise((resolve, rejects) => {
             const param = { expert_id: id }
@@ -403,6 +538,9 @@ export default class ExpertPage extends Component {
         p2.then(data => {
             const info = data.data
             this.refs.contactInfo.value = info;
+            this.setState({
+                contactInfoValue: info
+            })
         })
         let p3 = new Promise((resolve, rejects) => {
             const param = { expert_id: id }
@@ -411,6 +549,9 @@ export default class ExpertPage extends Component {
         p3.then(data => {
             const info = data.data
             this.refs.identifyInfo.value = info;
+            this.setState({
+                identifyInfoValue: info
+            })
         })
         let p4 = new Promise((resolve, rejects) => {
             const param = { expert_id: id }
@@ -419,6 +560,9 @@ export default class ExpertPage extends Component {
         p4.then(data => {
             const info = data.data
             this.refs.resumeInfo.value = info;
+            this.setState({
+                resumeInfoValue: info
+            })
         })
     }
 
@@ -720,7 +864,7 @@ export default class ExpertPage extends Component {
                 contentType: "application/json",
                 type: "POST"
             }, (data, res) => {
-                
+
                 Notice.info({
                     title: "删除提示",
                     content: "删除成功",
@@ -851,7 +995,7 @@ export default class ExpertPage extends Component {
                 contentType: "application/json",
                 type: "POST"
             }, (data, res) => {
-                
+
                 Notice.info({
                     title: "删除提示",
                     content: "删除成功",
@@ -955,7 +1099,7 @@ export default class ExpertPage extends Component {
                 contentType: "application/json",
                 type: "POST"
             }, (data, res) => {
-                
+
                 Notice.info({
                     title: "删除提示",
                     content: "删除成功",
@@ -1058,7 +1202,7 @@ export default class ExpertPage extends Component {
                 contentType: "application/json",
                 type: "POST"
             }, (data, res) => {
-                
+
                 Notice.info({
                     title: "删除提示",
                     content: "删除成功",

@@ -18,8 +18,8 @@
     border-radius: 4px;
     -webkit-transition: all .3s;
     transition: all .3s;
+    outline: 0;
     &:hover, &:focus {
-        outline: 0;
         border-color: #40a9ff;
     }
 }
