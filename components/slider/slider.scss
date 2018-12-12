@@ -89,4 +89,15 @@
             background: -o-linear-gradient(right, #8540C9, #EE63BA);
         }
     }
+    &-disabled {
+        .hp-slider-step, .hp-slider-handle {
+            background-color: #e9e9e9; 
+        }
+        .hp-slider-tooltip {
+            background-color: #e9e9e9;
+        }
+        .hp-slider-handle {
+            border-color: #e9e9e9;
+        }
+    }
 }

@@ -44,7 +44,6 @@ export default class Slider extends Component {
         const stepEle = this.refs.step
         const tipEl = this.refs.tip
         const width = railEle.offsetWidth;
-        console.log(v)
         const left = Math.round(v < 0 ? v : v > width ? width: v)/range[1] * width;
         if (left >= 0 && left <= width) {
             handleEle.style = `left: ${left}px`;
@@ -61,6 +60,8 @@ export default class Slider extends Component {
     }
 
     sliderStartDrag(e) {
+        const { disabled } = this.props;
+        if(disabled) return;
         const slider_left = this.refs.slider.offsetLeft + 230;
 
         const railEle = this.refs.rail

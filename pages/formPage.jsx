@@ -225,14 +225,14 @@ export default class FormPage extends Component {
                 <Layout col={4}>
                     <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="其他" toolbar={true}>
                         <h5><strong>滑动输入条</strong>：滑动型选择框。</h5>
-                        小：<Slider size="small"></Slider>
-                        中：<Slider></Slider>
-                        大：<Slider size="large"></Slider>
+                        小：<Slider value={50} size="small"></Slider>
+                        中：<Slider value={80}></Slider>
+                        大：<Slider value={30} size="large"></Slider>
                         默认值：<Slider value={60}></Slider>
-                        步长：<Slider step={5}></Slider>
-                        范围：<Slider value="50" range={[0, 200]}></Slider>
-                        禁用：<Slider value="100" range={[0, 100]} disabled></Slider>
-                        显示数值：<Slider showTip value="60" range={[0, 100]} disabled></Slider>
+                        {/* 步长：<Slider step={5}></Slider> */}
+                        范围：<Slider showTip value={50} range={[0, 200]}></Slider>
+                        禁用：<Slider showTip value={75} range={[0, 100]} disabled></Slider>
+                        显示数值：<Slider showTip value={60} range={[0, 100]}></Slider>
                     </Panel>
                 </Layout>
             </GridLayout>
