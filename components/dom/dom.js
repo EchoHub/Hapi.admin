@@ -1,5 +1,9 @@
 /**
- * @desc 绑定事件
+ * 绑定事件
+ * @param elem
+ * @param eventName
+ * @param eventHandler
+ * @param eventOptions
  */
 export function on(elem, eventName, eventHandler, eventOptions = { capture: false }) {
     let elems = []
@@ -20,7 +24,20 @@ export function on(elem, eventName, eventHandler, eventOptions = { capture: fals
         }
     }
 }
-
+/**
+ * 解除绑定事件
+ * @param elem
+ * @param eventName
+ * @param eventHandler
+ * @param useCapture // 指定移除事件句柄的阶段 true - 在捕获阶段移除事件句柄 false- 默认。在冒泡阶段移除事件句柄
+ */
+export function off(elem, eventName, eventHandler, useCapture) {
+    if(elem.removeEventListener) {
+        elem.removeEventListener(eventName, eventHandler, useCapture)
+    }else {
+        elem.detachEvent("on" + eventName, eventHandler)
+    }
+}
 /**
  * 在节点末尾插入一段 HTML 或一个节点，返回插入的新节点
  * @param elem 要处理的节点

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     Panel, Form, GridLayout, Layout, FormLayout, FormField, Button, Notice,
     TextBox, CheckBox, CheckBoxGroup, RadioBox, RadioBoxGroup, Switch, Rate,
-    TextArea, Select, ListItem
+    TextArea, Select, ListItem, Slider
 } from "common";
 import "./formPage.scss"
 
@@ -210,17 +210,29 @@ export default class FormPage extends Component {
                 </Layout>
                 <Layout col={4}>
                     <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="输入框" toolbar={true}>
+                        <h5><strong>文本输入框</strong>：常用的表单输入框包括文本框、数字框等</h5>
                         <TextBox name="furit" checked></TextBox>
+                        <h5><strong>下拉选择框</strong>：常见下拉选择框包括单选框、多选框、带模糊查询的选择框等</h5>
                         <Select className="mt-10" value={2}>
                             <ListItem value={1}>Option One</ListItem>
                             <ListItem value={2}>Option Two</ListItem>
                             <ListItem value={3}>Option Three</ListItem>
                         </Select>
+                        <h5><strong>文本域：常用作内容较多的文本输入框</strong></h5>
                         <TextArea className="mt-10"></TextArea>
                     </Panel>
                 </Layout>
                 <Layout col={4}>
-                    <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="多选框／单选框" toolbar={true}>
+                    <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="其他" toolbar={true}>
+                        <h5><strong>滑动输入条</strong>：滑动型选择框。</h5>
+                        小：<Slider size="small"></Slider>
+                        中：<Slider></Slider>
+                        大：<Slider size="large"></Slider>
+                        默认值：<Slider value={60}></Slider>
+                        步长：<Slider step={5}></Slider>
+                        范围：<Slider value="50" range={[0, 200]}></Slider>
+                        禁用：<Slider value="100" range={[0, 100]} disabled></Slider>
+                        显示数值：<Slider showTip value="60" range={[0, 100]} disabled></Slider>
                     </Panel>
                 </Layout>
             </GridLayout>

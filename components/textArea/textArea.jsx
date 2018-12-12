@@ -65,7 +65,7 @@ export default class TextArea extends Component {
         return reportValidity(input, value, { pattern, patternMessage, required, max, min, maxLength, minLength })
     }
 }
-TextArea.propsTypes = {
+TextArea.propTypes = {
     prefixCls: PropTypes.string
 }
 TextArea.defaultProps = {
