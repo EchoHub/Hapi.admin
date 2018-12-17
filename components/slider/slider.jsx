@@ -124,11 +124,11 @@ export default class Slider extends Component {
                 }
                 this.setState({
                     value: _width > 0 ?[
-                        range[0] + left_2/width * range[1],
-                        range[0] + left_1/width * range[1]
+                        range[0] + (left_2 > 0 ? left_2 : 0)/width * range[1],
+                        range[0] + (left > width ? width : left_1)/width * range[1]
                     ] : [
-                        range[0] + left_1/width * range[1],
-                        range[0] + left_2/width * range[1]
+                        range[0] + (left_1 > 0 ? left_1 : 0)/width * range[1],
+                        range[0] + (left > width ? width : left_2)/width * range[1]
                     ]
                 }, () => {
                     console.log(this.state.value)
