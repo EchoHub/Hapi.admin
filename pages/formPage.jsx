@@ -233,6 +233,7 @@ export default class FormPage extends Component {
                         范围：<Slider showTip value={50} range={[0, 200]}></Slider>
                         禁用：<Slider showTip value={75} range={[0, 100]} disabled></Slider>
                         显示数值：<Slider showTip value={60} range={[0, 100]}></Slider>
+                        范围滑块：<Slider value={[30, 70]} rangeSlider></Slider>
                     </Panel>
                 </Layout>
             </GridLayout>

@@ -21,7 +21,7 @@ export default class Slider extends Component {
 
     }
     render() {
-        const { prefixCls, className, size, disabled, showTip } = this.props;
+        const { prefixCls, className, size, disabled, showTip, rangeSlider } = this.props;
         const { value } = this.state;
         const classes = classNames(prefixCls, className, {
             [`hp-slider-${size}`]: size,
@@ -31,24 +31,52 @@ export default class Slider extends Component {
             {showTip ? <div ref="tip" className="hp-slider-tooltip">{value}</div> : null}
             <div ref="rail" className="hp-slider-rail"></div>
             <div ref="step" className="hp-slider-step"></div>
-            <div ref="handle" className="hp-slider-handle"
-                onMouseDown={e => this.sliderStartDrag(e)}
-            ></div>
+            {
+                rangeSlider ? [
+                    <div ref="handle_1"
+                        className="hp-slider-handle"
+                        key={`sliderhandle-1`}
+                        onMouseDown={e => this.sliderStartDrag(e, "handle_1")}
+                    ></div>, <div ref="handle_2"
+                        className="hp-slider-handle"
+                        key={`sliderhandle-2`}
+                        onMouseDown={e => this.sliderStartDrag(e, "handle_2")}
+                    ></div>
+                ] : <div ref="handle"
+                    className="hp-slider-handle"
+                    onMouseDown={e => this.sliderStartDrag(e, "handle")}
+                ></div>
+            }
+
         </div>
     }
 
     set value(v) {
-        const { step, range } = this.props
+        const { step, range, rangeSlider } = this.props
         const railEle = this.refs.rail
-        const handleEle = this.refs.handle
         const stepEle = this.refs.step
         const tipEl = this.refs.tip
         const width = railEle.offsetWidth;
-        const left = Math.round(v < 0 ? v : v > width ? width: v)/range[1] * width;
-        if (left >= 0 && left <= width) {
-            handleEle.style = `left: ${left}px`;
-            stepEle.style = `width: ${left}px`;
-            tipEl && (tipEl.style = `left: ${left}px`);
+        let value = rangeSlider && v instanceof Array ? v : [v]
+        let index = 1;
+        for (const _value of value) {
+            const handleEle = value.length > 1 ? this.refs[`handle_${index}`] : this.refs.handle
+            const left = Math.round(_value < 0 ? _value : _value > width ? width : _value) / range[1] * width;
+            if (left >= 0 && left <= width) {
+                handleEle.style = `left: ${left}px`;
+                if (!rangeSlider) {
+                    stepEle.style = `width: ${left}px`;
+                }
+                tipEl && (tipEl.style = `left: ${left}px`);
+            }
+            index++;
+        }
+        if(rangeSlider) {
+            const min = Math.min.apply(Math, v);
+            const max = Math.max.apply(Math, v);
+            const left = min/range[1] * width
+            const max_left = max/range[1] * width
+            stepEle.style = `left: ${left}px;width:${max_left - left}px`
         }
         this.setState({
             value: v
@@ -56,16 +84,16 @@ export default class Slider extends Component {
     }
 
     get value() {
-        return this._value
+        return this.state.value
     }
 
-    sliderStartDrag(e) {
-        const { disabled } = this.props;
-        if(disabled) return;
+    sliderStartDrag(e, handleRefName) {
+        const { disabled, rangeSlider } = this.props;
+        if (disabled) return;
         const slider_left = this.refs.slider.offsetLeft + 230;
 
         const railEle = this.refs.rail
-        const handleEle = this.refs.handle
+        const handleEle = this.refs[handleRefName]
         const stepEle = this.refs.step
         const tipEl = this.refs.tip
 
@@ -73,15 +101,39 @@ export default class Slider extends Component {
         const { step, range } = this.props
         const body = document.body;
         body.onmousemove = e => {
-            const left = e.clientX - slider_left;
-            if (left >= 0 && left <= width) {
-                handleEle.style = `left: ${left}px`;
-                stepEle.style = `width: ${left}px`;
-                tipEl && (tipEl.style = `left: ${left}px`);
+            if (!rangeSlider) {
+                const left = e.clientX - slider_left;
+                if (left >= 0 && left <= width) {
+                    handleEle.style = `left: ${left}px`;
+                    stepEle.style = `width: ${left}px`;
+                    tipEl && (tipEl.style = `left: ${left}px`);
+                }
+                this.setState({
+                    value: range[0] + Math.round((left > width ? width : (left < 0 ? 0 : left)) / width * range[1])
+                })
+            } else {
+                const left = e.clientX - slider_left;
+                const left_1 = this.refs.handle_1.offsetLeft;
+                const left_2 = this.refs.handle_2.offsetLeft;
+                const _width = left_1 - left_2;
+                if (left >= 0 && left <= width) {
+                    const step_left = _width > 0 ? left_2 : left_1;
+                    handleEle.style = `left: ${left}px`;
+                    stepEle.style = `left: ${step_left}px; width: ${Math.abs(_width)}px`;
+                    tipEl && (tipEl.style = `left: ${left}px`);
+                }
+                this.setState({
+                    value: _width > 0 ?[
+                        range[0] + left_2/width * range[1],
+                        range[0] + left_1/width * range[1]
+                    ] : [
+                        range[0] + left_1/width * range[1],
+                        range[0] + left_2/width * range[1]
+                    ]
+                }, () => {
+                    console.log(this.state.value)
+                })
             }
-            this.setState({
-                value: range[0] + Math.round((left > width ? width : (left < 0 ? 0 : left)) / width * range[1])
-            })
         }
         body.onmouseup = e => {
             body.onmousemove = null
@@ -93,6 +145,7 @@ Slider.defaultProps = {
     prefixCls: "hp-slider",
     size: "normal",
     disabled: false,
+    rangeSlider: false, // 是否是范围滑块
     range: [0, 100],
     value: 0
 }
