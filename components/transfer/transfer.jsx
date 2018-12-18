@@ -9,12 +9,23 @@ export default class Transfer extends Component {
         super(props)
     }
     render() {
-        return <div className="hp-template"></div>
+        const { prefixCls, className } = this.props;
+        const classes = classNames(prefixCls, className);
+        return <div className={classes}>
+            <div className="hp-transfer-list">
+                <div className="hp-transfer-header"></div>
+                <div className="hp-transfer-body"></div>
+            </div>
+            <div className="hp-transfer-operation"></div>
+            <div className="hp-transfer-list">
+                <div className="hp-transfer-body"></div>
+            </div>
+        </div>
     }
 }
 Transfer.propTypes = {
     prefixCls: PropTypes.string
 }
 Transfer.defaultProps = {
-    prefixCls: "hp-template"
+    prefixCls: "hp-transfer"
 }

@@ -10,6 +10,7 @@ export { default as TextBox } from "textBox/textBox";
 export { default as TextArea } from "textArea/textArea";
 export { default as Select } from "select/select";
 export { default as Slider } from "slider/slider";
+export { default as Transfer } from "transfer/transfer";
 export { default as DataGridView, Column } from "dataGridView/dataGridView";
 export { default as Pagination } from "pagination/pagination";
 export { default as ListBox, ListItem } from "listBox/listBox";

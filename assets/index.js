@@ -59,6 +59,13 @@ const menus = [
                 flag: 0,
             },
             {
+                title: "穿梭框",
+                belong: "组件",
+                icon: "",
+                route: "/transferPage",
+                flag: 0,
+            },
+            {
                 title: "画布",
                 belong: "组件",
                 icon: "",
