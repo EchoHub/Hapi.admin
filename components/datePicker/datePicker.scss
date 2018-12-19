@@ -1,3 +1,11 @@
+@import "adminSystem/adminSystem.scss";
 .hp-datePicker {
 
+}
+.layui-laydate-footer span[lay-type=date], .layui-laydate-footer span:hover {
+    color: $element-color-primary!important;
+}
+.layui-laydate-content td.laydate-selected {
+    color: #fff;
+    background: $element-color-primary!important;
 }

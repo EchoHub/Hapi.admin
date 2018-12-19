@@ -17,7 +17,7 @@ module.exports = {
     },
     resolve: {
         extensions: [".js", ".jsx", ".js"],
-        modules: ["./components", "./assets", "./pages", "node_modules"],
+        modules: ["./components", "./assets", "./pages", "./libs","node_modules"],
         alias: {
             // components: path.resolve(__dirname, "components/"),
             // assets: path.resolve(__dirname, "assets/")
@@ -47,7 +47,7 @@ module.exports = {
                 loader: MiniCssExtractPlugin.loader,
             },
             {
-                test: /\.scss$/,
+                test: /\.(s?)css$/,
                 use: [{
                     loader: "style-loader"
                 }, {
@@ -62,7 +62,8 @@ module.exports = {
             // },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: ["file-loader", "url-loader"] // 加载字体
+                use: ["file-loader"] // 加载字体
+                // , "url-loader"
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,

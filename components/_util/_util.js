@@ -116,6 +116,20 @@ export function unique(arr) {
     return res;
 }
 
+/**
+ * 去除对象里面null或者undefined
+ * @param {*} obj 
+ */
+export function clean(obj) {
+    if(obj && Object.keys(obj).length) {
+        for(const key in obj) {
+            if(obj[key] === null || obj[key] === undefined) 
+                delete obj[key]
+        }
+    }
+    return obj
+}
+
 export function paramFormat(str) {
     if(str === undefined || str === null) return ""
     return str
