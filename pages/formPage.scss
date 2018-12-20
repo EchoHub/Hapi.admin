@@ -1,3 +1,21 @@
 .hp-formpage {
     padding: 20px;
+    .min-w300 {
+        min-width: 300px;
+    }
+}
+.layui-laydate {
+    .layui-laydate-header {
+        background: #fff!important;
+        .layui-icon, .laydate-set-ym span {
+            color: #8540C9!important;
+        }
+    }
+    .layui-laydate-footer {
+        display: none;
+    }
+    .layui-laydate-content table tr > td.layui-this[lay-ymd] {
+        border-radius: 50%;
+        background-color: #8540C9!important;
+    }
 }

@@ -13,6 +13,7 @@ import Others from "./others"
 import ExpertPage from "./expertPage"
 import ExpertList from "./expertList"
 import TransferPage from "./transferPage"
+import LoginDemo from "./loginDemo"
 var Pages = {
     "console" : Console,
     "buttonPage" : ButtonPage,
@@ -26,5 +27,6 @@ var Pages = {
     "expertPage" : ExpertPage,
     "expertList" : ExpertList,
     "transferPage" : TransferPage,
+    "loginDemo" : LoginDemo,
 };
 export default Pages;

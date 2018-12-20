@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {
     Button, CheckBox, CheckBoxGroup, DatePicker, Form, FormLayout, FormField, GridLayout, Layout, Notice, Panel,
-    Rate, RadioBox, RadioBoxGroup, Switch, TextBox, 
+    Rate, RadioBox, RadioBoxGroup, Switch, TextBox,
     TextArea, Select, ListItem, Slider
 } from "common";
 import "./formPage.scss"
+import { Date } from 'core-js';
 
 export default class FormPage extends Component {
     constructor(props) {
@@ -213,8 +214,12 @@ export default class FormPage extends Component {
                         <h5><strong>文本输入框</strong>：常用的表单输入框包括文本框、数字框等</h5>
                         <TextBox name="furit" checked></TextBox>
                         <h5><strong>时间选择器</strong>：常用时间选择器包括年、月、日、日期选择器、日期范围选择器等。</h5>
-                        <DatePicker></DatePicker>
-                        <DatePicker range={true}></DatePicker>
+                        <div>默认： <DatePicker></DatePicker></div>
+                        <div className="mt-10">格式： <DatePicker format={"yyyy-MM-dd HH:mm:ss"}></DatePicker></div>
+                        <div className="mt-10">时间： <DatePicker pickerType={"time"}></DatePicker></div>
+                        <div className="mt-10">月： <DatePicker pickerType={"month"}></DatePicker></div>
+                        <div className="mt-10">年： <DatePicker pickerType={"year"}></DatePicker></div>
+                        <div className="mt-10">日期区间： <DatePicker className="min-w300" range={true}></DatePicker></div>
                         <h5><strong>下拉选择框</strong>：常见下拉选择框包括单选框、多选框、带模糊查询的选择框等</h5>
                         <Select className="mt-10" value={2}>
                             <ListItem value={1}>Option One</ListItem>
@@ -237,6 +242,34 @@ export default class FormPage extends Component {
                         禁用：<Slider showTip value={75} range={[0, 100]} disabled></Slider>
                         显示数值：<Slider showTip value={60} range={[0, 100]}></Slider>
                         范围滑块：<Slider value={[30, 70]} rangeSlider></Slider>
+                    </Panel>
+                </Layout>
+            </GridLayout>
+            <GridLayout className="display-flex">
+                <Layout col={4}>
+                    <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="自定义时间控件" toolbar={true}>
+                        <div className="datepicker-insta">
+                            <ul className="datepicker-insta-container">
+                                <li className="date">
+
+                                </li>
+                                <li className="date_start">
+
+                                </li>
+                                <li className="date_end">
+
+                                </li>
+                            </ul>
+                            <DatePicker
+                                lang={"en"}
+                                pickerType={"date"}
+                                format={"yyyy-MM-dd"}
+                                done={(value, date) => {
+                                    console.log(value)
+                                    console.log(date)
+                                }}
+                            ></DatePicker>
+                        </div>
                     </Panel>
                 </Layout>
             </GridLayout>

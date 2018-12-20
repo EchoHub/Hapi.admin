@@ -13,7 +13,7 @@ export default class DatePicker extends Component {
         super(props)
     }
     componentDidMount() {
-        const { format, range, pickerType, min, max, start, event } = this.props;
+        const { format, range, pickerType, min, max, start, event, lang, done } = this.props;
         laydate.render(clean({
             elem: findDOMNode(this),
             format: format || "yyyy-MM-dd",
@@ -27,11 +27,11 @@ export default class DatePicker extends Component {
             min: min,
             max: max,
             trigger: event,
+            lang: lang,
             // calendar: calendar,
             // mark: mark,
             value: start,
-            done: () => {
-            },
+            done: done,
             theme: "#1890ff"
         }));
     // dom.on(this.elem, "click", e => e.stopPropagation());
@@ -52,9 +52,12 @@ DatePicker.defaultProps = {
     pickerType: "datetime", // "year" | "month" | "date" | "time" | "datetime"
     range: false, // 是否选择时间区域
     event: "click",
+    lang: "cn", // cn 中文 en 英文
     min: null,
     max: null,
-    start: null
+    start: null,
+    change: null,
+    done: () => { }
 }
 
 // {

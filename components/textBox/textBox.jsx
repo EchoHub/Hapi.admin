@@ -54,7 +54,7 @@ export default class TextBox extends Component {
         const { prefixCls, className } = this.props;
         const { _attr } = this.state
         const classes = classNames(prefixCls, className);
-        return <input {..._attr} ref="input" className={classes}/>
+        return <input autoComplete={"off"} {..._attr} ref="input" className={classes}/>
     }
 }
 TextBox.propTypes = {

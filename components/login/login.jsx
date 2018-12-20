@@ -14,7 +14,7 @@ export default class Login extends Component {
             <canvas id="Mycanvas"></canvas>
             <div className="absolute-center">
                 <div className="x-center login-title">
-                    Hapi CRM
+                    Hapi ADMIN
                 </div>
                 <div className="login-content">
                     <ul className="login-method_tab">

@@ -90,7 +90,7 @@ const menus = [
                 title: "登陆页",
                 belong: "页面",
                 icon: "",
-                route: "/login",
+                route: "/loginDemo",
                 flag: 0,
             },
             {
