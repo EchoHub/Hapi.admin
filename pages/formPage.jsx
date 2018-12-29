@@ -201,7 +201,7 @@ export default class FormPage extends Component {
                 </Layout>
             </GridLayout>
             <GridLayout className="display-flex">
-                <Layout col={4}>
+                <Layout col={6}>
                     <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="开关" toolbar={true}>
                         <h5 >
                             <strong>单选框</strong>：多个备选项中选取一个备选项，常和 RadioBoxGroup 一起使用。）
@@ -256,29 +256,7 @@ export default class FormPage extends Component {
                         </div>
                     </Panel>
                 </Layout>
-                <Layout col={4}>
-                    <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="输入框" toolbar={true}>
-                        <h5><strong>文本输入框</strong>：常用的表单输入框包括文本框、数字框等</h5>
-                        <TextBox name="furit" checked></TextBox>
-                        <h5><strong>时间选择器</strong>：常用时间选择器包括年、月、日、日期选择器、日期范围选择器等。</h5>
-                        <div>默认： <DatePicker></DatePicker></div>
-                        <div className="mt-10">主题： <DatePicker theme={"#a892bd"}></DatePicker></div>
-                        <div className="mt-10">格式： <DatePicker format={"yyyy-MM-dd HH:mm:ss"}></DatePicker></div>
-                        <div className="mt-10">时间： <DatePicker pickerType={"time"}></DatePicker></div>
-                        <div className="mt-10">月： <DatePicker pickerType={"month"}></DatePicker></div>
-                        <div className="mt-10">年： <DatePicker pickerType={"year"}></DatePicker></div>
-                        <div className="mt-10">日期区间： <DatePicker className="min-w300" range={true}></DatePicker></div>
-                        <h5><strong>下拉选择框</strong>：常见下拉选择框包括单选框、多选框、带模糊查询的选择框等</h5>
-                        <Select className="mt-10" value={2}>
-                            <ListItem value={1}>Option One</ListItem>
-                            <ListItem value={2}>Option Two</ListItem>
-                            <ListItem value={3}>Option Three</ListItem>
-                        </Select>
-                        <h5><strong>文本域：常用作内容较多的文本输入框</strong></h5>
-                        <TextArea className="mt-10"></TextArea>
-                    </Panel>
-                </Layout>
-                <Layout col={4}>
+                <Layout col={6}>
                     <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="其他" toolbar={true}>
                         <h5><strong>滑动输入条</strong>：滑动型选择框。</h5>
                         小：<Slider value={50} size="small"></Slider>
@@ -294,69 +272,113 @@ export default class FormPage extends Component {
                 </Layout>
             </GridLayout>
             <GridLayout className="display-flex">
-                <Layout col={4}>
-                    <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="自定义时间控件" toolbar={true}>
-                        <div className="datepicker-insta">
-                            <div className="datepicker-tip">Select date</div>
-                            <ul className="datepicker-insta-container">
-                                <li className="date">
-                                    <div className="date-card">
-                                        <div className="date-card-header">{week}</div>
-                                        <div className="date-card-content">
-                                            <span>{date}</span>
-                                            <DatePicker
-                                                lang={"en"}
-                                                pickerType={"date"}
-                                                format={"yyyy-MM-dd"}
-                                                done={(value, date) => {
-                                                    this.selectDateTime(date)
-                                                }}
-                                                readOnly
-                                            ></DatePicker>
-                                        </div>
-                                        <div className="date-card-footer">{month}</div>
+                <Layout col={12}>
+                    <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="输入框" toolbar={true}>
+                        <h5><strong>文本输入框</strong>：常用的表单输入框包括文本框、数字框等</h5>
+                        <TextBox name="furit" checked></TextBox>
+                        <h5><strong>时间选择器</strong>：常用时间选择器包括年、月、日、日期选择器、日期范围选择器等。</h5>
+                        <GridLayout>
+                            <Layout col={4}>
+                                <div>默认： <DatePicker></DatePicker></div>
+                            </Layout>
+                            <Layout col={4}>
+                                <div className="mt-10">主题： <DatePicker theme={"#a892bd"}></DatePicker></div>
+                            </Layout>
+                            <Layout col={4}>
+                                <div className="mt-10">格式： <DatePicker format={"yyyy-MM-dd HH:mm:ss"}></DatePicker></div>
+                            </Layout>
+                        </GridLayout>
+                        <GridLayout>
+                            <Layout col={4}>
+                                <div className="mt-10">时间： <DatePicker pickerType={"time"}></DatePicker></div>
+                            </Layout>
+                            <Layout col={4}>
+                                <div className="mt-10">月： <DatePicker pickerType={"month"}></DatePicker></div>
+                            </Layout>
+                            <Layout col={4}>
+                                <div className="mt-10">年： <DatePicker pickerType={"year"}></DatePicker></div>
+                            </Layout>
+                        </GridLayout>
+                        <GridLayout>
+                            <Layout col={12}>
+                                <div className="mt-10">日期区间： <DatePicker className="min-w300" range={true}></DatePicker></div>
+                            </Layout>
+                        </GridLayout>
+                        <GridLayout>
+                            <Layout col={12}>
+                                <div className="mt-10">
+                                    <div className="datepicker-insta">
+                                        <div className="datepicker-tip">Select date</div>
+                                        <ul className="datepicker-insta-container">
+                                            <li className="date">
+                                                <div className="date-card">
+                                                    <div className="date-card-header">{week}</div>
+                                                    <div className="date-card-content">
+                                                        <span>{date}</span>
+                                                        <DatePicker
+                                                            lang={"en"}
+                                                            pickerType={"date"}
+                                                            format={"yyyy-MM-dd"}
+                                                            done={(value, date) => {
+                                                                this.selectDateTime(date)
+                                                            }}
+                                                            readOnly
+                                                        ></DatePicker>
+                                                    </div>
+                                                    <div className="date-card-footer">{month}</div>
+                                                </div>
+                                            </li>
+                                            <li className="date_start">
+                                                <div className="date-card">
+                                                    <div className="date-card-header">start</div>
+                                                    <div className="date-card-content">
+                                                        <span>{curTime}</span>
+                                                        <DatePicker
+                                                            lang={"en"}
+                                                            format={"HH:mm:ss"}
+                                                            pickerType={"time"}
+                                                            done={(value, date) => {
+                                                                this.selectStartTime(value, date)
+                                                                return false
+                                                            }}
+                                                            readOnly
+                                                        ></DatePicker>
+                                                    </div>
+                                                    <div className="date-card-footer">{start_flag}</div>
+                                                </div>
+                                            </li>
+                                            <span> to </span>
+                                            <li className="date_end">
+                                                <div className="date-card">
+                                                    <div className="date-card-header">end</div>
+                                                    <div className="date-card-content">
+                                                        <span>{toCurTime}</span>
+                                                        <DatePicker
+                                                            lang={"en"}
+                                                            format={"HH:mm:ss"}
+                                                            pickerType={"time"}
+                                                            done={(value, date) => {
+                                                                this.selectEndTime(value, date)
+                                                            }}
+                                                            readOnly
+                                                        ></DatePicker>
+                                                    </div>
+                                                    <div className="date-card-footer">{end_flag}</div>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </li>
-                                <li className="date_start">
-                                    <div className="date-card">
-                                        <div className="date-card-header">start</div>
-                                        <div className="date-card-content">
-                                            <span>{curTime}</span>
-                                            <DatePicker
-                                                lang={"en"}
-                                                format={"HH:mm:ss"}
-                                                pickerType={"time"}
-                                                done={(value, date) => {
-                                                    this.selectStartTime(value, date)
-                                                    return false
-                                                }}
-                                                readOnly
-                                            ></DatePicker>
-                                        </div>
-                                        <div className="date-card-footer">{start_flag}</div>
-                                    </div>
-                                </li>
-                                <span> to </span>
-                                <li className="date_end">
-                                    <div className="date-card">
-                                        <div className="date-card-header">end</div>
-                                        <div className="date-card-content">
-                                            <span>{toCurTime}</span>
-                                            <DatePicker
-                                                lang={"en"}
-                                                format={"HH:mm:ss"}
-                                                pickerType={"time"}
-                                                done={(value, date) => {
-                                                    this.selectEndTime(value, date)
-                                                }}
-                                                readOnly
-                                            ></DatePicker>
-                                        </div>
-                                        <div className="date-card-footer">{end_flag}</div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                                </div>
+                            </Layout>
+                        </GridLayout>
+                        <h5><strong>下拉选择框</strong>：常见下拉选择框包括单选框、多选框、带模糊查询的选择框等</h5>
+                        <Select className="mt-10" value={2}>
+                            <ListItem value={1}>Option One</ListItem>
+                            <ListItem value={2}>Option Two</ListItem>
+                            <ListItem value={3}>Option Three</ListItem>
+                        </Select>
+                        <h5><strong>文本域：常用作内容较多的文本输入框</strong></h5>
+                        <TextArea className="mt-10"></TextArea>
                     </Panel>
                 </Layout>
             </GridLayout>

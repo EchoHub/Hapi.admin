@@ -13,6 +13,7 @@ import Others from "./others"
 import ExpertPage from "./expertPage"
 import ExpertList from "./expertList"
 import TransferPage from "./transferPage"
+import StepPage from "./stepPage"
 import LoginDemo from "./loginDemo"
 import ReactPage from "./reactPage"
 var Pages = {
@@ -28,6 +29,7 @@ var Pages = {
     "expertPage" : ExpertPage,
     "expertList" : ExpertList,
     "transferPage" : TransferPage,
+    "stepPage" : StepPage,
     "loginDemo" : LoginDemo,
     "reactPage" : ReactPage,
 };

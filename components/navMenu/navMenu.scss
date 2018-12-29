@@ -46,7 +46,7 @@
             display: block;
             font-weight: lighter;
             cursor: pointer;
-            opacity: .8;
+            // opacity: .8;
             transition: opacity ease .3s;
             .iconfont {
                 padding-right: 10px;
@@ -67,7 +67,7 @@
             }
             &:hover{
                 color: #fff;
-                opacity: 1;
+                // opacity: 1;
                 .iconfont:not(.menu-arrow){
                     transform: rotate(360deg);
                 }

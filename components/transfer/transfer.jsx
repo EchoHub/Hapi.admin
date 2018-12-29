@@ -76,6 +76,7 @@ export default class Transfer extends Component {
                                 <CheckBox
                                     ref={`dataSource_cb_${i}`}
                                     value={item.key}
+                                    disabled={item.disabled}
                                 >{item.content}</CheckBox>
                             </div>
                         )
@@ -221,6 +222,8 @@ export default class Transfer extends Component {
 
     dataSourceSelectHandle(index, info) {
         const cb = this.refs[`dataSource_cb_${index}`];
+        const { disabled } = cb.state;
+        if(disabled) return
         cb.checked = !cb.checked
         const { selectedDataSource } = this.state;
         let result = [];
@@ -241,6 +244,8 @@ export default class Transfer extends Component {
 
     targetSelectHandle(index, info) {
         const cb = this.refs[`targetSource_cb_${index}`];
+        const { disabled } = cb.state;
+        if(disabled) return
         cb.checked = !cb.checked
         const { selectedTargetSource } = this.state;
         let result = [];
@@ -266,15 +271,16 @@ export default class Transfer extends Component {
         const len = nodes.length;
         for (let i = 0; i < len; i++) {
             const cb = this.refs[type === 1 ? `dataSource_cb_${i}` : `targetSource_cb_${i}`];
-            cb.checked = allCb.checked;
+            const { disabled } = cb.state;
+            !disabled && (cb.checked = allCb.checked);
         }
         if (type === 1) {
             this.setState({
-                selectedDataSource: allCb.checked ? dataSource : []
+                selectedDataSource: allCb.checked ? dataSource.filter(item => !item.disabled) : []
             })
         } else {
             this.setState({
-                selectedTargetSource: allCb.checked ? targetSource : []
+                selectedTargetSource: allCb.checked ? targetSource.filter(item => !item.disabled) : []
             })
         }
     }

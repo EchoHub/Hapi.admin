@@ -66,6 +66,13 @@ const menus = [
                 flag: 0,
             },
             {
+                title: "步骤条",
+                belong: "组件",
+                icon: "",
+                route: "/stepPage",
+                flag: 0,
+            },
+            {
                 title: "画布",
                 belong: "组件",
                 icon: "",

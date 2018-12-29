@@ -61,7 +61,7 @@ export default class DatePicker extends Component {
         const { prefixCls, className } = this.props;
         const { _attr } = this.state
         const classes = classNames(prefixCls, className);
-        return <input type="text" className={classes} {..._attr} />
+        return <input type="text" {..._attr} className={classes} />
     }
 
     static getWeek(date, lang) {

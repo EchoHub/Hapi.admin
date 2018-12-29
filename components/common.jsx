@@ -21,6 +21,7 @@ export { default as RadioBoxGroup } from "radioBoxGroup/radioBoxGroup";
 export { default as Select } from "select/select";
 export { default as Switch } from "switch/switch";
 export { default as Slider } from "slider/slider";
+export { default as Steps, Step } from "steps/steps";
 export { default as TextBox } from "textBox/textBox";
 export { default as TextArea } from "textArea/textArea";
 export { default as Transfer } from "transfer/transfer";
