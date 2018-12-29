@@ -12,8 +12,8 @@ export default class TextBox extends Component {
     }
 
     get value() {
-        const { name } = this.props;
-        let result = {};
+        // const { name } = this.props;
+        // let result = {};
         // result[name] = this.refs.input.value
         return this.refs.input.value;
     }

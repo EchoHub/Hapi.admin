@@ -1,3 +1,74 @@
+@import "adminSystem/adminSystem.scss";
 .hp-transfer {
-
+    &-list {
+        width: calc(50% - 24px);
+        margin-right: 10px;
+        display: inline-block;
+        box-sizing: border-box;
+        border: 1px solid $border-color;
+        border-radius: 4px;
+        height: 240px;
+        overflow: auto;
+        vertical-align: middle;
+        .hp-transfer-header {
+            padding: 4px 8px;
+            border-bottom: 1px solid #efefef;
+            .title {
+                padding-left: 4px;
+            }
+        }
+        .hp-transfer_search {
+            padding: 4px 8px;
+            position: relative;
+            > .hp-textbox {
+                padding-right: 24px;
+            }
+            > .icon-search {
+                position: absolute;
+                right: 14px;
+                top: 8px;
+            }
+        }
+        .hp-transfer-body {
+            height: calc(100% - 30px);
+            overflow: auto;
+            &.hassearch {
+                height: calc(100% - 70px);
+            }
+            .item {
+                .hp-checkbox {
+                    padding: 4px 8px;
+                    width: calc(100% - 16px);
+                    &-content {
+                        padding-left: 4px;
+                    }
+                }
+                &:hover {
+                    background: $element-color-primary-light;
+                }
+            }
+        }
+        &:last-child {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+    }
+    &-operation {
+        display: inline-block;
+        vertical-align: middle;
+        >.toolbtn {
+            line-height: 1;
+            padding: 2px 4px 2px 6px;
+            border: 1px solid #efefef;
+            border-radius: 4px;
+            background: #fafafa;
+            box-sizing: border-box;
+            margin: 4px 0;
+            cursor: pointer;
+            transition: all ease .3s;
+            &:hover {
+                background: #e0e0e066;
+            }
+        }
+    }
 }

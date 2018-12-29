@@ -1,8 +1,45 @@
 /**
+ * 获取中文（简体）的拼音。
+ * @param value 中文字符串。
+ * @param joinChar 连接拼音的字符。
+ * @return 返回每个字符对应的拼音。如果不是中文或无法识别则该字符对应的位置是原字符。
+ */
+export default function pinyin(value, joinChar = " ") {
+    return getPinYin(value).map((py, index) => py[0] || value.charAt(index)).join(joinChar);
+}
+
+/**
+ * 获取中文（简体）的拼音。
+ * @param value 中文字符串。
+ * @return 返回每个字符发音组成的数组。如果不是中文或无法识别则该字符对应的位置是空数组。
+ */
+export function getPinYin(value) {
+    const r = [];
+    for (const char of value) {
+        r.push(getPinYinOfChar(char));
+    }
+    return r;
+}
+
+/**
+ * 获取单个中文（简体）字符的拼音。
+ * @param value 单个中文字符。
+ * @return 返回字符的所有发音。如果不是中文或无法识别则返回空数组。
+ */
+export function getPinYinOfChar(value) {
+    const r = [];
+    for (const pinyin in dict) {
+        if (dict[pinyin].indexOf(value) >= 0) {
+            r.push(pinyin);
+        }
+    }
+    return r;
+}
+/**
  * 拼音字典
  * @internal
  */
-export const dict: { [pinyin: string]: string } = {
+export const dict = {
     "a": "啊阿吖嗄锕",
     "ai": "埃挨哎唉哀皑癌蔼矮艾碍爱隘捱嗳嫒瑷暧砹锿霭",
     "an": "鞍氨安俺按暗岸胺案谙埯揞庵桉铵鹌黯",

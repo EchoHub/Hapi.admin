@@ -5,17 +5,89 @@
     }
 }
 .layui-laydate {
-    .layui-laydate-header {
-        background: #fff!important;
-        .layui-icon, .laydate-set-ym span {
-            color: #8540C9!important;
+    // &-header {
+    //     background: #fff!important;
+    //     .layui-icon, .laydate-set-ym span {
+    //         color: #8540C9!important;
+    //     }
+    // }
+    &-content {
+        border: none;
+        td {
+            height: 36px!important;
+            padding: 2px 5px!important;
+            border-radius: 50%;
         }
     }
-    .layui-laydate-footer {
-        display: none;
+    // &-footer {
+    //     display: none;
+    // }
+}
+.datepicker-insta {
+    .datepicker-tip {
+        margin: 10px 0;
+        color: #716B79;
+        font-family: CircularStd-Book;
+        font-weight: normal;
+        line-height: 1;
     }
-    .layui-laydate-content table tr > td.layui-this[lay-ymd] {
-        border-radius: 50%;
-        background-color: #8540C9!important;
+    &-container {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        > li {
+            width: calc(33% - 10px);
+            height: 88px;
+            margin-right: 15px;
+            display: inline-block;
+            border-radius: 4px;
+            background: #FAFAFB;
+            text-align: center;
+            font-family: CircularStd-Book;
+            .date-card {
+                position: relative;
+                > div {
+                    margin: 4px 0;
+                    user-select: none;
+                    transition: all ease .3s;
+                    font-size: 13px;
+                    line-height: 21px;
+                    cursor: pointer;
+                    &:hover {
+                        opacity: .7;
+                    }
+                }
+                .date-card-content {
+                    position: relative;
+                    min-height: 16px;
+                    display: inline-block;
+                    font-weight: 900;
+                    font-size: 14px;
+                }
+                .hp-datepicker {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: transparent;
+                    border: none;
+                    opacity: 0;
+                }
+            }
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        > span {
+            display: inline-block;
+            line-height: 88px;
+            position: relative;
+            left: -6px;
+            font-family: CircularStd-Book;
+            font-weight: normal;
+            color: #818091;
+        }
     }
 }

@@ -17,7 +17,8 @@ export default class TablePage extends Component {
                 <Layout col={6}>
                     <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginRight: "5px" }}
                         title="基本用法" toolbar={true}>
-                        <DataGridView dataSource={[
+                        <DataGridView 
+                        dataSource={[
                             {
                                 name: "李雷",
                                 age: 21,
@@ -202,7 +203,9 @@ export default class TablePage extends Component {
                     </Panel>
                     <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginRight: "5px" }}
                         title="单选／多选" toolbar={true}>
-                        <DataGridView dataSource={[
+                        <DataGridView 
+                        multiply
+                        dataSource={[
                             {
                                 name: "李雷",
                                 age: 21,

@@ -5,13 +5,17 @@ import {
     TextArea, Select, ListItem, Slider
 } from "common";
 import "./formPage.scss"
-import { Date } from 'core-js';
 
 export default class FormPage extends Component {
     constructor(props) {
         super(props)
+        this.state = {}
         this.getSubmitValues = this.getSubmitValues.bind(this);
         this.formReportValidity = this.formReportValidity.bind(this);
+
+        this.selectDateTime = this.selectDateTime.bind(this);
+        this.selectStartTime = this.selectStartTime.bind(this);
+        this.selectEndTime = this.selectEndTime.bind(this);
     }
     /**
      * @desc 获取提交数据
@@ -36,9 +40,52 @@ export default class FormPage extends Component {
                 autoClose: true
             })
         }
-        console.log(form.reportValidity())
+    }
+
+    /**
+     * 设置时间
+     */
+    selectDateTime(date) {
+        this.setState({
+            week: DatePicker.getWeek(`${date.year}/${date.month}/${date.date}`, "en"),
+            date: date.date,
+            month: monthEnum[date.month]
+        })
+    }
+
+    selectStartTime(value, date) {
+        this.setState({
+            curTime: value,
+            start_flag: date.hours < 12 ? "am" : "pm"
+        })
+    }
+
+    selectEndTime(value, date) {
+        this.setState({
+            toCurTime: value,
+            end_flag: date.hours < 12 ? "am" : "pm"
+        })
+    }
+
+    componentDidMount() {
+        const date = new window.Date();
+        const hours = date.getHours();
+        const mins = date.getMinutes();
+        const secs = date.getSeconds();
+        const start_flag = hours < 12 ? "am" : "pm"
+        const end_flag = hours < 12 ? "am" : "pm"
+        this.setState({
+            week: date.toString().split(" ")[0],
+            date: date.getDate(),
+            month: monthEnum[date.getMonth() + 1],
+            curTime: `${hours}:${mins}:${secs}`,
+            toCurTime: `${hours}:${mins}:${secs}`,
+            start_flag: start_flag,
+            end_flag: end_flag
+        })
     }
     render() {
+        const { week, date, month, curTime, toCurTime, start_flag, end_flag } = this.state;
         return <div className="hp-formpage">
             <GridLayout>
                 <Layout col={12}>
@@ -215,6 +262,7 @@ export default class FormPage extends Component {
                         <TextBox name="furit" checked></TextBox>
                         <h5><strong>时间选择器</strong>：常用时间选择器包括年、月、日、日期选择器、日期范围选择器等。</h5>
                         <div>默认： <DatePicker></DatePicker></div>
+                        <div className="mt-10">主题： <DatePicker theme={"#a892bd"}></DatePicker></div>
                         <div className="mt-10">格式： <DatePicker format={"yyyy-MM-dd HH:mm:ss"}></DatePicker></div>
                         <div className="mt-10">时间： <DatePicker pickerType={"time"}></DatePicker></div>
                         <div className="mt-10">月： <DatePicker pickerType={"month"}></DatePicker></div>
@@ -249,26 +297,65 @@ export default class FormPage extends Component {
                 <Layout col={4}>
                     <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="自定义时间控件" toolbar={true}>
                         <div className="datepicker-insta">
+                            <div className="datepicker-tip">Select date</div>
                             <ul className="datepicker-insta-container">
                                 <li className="date">
-
+                                    <div className="date-card">
+                                        <div className="date-card-header">{week}</div>
+                                        <div className="date-card-content">
+                                            <span>{date}</span>
+                                            <DatePicker
+                                                lang={"en"}
+                                                pickerType={"date"}
+                                                format={"yyyy-MM-dd"}
+                                                done={(value, date) => {
+                                                    this.selectDateTime(date)
+                                                }}
+                                                readOnly
+                                            ></DatePicker>
+                                        </div>
+                                        <div className="date-card-footer">{month}</div>
+                                    </div>
                                 </li>
                                 <li className="date_start">
-
+                                    <div className="date-card">
+                                        <div className="date-card-header">start</div>
+                                        <div className="date-card-content">
+                                            <span>{curTime}</span>
+                                            <DatePicker
+                                                lang={"en"}
+                                                format={"HH:mm:ss"}
+                                                pickerType={"time"}
+                                                done={(value, date) => {
+                                                    this.selectStartTime(value, date)
+                                                    return false
+                                                }}
+                                                readOnly
+                                            ></DatePicker>
+                                        </div>
+                                        <div className="date-card-footer">{start_flag}</div>
+                                    </div>
                                 </li>
+                                <span> to </span>
                                 <li className="date_end">
-
+                                    <div className="date-card">
+                                        <div className="date-card-header">end</div>
+                                        <div className="date-card-content">
+                                            <span>{toCurTime}</span>
+                                            <DatePicker
+                                                lang={"en"}
+                                                format={"HH:mm:ss"}
+                                                pickerType={"time"}
+                                                done={(value, date) => {
+                                                    this.selectEndTime(value, date)
+                                                }}
+                                                readOnly
+                                            ></DatePicker>
+                                        </div>
+                                        <div className="date-card-footer">{end_flag}</div>
+                                    </div>
                                 </li>
                             </ul>
-                            <DatePicker
-                                lang={"en"}
-                                pickerType={"date"}
-                                format={"yyyy-MM-dd"}
-                                done={(value, date) => {
-                                    console.log(value)
-                                    console.log(date)
-                                }}
-                            ></DatePicker>
                         </div>
                     </Panel>
                 </Layout>
@@ -276,3 +363,41 @@ export default class FormPage extends Component {
         </div>
     }
 }
+
+const monthEnum = {
+    1: "Jan",
+    2: "Feb",
+    3: "Mar",
+    4: "Apr",
+    5: "May",
+    6: "Jun",
+    7: "Jul",
+    8: "Aug",
+    9: "Sept",
+    10: "Oct",
+    11: "Nov",
+    12: "Dec"
+}
+// 一月 Jan. January
+
+// 二月 Feb. February
+
+// 三月 Mar. March
+
+// 四月 Apr. April
+
+// 五月 May. May
+
+// 六月 Jun. June
+
+// 七月 Jul. July
+
+// 八月 Aug. August
+
+// 九月 Sept. September
+
+// 十月 Oct. October
+
+// 十一月 Nov. November
+
+// 十二月 Dec. December

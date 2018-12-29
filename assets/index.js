@@ -150,6 +150,20 @@ const menus = [
                 flag: 0,
             }
         ]
+    },
+    {
+        title: "文档",
+        icon: "icon-brush",
+        flag: 1,
+        children: [
+            {
+                title: "React",
+                belong: "文档",
+                icon: "",
+                route: "/reactPage",
+                flag: 0
+            }
+        ] 
     }
 ]
 render(<AdminSystem theme="primary" menus={menus}></AdminSystem>, root, () => {

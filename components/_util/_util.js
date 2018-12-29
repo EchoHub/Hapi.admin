@@ -28,7 +28,7 @@ export function propsFilter(target, props) {
     let result = {}
     for (const _prop in props) {
         for (const prop in __proto__) {
-            if (_prop === prop) {
+            if (_prop === prop || _prop.toLowerCase() === prop) {
                 result[_prop] = props[_prop]
                 break;
             }

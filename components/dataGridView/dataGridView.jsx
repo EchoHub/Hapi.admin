@@ -43,7 +43,7 @@ export default class DataGridView extends Component {
         const { dataSource, total, paginationOptions } = this.state
         const classes = classNames(prefixCls, className);
         return <div className={classes}>
-            <table ref="table" className={classes}>
+            <table ref="table" className="hp-datagridview-table">
                 {this.renderBody(dataSource, children, { multiply })}
             </table>
             {showPagination ? <Pagination

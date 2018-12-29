@@ -14,6 +14,7 @@ import ExpertPage from "./expertPage"
 import ExpertList from "./expertList"
 import TransferPage from "./transferPage"
 import LoginDemo from "./loginDemo"
+import ReactPage from "./reactPage"
 var Pages = {
     "console" : Console,
     "buttonPage" : ButtonPage,
@@ -28,5 +29,6 @@ var Pages = {
     "expertList" : ExpertList,
     "transferPage" : TransferPage,
     "loginDemo" : LoginDemo,
+    "reactPage" : ReactPage,
 };
 export default Pages;
