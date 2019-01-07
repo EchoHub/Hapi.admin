@@ -15,6 +15,7 @@ import ExpertList from "./expertList"
 import TransferPage from "./transferPage"
 import StepPage from "./stepPage"
 import DropDownPage from "./dropDownPage"
+import CollapsePage from "./collapsePage"
 import LoginDemo from "./loginDemo"
 import ReactPage from "./reactPage"
 var Pages = {
@@ -22,16 +23,17 @@ var Pages = {
     "buttonPage" : ButtonPage,
     "layout" : Layout,
     "formPage" : FormPage,
-    "noticePage" : NoticePage,
-    "modalPage" : ModalPage,
-    "others" : Others,
     "tablePage" : TablePage,
+    "modalPage" : ModalPage,
+    "dropDownPage" : DropDownPage,
+    "stepPage" : StepPage,
+    "transferPage" : TransferPage,
+    "collapsePage": CollapsePage,
+    "noticePage" : NoticePage,
+    "others" : Others,
     "canvas" : Canvas,
     "expertPage" : ExpertPage,
     "expertList" : ExpertList,
-    "transferPage" : TransferPage,
-    "stepPage" : StepPage,
-    "dropDownPage" : DropDownPage,
     "loginDemo" : LoginDemo,
     "reactPage" : ReactPage,
 };

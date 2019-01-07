@@ -5,6 +5,7 @@ export { default as BreadCrumb } from "breadCrumb/breadCrumb";
 export { default as CheckBox } from "checkBox/checkBox";
 export { default as CheckBoxGroup } from "checkBoxGroup/checkBoxGroup";
 export { default as Chart } from "chart/chart";
+export { default as Collapse, CollapseItem } from "collapse/collapse";
 export { default as Canvas } from "canvas/canvas";
 export { default as DatePicker } from "datePicker/datePicker";
 export { default as DropDown, DropDownItem, SubMenu } from "dropDown/dropDown";

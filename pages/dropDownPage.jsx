@@ -23,7 +23,6 @@ export default class DropDownPage extends Component {
             <GridLayout>
                 <Layout col={4}>
                     <Panel className="mt-10"
-                        style={{ width: "calc(100% - 5px)", marginLeft: "5px" }}
                         title="基本用法" toolbar={true}>
                         <p>最简单的下拉菜单</p>
                         <DropDown
@@ -269,7 +268,6 @@ export default class DropDownPage extends Component {
             <GridLayout>
                 <Layout col={12}>
                     <Panel className="mt-10"
-                        style={{ width: "calc(100% - 5px)", marginLeft: "5px" }}
                         title="触发事件" toolbar={true}>
                         <p>点击菜单会触发事件，用户可以获取对应的菜单内容，并进行不同的操作。</p>
                         <DropDown

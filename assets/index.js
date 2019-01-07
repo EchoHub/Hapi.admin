@@ -45,17 +45,24 @@ const menus = [
                 flag: 0,
             },
             {
-                title: "通知",
-                belong: "组件",
-                icon: "",
-                route: "/noticePage",
-                flag: 0,
-            },
-            {
                 title: "模态窗",
                 belong: "组件",
                 icon: "",
                 route: "/modalPage",
+                flag: 0,
+            },
+            {
+                title: "下拉菜单",
+                belong: "组件",
+                icon: "",
+                route: "/dropDownPage",
+                flag: 0,
+            },
+            {
+                title: "折叠面板",
+                belong: "组件",
+                icon: "",
+                route: "/collapsePage",
                 flag: 0,
             },
             {
@@ -73,10 +80,10 @@ const menus = [
                 flag: 0,
             },
             {
-                title: "下拉菜单",
+                title: "通知",
                 belong: "组件",
                 icon: "",
-                route: "/dropDownPage",
+                route: "/noticePage",
                 flag: 0,
             },
             {
