@@ -7,6 +7,7 @@ export { default as CheckBoxGroup } from "checkBoxGroup/checkBoxGroup";
 export { default as Chart } from "chart/chart";
 export { default as Canvas } from "canvas/canvas";
 export { default as DatePicker } from "datePicker/datePicker";
+export { default as DropDown, DropDownItem, SubMenu } from "dropDown/dropDown";
 export { default as Dialog } from "dialog/dialog";
 export { default as DataGridView, Column } from "dataGridView/dataGridView";
 export { default as Form, FormLayout, FormField } from "form/form";

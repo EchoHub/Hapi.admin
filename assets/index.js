@@ -73,6 +73,13 @@ const menus = [
                 flag: 0,
             },
             {
+                title: "下拉菜单",
+                belong: "组件",
+                icon: "",
+                route: "/dropDownPage",
+                flag: 0,
+            },
+            {
                 title: "画布",
                 belong: "组件",
                 icon: "",

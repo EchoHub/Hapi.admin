@@ -14,6 +14,7 @@ import ExpertPage from "./expertPage"
 import ExpertList from "./expertList"
 import TransferPage from "./transferPage"
 import StepPage from "./stepPage"
+import DropDownPage from "./dropDownPage"
 import LoginDemo from "./loginDemo"
 import ReactPage from "./reactPage"
 var Pages = {
@@ -30,6 +31,7 @@ var Pages = {
     "expertList" : ExpertList,
     "transferPage" : TransferPage,
     "stepPage" : StepPage,
+    "dropDownPage" : DropDownPage,
     "loginDemo" : LoginDemo,
     "reactPage" : ReactPage,
 };
