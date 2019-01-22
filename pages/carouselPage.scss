@@ -1,0 +1,23 @@
+@import "adminSystem/adminSystem.scss";
+.hp-carouselPage {
+    .hp-carousel {
+        background: #364d79;
+        height: 180px;
+        .hp-carousel-demo_div {
+            width: 100%;
+            height: 180px;
+            display: inline-block;
+            > h1 {
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                color: #fff;
+                text-align: center;
+                line-height: 180px;
+            }
+        }
+    }
+    .mt-35 {
+        margin-top: 35px;
+    }
+}

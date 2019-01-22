@@ -59,6 +59,13 @@ const menus = [
                 flag: 0,
             },
             {
+                title: "跑马灯",
+                belong: "组件",
+                icon: "",
+                route: "/carouselPage",
+                flag: 0,
+            },
+            {
                 title: "折叠面板",
                 belong: "组件",
                 icon: "",

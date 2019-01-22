@@ -9,6 +9,7 @@ import Layout from "./layout"
 import NoticePage from "./noticePage"
 import ModalPage from "./modalPage"
 import Canvas from "./canvas"
+import CarouselPage from "./carouselPage"
 import Others from "./others"
 import ExpertPage from "./expertPage"
 import ExpertList from "./expertList"
@@ -29,6 +30,7 @@ var Pages = {
     "stepPage" : StepPage,
     "transferPage" : TransferPage,
     "collapsePage": CollapsePage,
+    "carouselPage": CarouselPage,
     "noticePage" : NoticePage,
     "others" : Others,
     "canvas" : Canvas,

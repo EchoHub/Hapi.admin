@@ -1,0 +1,80 @@
+.hp-carousel {
+    position: relative;
+    overflow: hidden;
+    &-list {
+        white-space: nowrap;
+        transition: all ease .3s;
+        position: relative;
+        left: 0;
+    }
+    &-dots {
+        margin: auto;
+        padding: 0;
+        position: absolute;
+        bottom: 10px;
+        text-align: center;
+        width: 100%;
+        z-index: 99;
+        .hp-carousel-dot {
+            margin: 0 4px;
+            display: inline-block;
+            width: 16px;
+            border-radius: 3px;
+            height: 3px;
+            background: rgba(255, 255, 255, .4);
+            transition: all ease .5s;
+            &:hover {
+                cursor: pointer;
+                background: rgba(255, 255, 255, 1);
+            }
+            &.active {
+                background: rgba(255, 255, 255, 1);
+                width: 24px;
+            }
+        }
+    }
+    &.vertical {
+        .hp-carousel-list {
+            top: 0;
+            white-space: inherit;
+        }
+        .hp-carousel-dots {
+            width: 10px;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            .hp-carousel-dot {
+                margin: 4px 0;
+                display: inline-block;
+                height: 16px;
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+                width: 3px;
+                background: rgba(255, 255, 255, .4);
+                transition: all ease .5s;
+                display: block;
+                &.active {
+                    background: rgba(255, 255, 255, 1);
+                    height: 24px;
+                }
+            }
+        }
+    }
+    &.fade {
+        transition: opacity ease-in-out .1s;
+        .hp-carousel-list {
+            position: relative;
+            .hp-carousel-demo_div {
+                transition: opacity ease-in-out .3s;
+                position: absolute;
+                left: 0;
+                top: 0;
+                opacity: 0;
+                &.active {
+                    opacity: 1;
+                    z-index: 88;
+                }
+            }
+        }
+    }
+}
