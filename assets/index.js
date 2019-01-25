@@ -45,10 +45,10 @@ const menus = [
                 flag: 0,
             },
             {
-                title: "模态窗",
+                title: "级联选择器",
                 belong: "组件",
                 icon: "",
-                route: "/modalPage",
+                route: "/cascaderPage",
                 flag: 0,
             },
             {
@@ -56,6 +56,13 @@ const menus = [
                 belong: "组件",
                 icon: "",
                 route: "/dropDownPage",
+                flag: 0,
+            },
+            {
+                title: "模态窗",
+                belong: "组件",
+                icon: "",
+                route: "/modalPage",
                 flag: 0,
             },
             {

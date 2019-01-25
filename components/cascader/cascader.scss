@@ -1,0 +1,77 @@
+@import "adminSystem/adminSystem.scss";
+$menus-border-radius: 2px;
+$menus-bg-color: #66b1ff4a;
+.hp-cascader {
+    position: relative;
+    &-picker {
+        .hp-textbox {
+            width: 100%;
+        }
+        > .iconfont {
+            position: absolute;
+            top: 4px;
+            right: 6px;
+            color: #bbb;
+            transition: transform ease .3s;
+            &.hp-cascader-flag-collapsable:not(.icon-close) {
+                transform: rotate(180deg);
+            }
+            &.icon-close {
+                display: none;
+                font-size: .2rem;
+                border-radius: 50%;
+                background: #ddd;
+                color: #fff;
+                width: 16px;
+                height: 16px;
+                text-align: center;
+                top: 8px;
+            }
+        }
+    }
+    &-menus {
+        list-style: none;
+        display: none;
+        position: fixed;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+        > ul {
+            display: inline-block;
+            min-width: 110px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            // margin-top: 4px;
+            border-radius: $menus-border-radius;
+            min-height: 140px;
+            max-width: 240px;
+            background: #fff;
+            &:not(:first-child) {
+                border-left: 1px solid #ddd;
+                box-shadow: none;
+            }
+        }
+        &.hp-cascader-menus-collapsable {
+            display: flex;
+            li {
+                min-width: 110px;
+                padding: 0.4rem .5rem;
+                transition: all ease-in-out .1s;
+                &:hover {
+                    background: $menus-bg-color;
+                }
+                &:first-child {
+                    border-top-left-radius: $menus-border-radius;
+                    border-top-right-radius: $menus-border-radius;
+                }
+                &.selected {
+                    background: #f1f0f0;
+                }
+            }
+        }
+    }
+    &:hover {
+        .icon-close {
+            display: inherit;
+        }
+    }
+}

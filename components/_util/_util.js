@@ -8,9 +8,9 @@ export function getCookie(name) {
     const cookie = document.cookie;
     let result = ""
     let cookieJson = {}
-    if(cookie) {
+    if (cookie) {
         const _params = cookie.split("&");
-        for(const _param of _params) {
+        for (const _param of _params) {
             cookieJson[_param.split("=")[0]] = _param.split("=")[1];
         }
         return cookieJson[name]
@@ -121,9 +121,9 @@ export function unique(arr) {
  * @param {*} obj 
  */
 export function clean(obj) {
-    if(obj && Object.keys(obj).length) {
-        for(const key in obj) {
-            if(obj[key] === null || obj[key] === undefined) 
+    if (obj && Object.keys(obj).length) {
+        for (const key in obj) {
+            if (obj[key] === null || obj[key] === undefined)
                 delete obj[key]
         }
     }
@@ -131,6 +131,20 @@ export function clean(obj) {
 }
 
 export function paramFormat(str) {
-    if(str === undefined || str === null) return ""
+    if (str === undefined || str === null) return ""
     return str
+}
+
+// 计算弹窗偏移量
+export function caculatePopupOffset(target) {
+    const parent = target.offsetParent;
+    let offsetLeft = target.offsetLeft, offsetTop = target.offsetTop;
+    if (parent) {
+        offsetLeft += (caculatePopupOffset(parent).offsetLeft - parent.scrollLeft)
+        offsetTop += (caculatePopupOffset(parent).offsetTop - parent.scrollTop)
+    }
+    return {
+        offsetTop: offsetTop,
+        offsetLeft: offsetLeft
+    }
 }

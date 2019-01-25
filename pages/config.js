@@ -17,6 +17,7 @@ import TransferPage from "./transferPage"
 import StepPage from "./stepPage"
 import DropDownPage from "./dropDownPage"
 import CollapsePage from "./collapsePage"
+import CascaderPage from "./cascaderPage"
 import LoginDemo from "./loginDemo"
 import ReactPage from "./reactPage"
 var Pages = {
@@ -31,6 +32,7 @@ var Pages = {
     "transferPage" : TransferPage,
     "collapsePage": CollapsePage,
     "carouselPage": CarouselPage,
+    "cascaderPage": CascaderPage,
     "noticePage" : NoticePage,
     "others" : Others,
     "canvas" : Canvas,

@@ -161,6 +161,7 @@ $element-color-primary-light: #1890ff1a;
             overflow: auto;
             width: 100%;
             height: calc(100% - 48px);
+            position: relative;
             &::-webkit-scrollbar {
                 width: 6px;
                 height: 1px;

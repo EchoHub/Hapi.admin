@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     Button, CheckBox, CheckBoxGroup, DatePicker, Form, FormLayout, FormField, GridLayout, Layout, Notice, Panel,
-    Rate, RadioBox, RadioBoxGroup, Switch, TextBox,
+    Rate, RadioBox, RadioBoxGroup, Switch, TextBox, Cascader,
     TextArea, Select, ListItem, Slider
 } from "common";
 import "./formPage.scss"

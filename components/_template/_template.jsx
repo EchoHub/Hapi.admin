@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { findDOMNode } from "react-dom";
 import PropTypes from 'prop-types';
 import classNames from "classnames";
+import { polyfill } from "react-lifecycles-compat"
 import "./_template.scss"
 
 export default class Template extends Component {
