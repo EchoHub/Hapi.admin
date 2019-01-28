@@ -131,6 +131,118 @@ export default class CascaderPage extends Component {
                     </Panel>
                 </Layout>
             </GridLayout>
+            <GridLayout>
+                <Layout col={6}>
+                    <Panel className="mt-10" style={{ width: "calc(100% - 5px)" }} title="基本用法" toolbar={true}>
+                        <p className="introduction">移入展开：通过移入展开下级菜单，通过点击完成选择。</p>
+                        <Cascader 
+                        className="w-16"
+                        expandTrigger="hover"
+                        options={
+                            [
+                                {
+                                    name: "Zhejiang",
+                                    label: "Zhejiang",
+                                    children: [
+                                        {
+                                            name: "HangZhou",
+                                            label: "HangZhou",
+                                            children: [
+                                                {
+                                                    name: "West Lake",
+                                                    label: "West Lake"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            name: "HuZhou",
+                                            label: "HuZhou",
+                                            children: [
+                                                {
+                                                    name: "De Qing",
+                                                    label: "De Qing"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    name: "JiangSu",
+                                    label: "JiangSu",
+                                    children: [
+                                        {
+                                            name: "NanJing",
+                                            label: "NanJing",
+                                            children: [
+                                                {
+                                                    name: "Xuanwu Lake",
+                                                    label: "Xuanwu Lake"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                        ></Cascader>
+                    </Panel>
+                </Layout>
+                <Layout col={6}>
+                    <Panel className="mt-10" style={{ width: "calc(100% - 5px)", marginLeft: "5px" }} title="默认值" toolbar={true}>
+                        <p className="introduction">禁用选项：通过设置每个option里面的disabled, 指定不可选用项。</p>
+                        <Cascader 
+                        className="w-16"
+                        options={
+                            [
+                                {
+                                    name: "Zhejiang",
+                                    label: "Zhejiang",
+                                    children: [
+                                        {
+                                            name: "HangZhou",
+                                            label: "HangZhou",
+                                            children: [
+                                                {
+                                                    name: "West Lake",
+                                                    label: "West Lake"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            name: "HuZhou",
+                                            label: "HuZhou",
+                                            children: [
+                                                {
+                                                    name: "De Qing",
+                                                    label: "De Qing"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    name: "JiangSu",
+                                    label: "JiangSu",
+                                    disabled: true,
+                                    children: [
+                                        {
+                                            name: "NanJing",
+                                            label: "NanJing",
+                                            children: [
+                                                {
+                                                    name: "Xuanwu Lake",
+                                                    label: "Xuanwu Lake"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                        ></Cascader>
+                    </Panel>
+                </Layout>
+            </GridLayout>
         </div>
     }
 }

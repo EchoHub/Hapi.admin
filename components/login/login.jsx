@@ -62,13 +62,11 @@ export default class Login extends Component {
         const form = this.refs.loginForm;
         if(form.reportValidity().valid) {
             const param = {
-                ...form.value,
-                grant_type: "password",
-                client_id: "web",
-                client_secret: "7e8a29f9f597036d85bb88486a1137fd723e0024"
+                ...form.value
             }
             if(form.value["username"] === "hapi" && form.value["password"] === "hapi") {
                 location.href = "index.html#console";
+                sessionStorage.setItem(btoa("username"), btoa(form.value["password"]));
                 return;
             }
             login(param, {

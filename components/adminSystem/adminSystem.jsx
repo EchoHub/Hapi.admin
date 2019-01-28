@@ -86,6 +86,9 @@ export default class AdminSystem extends Component {
             menus: this.validityRoute(curhash, this.state.menus)
         })
         // window.onhashchange = this.hashChange
+        if (!sessionStorage.getItem(btoa("username"))) {
+            location.href = "login.html"
+        }
     }
 
     render() {
@@ -118,11 +121,10 @@ export default class AdminSystem extends Component {
     hashChange(e) {
         const hash = location.hash.split("#")[1].split("?")[0]
         const nodes = DOM.query(DOM.find(findDOMNode(this), ".hp-navmenu"), ".hp-menuitem_title");
-        for(const item of nodes) {
+        for (const item of nodes) {
             const item_hash = (item.parentNode || item.parentElement).href
             const li = item.parentNode.parentNode || item.parentElement.parentElement;
-            console.log(item, item_hash)
-            if(item_hash !== hash) {
+            if (item_hash !== hash) {
                 DOM.removeClass(li, "hp_item_selected")
             } else {
                 DOM.addClass(li, "hp_item_selected")

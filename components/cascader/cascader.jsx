@@ -125,19 +125,27 @@ class Cascader extends Component {
     echoItemHandle = (options, values, index) => {
         let uls = [], child_ul
         const { expandTrigger } = this.props;
-        let behavor = new Object()
         const lis = options.map(option => {
-            const hasChildren = option.children && option.children.length
-            const eventName = (expandTrigger !== "click" && !hasChildren) ? "onMouseEnter" : "onClick";
-            behavor[eventName] = null
-            behavor[eventName] = hasChildren ? this.getSubItems.bind(this, option, index) : this.selectedHandle.bind(this, option)
-            const selected = values[index] === option.name;
-            if (selected && hasChildren) {
-                const _index = index + 1
-                child_ul = this.echoItemHandle(option.children, values, _index)
+            let behavor = new Object()
+            const { name, children, disabled } = option
+            const selected = values[index] === name;
+            if (!disabled) {
+                const hasChildren = children && children.length
+                const eventName = (expandTrigger !== "click" && hasChildren) ? "onMouseEnter" : "onClick";
+                behavor[eventName] = null
+                behavor[eventName] = hasChildren ? this.getSubItems.bind(this, option, index) : this.selectedHandle.bind(this, option)
+                if (selected && hasChildren) {
+                    const _index = index + 1
+                    child_ul = this.echoItemHandle(children, values, _index)
+                }
             }
+            
+            const classes = classNames({
+                ["selected"]: selected,
+                ["disabled"]: disabled,
+            })
             return <li
-                className={selected ? "selected" : ""}
+                className={classes}
                 key={option.name}
                 {...behavor}
             >{option.label}</li>
@@ -164,11 +172,15 @@ class Cascader extends Component {
         if (Array.isArray(options) && options.length) {
             let behavor = new Object()
             let lis = options.map(option => {
-                behavor[expandTrigger !== "click" ? "onMouseEnter" : "onClick"] = this.getSubItems.bind(this, option, 0)
+                const { label, name, disabled } = option;
+                if (!disabled) {
+                    behavor[expandTrigger !== "click" ? "onMouseEnter" : "onClick"] = this.getSubItems.bind(this, option, 0);
+                }
                 return <li
-                    key={option.name}
+                    className={disabled ? "disabled" : ""}
+                    key={name}
                     {...behavor}
-                >{option.label}</li>
+                >{label}</li>
             })
             const menus_ = <ul key={+new Date()}>{lis}</ul>
             this.setState({
@@ -181,8 +193,11 @@ class Cascader extends Component {
 
     selectedHandle(option, event) {
         const { menus } = this.state
+        const { menusRef, flag } = this.refs;
         const _self = event.target;
         DOM.addClass(_self, "selected")
+        DOM.toggleClass(findDOMNode(flag), "hp-cascader-flag-collapsable", false);
+        DOM.toggleClass(findDOMNode(menusRef), "hp-cascader-menus-collapsable", false);
         this.setState(prevState => {
             let _values = prevState.values.slice(0, menus.length - 1);
             _values.push(option.name);
@@ -193,18 +208,21 @@ class Cascader extends Component {
     }
 
     getSubItems(option, index, event) {
+        const { children, disabled } = option;
+        if(disabled) {
+            return;
+        }
         const _self = event.target;
         Array.prototype.slice.call(DOM.closest(_self, "ul").childNodes).map(item => DOM.removeClass(item, "selected"))
         DOM.addClass(_self, "selected")
         const { expandTrigger } = this.props;
-        const children = option.children;
         const activeIndex = index;
         if (Array.isArray(children) && children.length) {
             let behavor = new Object()
             index++
             const lis = option.children.map(option => {
                 const hasChildren = option.children && option.children.length
-                const eventName = (expandTrigger !== "click" && !hasChildren) ? "onMouseEnter" : "onClick";
+                const eventName = (expandTrigger !== "click" && hasChildren) ? "onMouseEnter" : "onClick";
                 behavor[eventName] = null
                 behavor[eventName] = hasChildren ? this.getSubItems.bind(this, option, index) : this.selectedHandle.bind(this, option)
                 return <li
