@@ -170,8 +170,8 @@ class Cascader extends Component {
             return;
         }
         if (Array.isArray(options) && options.length) {
-            let behavor = new Object()
             let lis = options.map(option => {
+                let behavor = new Object()
                 const { label, name, disabled } = option;
                 if (!disabled) {
                     behavor[expandTrigger !== "click" ? "onMouseEnter" : "onClick"] = this.getSubItems.bind(this, option, 0);
