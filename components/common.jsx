@@ -34,6 +34,7 @@ export { default as Transfer } from "transfer/transfer";
 // _hapi
 export * from "_util/_util";
 export { ajax, getQuery, setQuery, appendQuery, formatQuery } from "web/ajax";
+export * from "utils/utils";
 
 // pages
 export { default as Pages } from "config";

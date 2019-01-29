@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { GridLayout, Layout, Panel, Carousel } from "common";
+import { formatArrayObj, GridLayout, Layout, Panel, Carousel } from "common";
 import "./carouselPage.scss"
 
 export default class CarouselPage extends Component {
     constructor(props) {
         super(props)
+    }
+    componentDidMount() {
+        console.log(formatArrayObj([{a: 1, b: 1}, {a: 2, b: 2}], {a: "name", b: "type"}))
     }
     render() {
         return <div className="hp-carouselPage">

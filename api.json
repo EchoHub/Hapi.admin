@@ -1,0 +1,85 @@
+{
+    "apis": {
+        "/api/query":{
+			"summary":"获取数据",
+			"parameters":{
+				"page":{
+					"notEmpty":true,
+					"summary":"页数",
+					"optional":true,
+					"type":"java.lang.Integer"
+                },
+                "pageSize":{
+					"notEmpty":true,
+					"summary":"单页数据大小",
+					"optional":true,
+					"type":"java.lang.Integer"
+				}
+			},
+			"responses":[
+				{
+					"type":"hapi.data.result<hapi.data.queryInfo>"
+				}
+			]
+		}
+    },
+    "types": {
+        "hapi.data.result":{
+			"properties":{
+				"total":{
+					"type":"int"
+				},
+				"message":{
+					"type":"java.lang.String"
+				},
+				"data":{
+					"type":"T"
+				},
+				"code":{
+					"type":"java.lang.String"
+				},
+				"stackMessage":{
+					"type":"java.lang.String"
+				}
+			}
+        },
+        "hapi.data.queryInfo": {
+
+        },
+        "java.lang.String":{
+			"alias":"string"
+        },
+        "java.lang.Character":{
+			"alias":"string"
+        },
+        "java.math.BigDecimal":{
+			"alias":"number"
+        },
+        "java.lang.Integer":{
+			"alias":"number"
+		},
+		"java.lang.Short":{
+			"alias":"number"
+        },
+        "java.lang.Long":{
+			"alias":"number"
+        },
+        "java.lang.Float": {
+            "alias":"number"
+        },
+        "java.lang.Double":{
+			"alias":"number"
+        },
+        "java.lang.Byte":{
+			"alias":"number"
+        },
+        "java.lang.Boolean":{
+			"alias":"boolean"
+        },
+        "java.util.Date":{
+			"alias":"date"
+		}
+    },
+    "version": "0.0.1",
+    "modified": "2019-01-29 16:43:00"
+}

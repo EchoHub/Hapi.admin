@@ -1,7 +1,6 @@
 import * as API from "api/config.json";
 import * as Path from "api/path.json";
 import { ajax } from "common";
-
 export function login(param, options, success, error, others) {
     const _options = options || {}
     return ajax({

@@ -33,6 +33,7 @@ $menus-bg-color: #66b1ff4a;
         list-style: none;
         display: none;
         position: fixed;
+        z-index: 666;
         box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
         > ul {
             display: inline-block;

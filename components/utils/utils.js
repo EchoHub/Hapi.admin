@@ -31,7 +31,7 @@ export function arrayEliminator(source, target) {
         for (const ite of target) {
             if (typeof ite === "object" && typeof item === "object") {
                 shouldRemove = objectCompare(ite, item)
-                if(shouldRemove) break
+                if (shouldRemove) break
             } else {
                 if (ite === item) {
                     shouldRemove = true;
@@ -63,10 +63,27 @@ export function objectCompare(obj1, obj2) {
 }
 
 // 数字千分符
-function commafy(num){
+function commafy(num) {
     return num && num
         .toString()
-        .replace(/(\d)(?=(\d{3})+\.)/g, function($1, $2){
+        .replace(/(\d)(?=(\d{3})+\.)/g, function ($1, $2) {
             return $2 + ',';
         });
+}
+
+/**
+ * 转换目标数组内JSON对象接口
+ * @param {*} source  数据源
+ * @param {*} format 转换格式
+ */
+export function formatArrayObj(source, format) {
+    let result = []
+    for (const item of source) {
+        let _item = new Object()
+        for (const key in format) {
+            _item[format[key]] = item[key]
+        }
+        result.push(_item)
+    }
+    return result
 }

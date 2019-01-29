@@ -4,12 +4,19 @@ const fs = require("fs");
 const param = getArgv();
 const colors = require('colors');
 
-const dirPath = {
-    page: path.resolve(__dirname, "./../../pages"),
-    component: path.resolve(__dirname, "./../../components")
-};
 (function () {
     let name;
+    const dirPath = {
+        page: path.resolve(__dirname, "./../../pages"),
+        component: path.resolve(__dirname, "./../../components")
+    };
+    const apiOpt = {
+        entry: path.resolve(__dirname, "./../../api.json"),
+        output: path.resolve(__dirname, "./../../components/api"),
+        options: {
+            encoding: "utf8"
+        }
+    }
     switch (param[0]) {
         case "page":
             name = param[1];
@@ -40,6 +47,10 @@ const dirPath = {
         //     break;
         case "watch":
             watchFileOrDir([dirPath.page, dirPath.component])
+            break;
+        case "api":
+            const apiSource = fs.readFileSync(apiOpt.entry, apiOpt.options);
+            console.log(apiSource)
             break;
         default:
             throw console.log("illegal param".red)

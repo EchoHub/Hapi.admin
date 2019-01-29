@@ -70,6 +70,7 @@ export default class Carousel extends Component {
 
     effect(childNodes, activeIndex, vertical, effect) {
         const carouselListNode = this.carouselListNode
+        if(!carouselListNode) return
         switch (effect) {
             case "offset":
             default:
