@@ -96,11 +96,11 @@ module.exports = function APIFactory(apiOpt) {
     // 根据数据类型 生成mock数据
     function buildMockByTypes(type, types) {
         const _type = type.replace(/^hapi\.data\.result<(\S+)>$/, "$1")
-        let mockData = checkDataType(_type, types, type, 1)
-        if (typeof mockData === "object") {
-            mockData = JSON.stringify(mockData);
+        let mockData = checkDataType(_type, types, _type, 1)
+        if (typeof mockData !== "object") {
+            mockData = Object.assign({}, resultOptions, { value: mockData })
         }
-        return mockData;
+        return JSON.stringify(mockData);
     }
 
     // 异常处理

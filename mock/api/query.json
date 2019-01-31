@@ -1,11 +1,1 @@
-{
-    "code": "0",
-    "message": "message_1",
-    "data": {
-        "username": "username_1",
-        "age": 0,
-        "sex": 1,
-        "idCard": "idCard_1",
-        "address": "address_1"
-    }
-}
+{"code":"0","message":"message_1","data":{"username":"username_1","age":1,"sex":0,"idCard":"idCard_1","address":"address_1"}}
