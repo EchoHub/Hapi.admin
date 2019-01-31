@@ -21,13 +21,35 @@
 					"type":"hapi.data.result<hapi.data.queryInfo>"
 				}
 			]
+        },
+        "/api/query2":{
+			"summary":"获取数据2",
+			"parameters":{
+				"page":{
+					"notEmpty":true,
+					"summary":"页数",
+					"optional":true,
+					"type":"java.lang.Integer"
+                },
+                "pageSize":{
+					"notEmpty":true,
+					"summary":"单页数据大小",
+					"optional":true,
+					"type":"java.lang.Integer"
+				}
+			},
+			"responses":[
+				{
+					"type":"hapi.data.result<hapi.data.queryInfo>"
+				}
+			]
 		}
     },
     "types": {
         "hapi.data.result":{
 			"properties":{
 				"total":{
-					"type":"int"
+					"type":"java.lang.Integer"
 				},
 				"message":{
 					"type":"java.lang.String"
@@ -37,14 +59,30 @@
 				},
 				"code":{
 					"type":"java.lang.String"
-				},
-				"stackMessage":{
-					"type":"java.lang.String"
 				}
 			}
         },
         "hapi.data.queryInfo": {
-
+			"username": {
+				"summary": "用户名",
+				"type": "java.lang.String"
+			},
+			"age": {
+				"summary": "年龄",
+				"type": "java.lang.Integer"
+			},
+			"sex": {
+				"summary": "性别",
+				"type": "java.lang.Integer"
+			},
+			"idCard": {
+				"summary": "身份证号",
+				"type": "java.lang.String"
+			},
+			"address": {
+				"summary": "现住址",
+				"type": "java.lang.String"
+			}
         },
         "java.lang.String":{
 			"alias":"string"

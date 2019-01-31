@@ -3,6 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const param = getArgv();
 const colors = require('colors');
+const APIFactory = require("./apiFactory");
 
 (function () {
     let name;
@@ -43,14 +44,13 @@ const colors = require('colors');
             });
             break;
         // case "rename":
-            
+
         //     break;
         case "watch":
             watchFileOrDir([dirPath.page, dirPath.component])
             break;
         case "api":
-            const apiSource = fs.readFileSync(apiOpt.entry, apiOpt.options);
-            console.log(apiSource)
+            APIFactory(apiOpt).buildMock()
             break;
         default:
             throw console.log("illegal param".red)
@@ -143,7 +143,7 @@ function copyDirFiles(src, dst, target) {
                 const _result = data.replace(/_template/g, target);
                 const result = _result.replace(/Template/g, target[0].toUpperCase() + target.slice(1));
                 fs.createWriteStream(`${dst}/${target}.${item.split(".")[1]}`)
-                fs.writeFile(`${dst}/${target}.${item.split(".")[1]}`, result, null, () => {})
+                fs.writeFile(`${dst}/${target}.${item.split(".")[1]}`, result, null, () => { })
             }
         })
         return true;
