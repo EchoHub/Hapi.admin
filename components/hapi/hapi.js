@@ -49,8 +49,11 @@ const APIFactory = require("./apiFactory");
         case "watch":
             watchFileOrDir([dirPath.page, dirPath.component])
             break;
-        case "api":
+        case "mock":
             APIFactory(apiOpt).buildMock()
+            break;
+        case "api":
+            APIFactory(apiOpt).buildApi()
             break;
         default:
             throw console.log("illegal param".red)

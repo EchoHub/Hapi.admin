@@ -70,7 +70,7 @@ module.exports = function APIFactory(apiOpt) {
                         } else if (_key === "alias") {
                             switch (typesResult[_key]) {
                                 case "number":
-                                    value = Number(Math.random(1000).toFixed(0));
+                                    value = Number((Math.random() * 10).toFixed(0));
                                     break;
                                 case "string":
                                     value = `${mock}_${index}`;
@@ -110,7 +110,7 @@ module.exports = function APIFactory(apiOpt) {
 
     return {
         apiSource: apiSource,
-        buildMock: () => {
+        buildMock: function () {
             const mockRootPath = path.join(__dirname, "./../../mock");
             const api = JSON.parse(apiSource);
             const apis = api.apis;
@@ -132,28 +132,23 @@ module.exports = function APIFactory(apiOpt) {
                     let apiDirPath = dirs.splice(0, len - 1).join("/").replace(/^\//, "");
                     const apiPath = path.join(__dirname, `./../../mock/${apiDirPath}`);
                     const apiConfig = apis[api];
-                    new Promise((resolve, reject) => {
-                        // 创建mock文件目录
-                        dirExists(apiPath)
-                        resolve([apiName, apiPath])
-                    }).then(data => {
-                        // 创建mock文件
-                        const [name, rootPath] = data;
-                        const mockFileName = path.join(rootPath, name + ".json");
-                        const fw = fs.createWriteStream(mockFileName, {
-                            flags: 'w',
-                            defaultEncoding: 'utf8',
-                        })
-                        const { summary, parameters, responses } = apiConfig
-                        let mock = ""
-                        for (const item of responses) {
-                            const type = item.type
-                            mock = buildMockByTypes(type, types)
-                        }
-                        fw.write(mock, () => {
-                            console.log(`${name.yellow} mock文件创建成功，数据文件路径：`.blue, mockFileName.underline.green)
-                            fw.close()
-                        })
+                    // 创建mock文件目录
+                    dirExists(apiPath)
+                    // 创建mock文件
+                    const mockFileName = path.join(apiPath, apiName + ".json");
+                    const fw = fs.createWriteStream(mockFileName, {
+                        flags: 'w',
+                        defaultEncoding: 'utf8',
+                    })
+                    const { summary, parameters, responses } = apiConfig
+                    let mock = ""
+                    for (const item of responses) {
+                        const type = item.type
+                        mock = buildMockByTypes(type, types)
+                    }
+                    fw.write(mock, () => {
+                        console.log(`${apiName.yellow} mock文件创建成功，数据文件路径：`.blue, mockFileName.underline.green)
+                        fw.close()
                     })
                 }
             })
@@ -161,8 +156,15 @@ module.exports = function APIFactory(apiOpt) {
                 errCatch(err)
             })
         },
-        buildApi: () => {
+        buildApi: function () {
+            this.buildMock()
+            const api = JSON.parse(apiSource);
+            const apis = api.apis;
+            const apiPath = path.join(__dirname, "./../apiDir");
+            dirExists(apiPath)
+            for (const api in apis) {
 
+            }
             // const version = api.version;
             // const modified = api.modified;
         }

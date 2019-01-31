@@ -63,7 +63,7 @@ export function objectCompare(obj1, obj2) {
 }
 
 // 数字千分符
-function commafy(num) {
+export function commafy(num) {
     return num && num
         .toString()
         .replace(/(\d)(?=(\d{3})+\.)/g, function ($1, $2) {

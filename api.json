@@ -81,6 +81,23 @@
 					"type": "hapi.data.result<java.lang.String>"
 				}
 			]
+		},
+		"/api/addContact":{
+			"summary":"新增联系人",
+			"contentType":"application/json",
+			"parameters":{
+				"cantactInfo":{
+					"notEmpty":true,
+					"summary":"联系人信息",
+					"optional":true,
+					"type":"hapi.data.contactInfo"
+                }
+			},
+			"responses":[
+				{
+					"type": "hapi.data.result<java.lang.Boolean>"
+				}
+			]
 		}
     },
     "types": {

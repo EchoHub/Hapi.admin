@@ -14,7 +14,8 @@
     "delete": "node components/hapi/hapi.js delete page",
     "remove": "node components/hapi/hapi.js remove component",
     "watch": "node components/hapi/hapi.js watch",
-    "api": "node components/hapi/hapi.js api"
+    "api": "node components/hapi/hapi.js api",
+    "mock": "node components/hapi/hapi.js mock"
   },
   "repository": {
     "type": "git",
