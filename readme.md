@@ -11,15 +11,15 @@ npm install
 npm run start
 ```
 ## 组件库
-基本组件
+基础
 - Button 按钮
 - ButtonGroup 按钮组
 
-排版组件
+排版
 - GridLayout 栅格容器
 - Layout 栅格
 
-表单组件
+表单
 - checkBox 多选框 
 - checkBoxGroup 多选框组 
 - cascader 级联选择器
@@ -34,16 +34,16 @@ npm run start
 - textArea 文本域 
 - textBox 文本框 
 
-通知组件
+通知
 - toolTip 提示
 - message 消息提示
 - notification 通知
 
-列表组件
+列表
 - dataGridView 列表 
 - pagination 分页器 
 
-菜单组件
+菜单
 - navMenu 导航菜单
 - dropDown 下拉菜单
 
@@ -70,6 +70,7 @@ npm run start
 - 导入api.json文件
 - 执行mock生成指令
 - 一键生成 mock 数据
+
 导入api.json文件
 ```
 {

@@ -2,13 +2,16 @@ const fs = require("fs");
 const path = require("path");
 const rimraf = require("rimraf");
 module.exports = function APIFactory(apiOpt) {
-    const entry = apiOpt.entry;
-    const options = apiOpt.options
-    this.apiSource = fs.readFileSync(entry, options);
-    // 异常处理
-    function errCatch(err) {
-        console.log(err)
+    const { entry, options } = apiOpt
+
+    apiSource = fs.readFileSync(entry, options);
+
+    resultOptions = {
+        code: "0",
+        message: "message_1"
     }
+
+    arrlen = 5
 
     // 常见目录 若目录不存在则创建
     function dirExists(folderpath) {
@@ -24,22 +27,37 @@ module.exports = function APIFactory(apiOpt) {
         }
     }
 
-    const paganitionOptions = {
-        page: 1,
-        pageSize: 10,
-        total: 5,
-        code: "0",
-        message: "message_1"
-    }
-
-    // 校验数据结构
-    function checkDataType(type, types, mock) {
-        if (/^hapi\.data\.result<[a-zA-Z\.]+>$/.test(type)) {
-            _type = type.replace(/^hapi\.data\.result<([a-zA-Z\.]+)>$/, "$1");
-            let paganitionData = Object.assign({}, paganitionOptions);
-            paganitionData["data"] = checkDataType(_type, types, _type);
-            return paganitionData
+    // 数据工厂
+    function checkDataType(type, types, mock, index) {
+        const regExp = /\[\]$/
+        const pageRegExp2 = /^hapi\.data\.pagevo<([a-zA-Z\.]+)>$/
+        let resultData = Object.assign({}, resultOptions);
+        if (regExp.test(type)) {
+            // 返回是否为数组对象
+            const type_ = type.replace(regExp, "");
+            let resultList = []
+            for (let i = 0; i < arrlen; i++) {
+                resultList.push(checkDataType(type_, types, type_, i))
+            }
+            resultData["data"] = resultList;
+        } else if (pageRegExp2.test(type)) {
+            resultData = Object.assign({},
+                resultOptions,
+                {
+                    page: 1,
+                    pageSize: 10,
+                    total: 5
+                }
+            )
+            // 返回是否为数组对象
+            const type_ = type.replace(pageRegExp2, "$1");
+            let resultList = []
+            for (let i = 0; i < arrlen; i++) {
+                resultList.push(checkDataType(type_, types, type_, i))
+            }
+            resultData["data"] = resultList;
         } else {
+            // resultData["data"] = checkDataType(_type, types, _type, 1);
             let result = new Object()
             for (const key in types) {
                 if (type === key) {
@@ -47,7 +65,7 @@ module.exports = function APIFactory(apiOpt) {
                     for (const _key in typesResult) {
                         let value;
                         if (typesResult[_key].type) {
-                            value = checkDataType(typesResult[_key].type, types, _key)
+                            value = checkDataType(typesResult[_key].type, types, _key, index)
                             result[_key] = value;
                         } else if (_key === "alias") {
                             switch (typesResult[_key]) {
@@ -55,7 +73,7 @@ module.exports = function APIFactory(apiOpt) {
                                     value = Number(Math.random(1000).toFixed(0));
                                     break;
                                 case "string":
-                                    value = `${mock}_1`;
+                                    value = `${mock}_${index}`;
                                     break;
                                 case "boolean":
                                     value = true;
@@ -70,32 +88,42 @@ module.exports = function APIFactory(apiOpt) {
                     break;
                 }
             }
-            return result
+            resultData["data"] = result
         }
+        return resultData
     }
 
     // 根据数据类型 生成mock数据
     function buildMockByTypes(type, types) {
-        let mockData = checkDataType(type, types, type)
-        if(typeof mockData === "object") {
+        const _type = type.replace(/^hapi\.data\.result<(\S+)>$/, "$1")
+        let mockData = checkDataType(_type, types, type, 1)
+        if (typeof mockData === "object") {
             mockData = JSON.stringify(mockData);
         }
         return mockData;
     }
+
+    // 异常处理
+    function errCatch(err) {
+        console.log(err)
+    }
+
     return {
-        apiSource: this.apiSource,
+        apiSource: apiSource,
         buildMock: () => {
             const mockRootPath = path.join(__dirname, "./../../mock");
-            const api = JSON.parse(this.apiSource);
+            const api = JSON.parse(apiSource);
             const apis = api.apis;
             const types = api.types;
             let p = new Promise((resolve, reject) => {
                 rimraf(mockRootPath, err => {
+                    console.log("1.mock目录清除，请稍后...".underline.red)
                     if (!err) resolve()
                     else reject(err)
                 })
             });
             p.then(() => {
+                console.log("2.清除完成，mock目录开始创建...".underline.red)
                 dirExists(mockRootPath)
                 for (const api in apis) {
                     const dirs = api.split("/");
@@ -111,7 +139,8 @@ module.exports = function APIFactory(apiOpt) {
                     }).then(data => {
                         // 创建mock文件
                         const [name, rootPath] = data;
-                        const fw = fs.createWriteStream(path.join(rootPath, name + ".json"), {
+                        const mockFileName = path.join(rootPath, name + ".json");
+                        const fw = fs.createWriteStream(mockFileName, {
                             flags: 'w',
                             defaultEncoding: 'utf8',
                         })
@@ -122,6 +151,7 @@ module.exports = function APIFactory(apiOpt) {
                             mock = buildMockByTypes(type, types)
                         }
                         fw.write(mock, () => {
+                            console.log(`${name.yellow} mock文件创建成功，数据文件路径：`.blue, mockFileName.underline.green)
                             fw.close()
                         })
                     })
@@ -132,7 +162,6 @@ module.exports = function APIFactory(apiOpt) {
             })
         },
         buildApi: () => {
-
 
             // const version = api.version;
             // const modified = api.modified;

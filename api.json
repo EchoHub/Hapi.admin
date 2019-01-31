@@ -22,8 +22,8 @@
 				}
 			]
         },
-        "/api/query2":{
-			"summary":"获取数据2",
+        "/api/queryContact":{
+			"summary":"获取联系人列表",
 			"parameters":{
 				"page":{
 					"notEmpty":true,
@@ -40,7 +40,45 @@
 			},
 			"responses":[
 				{
-					"type":"hapi.data.result<hapi.data.queryInfo>"
+					"type":"hapi.data.result<hapi.data.pagevo<hapi.data.contactInfo>>"
+				}
+			]
+		},
+		"/api/queryList":{
+			"summary":"获取列表",
+			"parameters":{
+				"page":{
+					"notEmpty":true,
+					"summary":"页数",
+					"optional":true,
+					"type":"java.lang.Integer"
+                },
+                "pageSize":{
+					"notEmpty":true,
+					"summary":"单页数据大小",
+					"optional":true,
+					"type":"java.lang.Integer"
+				}
+			},
+			"responses":[
+				{
+					"type":"hapi.data.result<hapi.data.contactInfo[]>"
+				}
+			]
+		},
+		"/api/deleteContact":{
+			"summary":"删除联系人",
+			"parameters":{
+				"concactId":{
+					"notEmpty":true,
+					"summary":"id",
+					"optional":true,
+					"type":"java.lang.Integer"
+                }
+			},
+			"responses":[
+				{
+					"type": "hapi.data.result<java.lang.String>"
 				}
 			]
 		}
@@ -83,7 +121,25 @@
 				"summary": "现住址",
 				"type": "java.lang.String"
 			}
-        },
+		},
+		"hapi.data.contactInfo": {
+			"contactName": {
+				"summary": "联系人姓名",
+				"type": "java.lang.String"
+			},
+			"contactTel": {
+				"summary": "联系人电话",
+				"type": "java.lang.String"
+			},
+			"contactType": {
+				"summary": "联系人关系",
+				"type": "java.lang.Integer"
+			},
+			"contactAddr": {
+				"summary": "联系人住址",
+				"type": "java.lang.String"
+			}
+		},
         "java.lang.String":{
 			"alias":"string"
         },
